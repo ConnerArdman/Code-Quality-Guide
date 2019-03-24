@@ -2,7 +2,7 @@
 
 *A mostly reasonable approach to JavaScript adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript)*
 
-> Questions about the changes? Most of them were to meet the learning objectives of the course rather than opinions on code style, but feel free to ask [Conner](ardmanc@uw.edu) any questions.
+> Questions about the changes? Most of them were to meet the learning objectives of the course rather than opinions on code style, but feel free to ask [Conner](mailto:ardmanc@uw.edu) any questions.
 
 ## Table of Contents
 
@@ -3607,7 +3607,7 @@
 **[⬆ back to top](#table-of-contents)**
 
 ## Contributors
-  - [Conner Ardman](ardmanc@uw.edu)
+  - [Conner Ardman](mailto:ardmanc@uw.edu)
   - [Original Airbnb Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
