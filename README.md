@@ -11,16 +11,18 @@
   1. [Variables](#variables)
   1. [Strings](#strings)
   1. [Functions](#functions)
+  1. [Naming Conventions](#naming-conventions)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
-  1. [Curly Braces](#curly-braces)
-  1. [If/Else Statements](#if/else-statements)
-  1. [Boolean Zen](#boolean-zen)
   1. [Loops](#loops)
+  1. [If/Else Statements](#ifelse-statements)
+  1. [Boolean Zen](#boolean-zen)
+  1. [Curly Braces](#curly-braces)
+  1. [Semicolons](#semicolons)
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
-  1. [Semicolons](#semicolons)
-  1. [Naming Conventions](#naming-conventions)
+  1. [Long Lines](#long-lines)
   1. [Module Pattern & Strict Mode](#module-pattern--strict-mode)
+  1. [Good JavaScript Design](#good-javascript-design)
   1. [Contributors](#contributors)
 
 ## Variables
@@ -255,10 +257,48 @@
 
 **[⬆ back to top](#table-of-contents)**
 
+
+## Naming Conventions
+
+  <a name="naming--descriptive"></a><a name="4.1"></a>
+  - [4.1](#naming--descriptive) Avoid single letter names unless an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!
+
+    ```javascript
+    // bad
+    function p() {
+      // ...
+    }
+
+    // good
+    function getPowerLevel() {
+      // ...
+    }
+    ```
+
+  <a name="naming--camelCase"></a><a name="4.2"></a>
+  - [4.2](#naming--camelCase) Use `camelCase` when naming variables, objects and functions. As stated [above](#variables--const), use `UPPERCASE_NAMING` for constants.
+
+    ```javascript
+    // bad
+    let this_is_my_object = {};
+    function MyFunction() {
+      // ...
+    }
+
+    // good
+    let thisIsMyObject = {};
+    function myFunction() {
+      // ...
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
 ## Comparison Operators & Equality
 
-  <a name="comparison--eqeqeq"></a><a name="4.1"></a>
-  - [4.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
+  <a name="comparison--eqeqeq"></a><a name="5.1"></a>
+  - [5.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
 
     ```javascript
     // bad
@@ -272,8 +312,8 @@
     }
     ```
 
-  <a name="comparison--shortcuts"></a><a name="4.2"></a>
-  - [4.2](#comparison--shortcuts) Use shortcuts for booleans and null checks, but explicit comparisons for strings and numbers.
+  <a name="comparison--shortcuts"></a><a name="5.2"></a>
+  - [5.2](#comparison--shortcuts) Use shortcuts for booleans and null checks, but explicit comparisons for strings and numbers.
 
     **NOTE**: You will often hear instructors refer to this as boolean zen along with [this section](#boolean-zen)
 
@@ -339,8 +379,8 @@
     }
     ```
 
-  <a name="comparison--ternaries"></a><a name="4.3"></a>
-  - [4.3](#comparison--ternaries) Ternaries can be used, but they should not be nested and generally be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.
+  <a name="comparison--ternaries"></a><a name="5.3"></a>
+  - [5.3](#comparison--ternaries) Ternaries can be used, but they should not be nested and generally be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.
 
     > What's this? The ternary operator is a common shorthand notation in programming languages in the form of "let variable = expression ? value : value". If expression is true, the variable gets set to the first value after the "?". Otherwise, it is set to the value after the ":".
 
@@ -366,8 +406,8 @@
     let baz = !c;
     ```
 
-  <a name="comparison--no-mixed-operators"></a><a name="4.4"></a>
-  - [4.4](#comparison--no-mixed-operators) When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators (`+`, `-`, `*`, & `/`) since their precedence is broadly understood.
+  <a name="comparison--no-mixed-operators"></a><a name="5.4"></a>
+  - [5.4](#comparison--no-mixed-operators) When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators (`+`, `-`, `*`, & `/`) since their precedence is broadly understood.
 
     > Why? This improves readability and clarifies the developer’s intention.
 
@@ -401,32 +441,75 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## Curly Braces
+## Loops
 
-  <a name="blocks--braces"></a><a name="5.1"></a>
-  - [5.1](#blocks--braces) Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.
+  <a name="for--while"></a><a name="6.1"></a>
+  - [6.1](#for--while) Use a `for` loop when the number of repetitions is known (definite). Use a `while` loop when the number of repetitions is unknown (indefinite).
 
     ```javascript
     // bad
-    if (test)
-      return false;
-
-    // bad
-    if (test) return false;
+    let i = 0;
+    while (i < arr.length) {
+      console.log(arr[i]);
+      i++;
+    }
 
     // good
-    if (test) {
-      return false;
+    for (let i = 0; i < arr.length; i++) {
+      console.log(arr[i]);
+    }
+    ```
+
+    ```javascript
+    // bad - notice the middle condition does not use i at all, and it is not used in the loop!
+    let sum = 0;
+    for (let i = 0; sum < 1000; i++) {
+      sum += Math.random();
+    }
+
+    // good
+    let sum = 0;
+    while (sum < 1000) {
+      sum += Math.random();
+    }
+    ```
+
+  <a name="break--continue"></a><a name="6.2"></a>
+  - [6.2](#break--continue) Never use break, continue or empty return statements in this class.
+
+    > Why? For the length and complexity of the programs we ask you to write, these statements deviate from clear logical flow and you should instead consider ways to refactor your conditional statements and loops to handle different cases without forced "shortcuts".
+
+    ```javascript
+    // bad - contrived example, but the idea is you can usually replace the break with conditions.
+    while (i < arr.length) {
+      if (i > 5) {
+        break;
+      }
+      console.log(arr[i]);
+      i++;
+    }
+
+    // good
+    while (i < arr.length && i <= 5) {
+      console.log(arr[i]);
+      i++;
     }
     ```
 
     ```javascript
     // bad
-    function foo() { return false; }
+    function foo(num) {
+      if (num === 1) {
+        return;
+      } 
+      console.log(num + 5);
+    }
 
     // good
-    function foo() {
-      return false;
+    function foo(num) {
+      if (num !== 1) {
+        console.log(num + 5);
+      }
     }
     ```
 
@@ -434,8 +517,8 @@
 
 ## If/Else Statements
 
-  <a name="if--branching"></a><a name="6.1"></a>
-  - [6.1](#if--branching) When using `if/else` statements, properly choose between various `if` and `else` patterns depending on whether the conditions relate to one another. Avoid redundant or unnecessary `if` tests.
+  <a name="if--branching"></a><a name="7.1"></a>
+  - [7.1](#if--branching) When using `if/else` statements, properly choose between various `if` and `else` patterns depending on whether the conditions relate to one another. Avoid redundant or unnecessary `if` tests.
 
     ```javascript
     // bad
@@ -459,8 +542,8 @@
     }
     ```
 
-  <a name="if--factoring"></a><a name="6.2"></a>
-  - [6.2](#if--factoring) Move common code out of `if/else` statements to avoid redundancy.
+  <a name="if--factoring"></a><a name="7.2"></a>
+  - [7.2](#if--factoring) Move common code out of `if/else` statements to avoid redundancy.
 
     ```javascript
     // bad
@@ -501,8 +584,8 @@
     }
     ```
 
-  <a name="if--cuddled-elses"></a><a name="6.3"></a>
-  - [6.3](#if--cuddled-elses) Put `else` on the same line as your `if` block’s closing brace.
+  <a name="if--cuddled-elses"></a><a name="7.3"></a>
+  - [7.3](#if--cuddled-elses) Put `else` on the same line as your `if` block’s closing brace.
 
     ```javascript
     // bad
@@ -523,8 +606,8 @@
     }
     ```
 
-  <a name="control-statements"></a><a name="6.4"></a>
-  - [6.4](#control-statements) In case your `if` gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line. The same is true for `else if` and `while`.
+  <a name="control-statements"></a><a name="7.4"></a>
+  - [7.4](#control-statements) In case your `if` gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line. The same is true for `else if` and `while`.
 
     > Why? Requiring operators at the beginning of the line keeps the operators aligned, improving readability by making it easier to visually follow complex logic.
 
@@ -580,8 +663,8 @@
 
 ## Boolean Zen
 
-  <a name="boolean--zen"></a><a name="7.1"></a>
-  - [7.1](#boolean--zen) Never test if a `boolean` value is `true` or `false` explicitly.
+  <a name="boolean--zen"></a><a name="8.1"></a>
+  - [8.1](#boolean--zen) Never test if a `boolean` value is `true` or `false` explicitly.
 
     ```javascript
     // bad
@@ -595,8 +678,8 @@
     }
     ```
 
-  <a name="boolean--zen-return"></a><a name="7.2"></a>
-  - [7.2](#boolean--zen-return) If you have an `if/else` statement that returns a boolean value based on a test, just directly return the test's result instead.
+  <a name="boolean--zen-return"></a><a name="8.2"></a>
+  - [8.2](#boolean--zen-return) If you have an `if/else` statement that returns a boolean value based on a test, just directly return the test's result instead.
 
     ```javascript
     // bad
@@ -612,75 +695,66 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## Loops
+## Curly Braces
 
-  <a name="for--while"></a><a name="8.1"></a>
-  - [8.1](#for--while) Use a `for` loop when the number of repetitions is known (definite). Use a `while` loop when the number of repetitions is unknown (indefinite).
+  <a name="blocks--braces"></a><a name="9.1"></a>
+  - [9.1](#blocks--braces) Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.
 
     ```javascript
     // bad
-    let i = 0;
-    while (i < arr.length) {
-      console.log(arr[i]);
-      i++;
-    }
+    if (test)
+      return false;
+
+    // bad
+    if (test) return false;
 
     // good
-    for (let i = 0; i < arr.length; i++) {
-      console.log(arr[i]);
-    }
-    ```
-
-    ```javascript
-    // bad - notice the middle condition does not use i at all, and it is not used in the loop!
-    let sum = 0;
-    for (let i = 0; sum < 1000; i++) {
-      sum += Math.random();
-    }
-
-    // good
-    let sum = 0;
-    while (sum < 1000) {
-      sum += Math.random();
-    }
-    ```
-
-  <a name="break--continue"></a><a name="8.2"></a>
-  - [8.2](#break--continue) Never use break, continue or empty return statements in this class.
-
-    > Why? For the length and complexity of the programs we ask you to write, these statements deviate from clear logical flow and you should instead consider ways to refactor your conditional statements and loops to handle different cases without forced "shortcuts".
-
-    ```javascript
-    // bad - contrived example, but the idea is you can usually replace the break with conditions.
-    while (i < arr.length) {
-      if (i > 5) {
-        break;
-      }
-      console.log(arr[i]);
-      i++;
-    }
-
-    // good
-    while (i < arr.length && i <= 5) {
-      console.log(arr[i]);
-      i++;
+    if (test) {
+      return false;
     }
     ```
 
     ```javascript
     // bad
-    function foo(num) {
-      if (num === 1) {
-        return;
-      } 
-      console.log(num + 5);
+    function foo() { return false; }
+
+    // good
+    function foo() {
+      return false;
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Semicolons
+
+  <a name="semicolons--required"></a><a name="10.1"></a>
+  - [10.1](#semicolons--required) **Use them.**
+
+    > Why? When JavaScript encounters a line break without a semicolon, it uses a set of rules called [Automatic Semicolon Insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) to determine whether or not it should regard that line break as the end of a statement, and (as the name implies) place a semicolon into your code before the line break if it thinks so. ASI contains a few eccentric behaviors, though, and your code will break if JavaScript misinterprets your line break. These rules will become more complicated as new features become a part of JavaScript. Explicitly terminating your statements and configuring your linter to catch missing semicolons will help prevent you from encountering issues.
+
+    ```javascript
+    // bad - raises exception
+    let luke = {}
+    let yoda = {}
+    [luke, yoda].forEach(jedi => jedi.force = 'strong')
+
+    // bad - returns `undefined` instead of the value on the next line - although don't return on a new line anyways
+    function foo() {
+      return
+        'search your feelings, you know it to be foo'
     }
 
     // good
-    function foo(num) {
-      if (num !== 1) {
-        console.log(num + 5);
-      }
+    const luke = {};
+    const yoda = {};
+    [luke, yoda].forEach((jedi) => {
+      jedi.force = 'strong';
+    });
+
+    // good
+    function foo() {
+      return 'search your feelings, you know it to be foo';
     }
     ```
 
@@ -688,8 +762,21 @@
 
 ## Comments
 
-  <a name="comments--function-header"></a><a name="9.1"></a>
-  - [9.1](#comments--function-header) For JavaScript code, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript. In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
+  <a name="comments--header"></a><a name="11.1"></a>
+  - [11.1](#comments--header) Always include a file header comment as shown below
+
+    ```javascript
+    Name: Mowgli Hovik
+    Date: 01.01.2019
+    Section: CSE 154 AX
+
+    This is the index.html page for my portfolio of web development work. It includes links to
+    side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
+    a crytogram generator.
+    ```
+
+  <a name="comments--function-header"></a><a name="11.2"></a>
+  - [11.2](#comments--function-header) For JavaScript code, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript. In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
 
     **NOTE**: Notice that JSDoc comments start with `/**` not `/*`
 
@@ -714,8 +801,8 @@
        }
       ```
 
-  <a name="comments--multiline"></a><a name="9.2"></a>
-  - [9.2](#comments--multiline) Use `/* ... */` for multi-line comments.
+  <a name="comments--multiline"></a><a name="11.3"></a>
+  - [11.3](#comments--multiline) Use `/* ... */` for multi-line comments.
 
     ```javascript
     // bad
@@ -731,8 +818,8 @@
      */
     ```
 
-  <a name="comments--singleline"></a><a name="9.3"></a>
-  - [9.3](#comments--singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+  <a name="comments--singleline"></a><a name="11.4"></a>
+  - [11.4](#comments--singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
 
     **NOTE**: While not required, many programmers like to comment each module-global variable with a single line comment.
 
@@ -773,8 +860,8 @@
     }
     ```
 
-  <a name="comments--spaces"></a><a name="9.4"></a>
-  - [9.4](#comments--spaces) Start all comments with a space to make it easier to read.
+  <a name="comments--spaces"></a><a name="11.5"></a>
+  - [11.5](#comments--spaces) Start all comments with a space to make it easier to read.
 
     ```javascript
     // bad
@@ -786,8 +873,8 @@
     let active = true;
     ```
 
-  <a name="comments--sources"></a><a name="9.5"></a>
-  - [9.5](#comments--sources) Always cite sources in your comments if you use anything found online.
+  <a name="comments--sources"></a><a name="11.6"></a>
+  - [11.6](#comments--sources) Always cite sources in your comments if you use anything found online.
 
     **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
 
@@ -800,13 +887,13 @@
 
 ## Whitespace & Indentation
 
-  <a name="whitespace--spaces"></a><a name="10.1"></a>
-  - [10.1](#whitespace--spaces) Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.
+  <a name="whitespace--spaces"></a><a name="12.1"></a>
+  - [12.1](#whitespace--spaces) Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.
 
     **NOTE**: Please ask a TA for assistance if you are unsure of how to correct this. The settings are a bit hard to find in Atom, and this can mess up your indentation when turning in files on GitGrade.
 
-  <a name="whitespace--before-blocks"></a><a name="10.2"></a>
-  - [10.2](#whitespace--before-blocks) Place 1 space before the leading brace.
+  <a name="whitespace--before-blocks"></a><a name="12.2"></a>
+  - [12.2](#whitespace--before-blocks) Place 1 space before the leading brace.
 
     ```javascript
     // bad
@@ -830,8 +917,8 @@
     }
     ```
 
-  <a name="whitespace--around-keywords"></a><a name="10.3"></a>
-  - [10.3](#whitespace--around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations. 
+  <a name="whitespace--around-keywords"></a><a name="12.3"></a>
+  - [12.3](#whitespace--around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations. 
 
     ```javascript
     // bad
@@ -855,8 +942,8 @@
     }
     ```
 
-  <a name="whitespace--infix-ops"></a><a name="10.4"></a>
-  - [10.4](#whitespace--infix-ops) Set off operators with spaces.
+  <a name="whitespace--infix-ops"></a><a name="12.4"></a>
+  - [12.4](#whitespace--infix-ops) Set off operators with spaces.
 
     ```javascript
     // bad
@@ -876,8 +963,8 @@
     }
     ```
 
-  <a name="whitespace--newline-at-end"></a><a name="10.5"></a>
-  - [10.5](#whitespace--newline-at-end) Never have consecutive newline characters, even at the end of a file.
+  <a name="whitespace--newline-at-end"></a><a name="12.5"></a>
+  - [12.5](#whitespace--newline-at-end) Never have consecutive newline characters, even at the end of a file.
 
     ```javascript
     // bad
@@ -911,8 +998,8 @@
     }
     ```
 
-  <a name="whitespace--padded-blocks"></a><a name="10.6"></a>
-  - [10.6](#whitespace--padded-blocks) Do not pad your blocks with blank lines. Too much spacing can be just as bad as not enough.
+  <a name="whitespace--padded-blocks"></a><a name="12.6"></a>
+  - [12.6](#whitespace--padded-blocks) Do not pad your blocks with blank lines. Too much spacing can be just as bad as not enough.
 
     ```javascript
     // bad
@@ -944,8 +1031,8 @@
     }
     ```
 
-  <a name="whitespace--comma-spacing"></a><a name="10.7"></a>
-  - [10.7](#whitespace--comma-spacing) Avoid spaces before commas and require a space after commas.
+  <a name="whitespace--comma-spacing"></a><a name="12.7"></a>
+  - [12.7](#whitespace--comma-spacing) Avoid spaces before commas and require a space after commas.
 
     ```javascript
     // bad
@@ -958,8 +1045,8 @@
     let arr = [1, 2];
     ```
 
-  <a name="whitespace--indenting"></a><a name="10.8"></a>
-  - [10.8](#whitespace--indenting) Always indent one time for each nested block.
+  <a name="whitespace--indenting"></a><a name="12.8"></a>
+  - [12.8](#whitespace--indenting) Always indent one time for each nested block.
 
     ```javascript
     // bad
@@ -995,87 +1082,24 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## Semicolons
+## Long Lines
 
-  <a name="semicolons--required"></a><a name="11.1"></a>
-  - [11.1](#semicolons--required) **Use them.**
-
-    > Why? When JavaScript encounters a line break without a semicolon, it uses a set of rules called [Automatic Semicolon Insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) to determine whether or not it should regard that line break as the end of a statement, and (as the name implies) place a semicolon into your code before the line break if it thinks so. ASI contains a few eccentric behaviors, though, and your code will break if JavaScript misinterprets your line break. These rules will become more complicated as new features become a part of JavaScript. Explicitly terminating your statements and configuring your linter to catch missing semicolons will help prevent you from encountering issues.
-
-    ```javascript
-    // bad - raises exception
-    let luke = {}
-    let yoda = {}
-    [luke, yoda].forEach(jedi => jedi.force = 'strong')
-
-    // bad - returns `undefined` instead of the value on the next line - although don't return on a new line anyways
-    function foo() {
-      return
-        'search your feelings, you know it to be foo'
-    }
-
-    // good
-    const luke = {};
-    const yoda = {};
-    [luke, yoda].forEach((jedi) => {
-      jedi.force = 'strong';
-    });
-
-    // good
-    function foo() {
-      return 'search your feelings, you know it to be foo';
-    }
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-## Naming Conventions
-
-  <a name="naming--descriptive"></a><a name="12.1"></a>
-  - [12.1](#naming--descriptive) Avoid single letter names unless an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!
-
-    ```javascript
-    // bad
-    function p() {
-      // ...
-    }
-
-    // good
-    function getPowerLevel() {
-      // ...
-    }
-    ```
-
-  <a name="naming--camelCase"></a><a name="12.2"></a>
-  - [12.2](#naming--camelCase) Use `camelCase` when naming variables, objects and functions. As stated [above](#variables--const), use `UPPERCASE_NAMING` for constants.
-
-    ```javascript
-    // bad
-    let this_is_my_object = {};
-    function MyFunction() {
-      // ...
-    }
-
-    // good
-    let thisIsMyObject = {};
-    function myFunction() {
-      // ...
-    }
-    ```
+  <a name="short--lines"></a><a name="13.1"></a>
+  - [13.1](#short--lines) Always keep lines under 100 characters. It makes your code much easier to read. The one exception here is links. Any string containing a link can go over 100 characters.
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Module Pattern & Strict Mode
 
-  <a name="module--pattern"></a><a name="13.1"></a>
-  - [13.1](#module--pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
+  <a name="module--pattern"></a><a name="14.1"></a>
+  - [14.1](#module--pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
     
     > Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file's function would override the first one's (since HTML is loaded from top to bottom).
 
-    See example in [13.2](#use--strict)
+    See example in [14.2](#use--strict)
 
   <a name="use--strict"></a><a name="13.2"></a>
-  - [13.2](#use--strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
+  - [14.2](#use--strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
 
     ```javascript
     // good
@@ -1084,6 +1108,58 @@
       // ...
     })();
     ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Good JavaScript Design
+
+  <a name="unobtrusive--js"></a><a name="15.1"></a>
+  - [15.1](#unobtrusive--js) Never use element.innerHTML for anything other than clearing containers. Prefer createElement().
+    
+    ```javascript
+    // bad
+    div.innerHTML = '<img src="dog.jpg" alt="boundless pupper" />'
+
+    // good
+    let img = document.CreateElement('img');
+    img.src = 'dog.jpg';
+    img.alt = 'boundless pupper';
+    div.appendChild(img);
+    ```  
+
+  <a name="minimize--redundancy"></a><a name="15.2"></a>
+  - [15.2](#minimize--redundancy) Minimize redundant code as much as possible. 
+
+    **TIP**: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
+
+    ```javascript
+    // bad
+    foo();
+    x = 10;
+    y++;
+
+    // somewhere later in the code...
+    foo();
+    x = 15;
+    y++;
+    ```
+
+    ```javascript
+    // good
+    function helper(newX) {
+      foo();
+      x = newX;
+      y++;
+    }
+
+    helper(10);
+
+    // somewhere later in the code...
+    helper(15);
+    ```
+
+  <a name="no--log"></a><a name="15.3"></a>
+  - [15.3](#no--log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
 
 **[⬆ back to top](#table-of-contents)**
 
