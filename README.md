@@ -275,7 +275,7 @@
   <a name="comparison--shortcuts"></a><a name="4.2"></a>
   - [4.2](#comparison--shortcuts) Use shortcuts for booleans and null checks, but explicit comparisons for strings and numbers.
 
-  **NOTE**: You will often hear instructors refer to this as boolean zen along with [this section](#boolean-zen)
+    **NOTE**: You will often hear instructors refer to this as boolean zen along with [this section](#boolean-zen)
 
     ```javascript
     // bad
