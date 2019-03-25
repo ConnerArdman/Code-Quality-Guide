@@ -12,7 +12,7 @@
   1. [Strings](#strings)
   1. [Functions](#functions)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
-  1. [Blocks](#blocks)
+  1. [Curly Braces](#curly-braces)
   1. [If/Else Statements](#if/else-statements)
   1. [Boolean Zen](#boolean-zen)
   1. [Loops](#loops)
@@ -401,7 +401,7 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## Blocks
+## Curly Braces
 
   <a name="blocks--braces"></a><a name="5.1"></a>
   - [5.1](#blocks--braces) Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.
