@@ -1,6 +1,6 @@
 # CSE 154 Code Quality Guide() {
 
-*A mostly reasonable approach to JavaScript adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript)* for [CSE 154](cs.washington.edu/154) at the University of Washington.
+*A mostly reasonable approach to JavaScript adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript)* for [CSE 154](https://cs.washington.edu/154) at the University of Washington.
 
 > Questions about the changes? Most of them were to meet the learning objectives of the course and simplify the guide for our needs rather than opinions on code style, but feel free to ask [Conner](mailto:ardmanc@uw.edu) any questions.
 
