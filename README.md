@@ -405,32 +405,105 @@
 ## Blocks
 
   <a name="blocks--braces"></a><a name="16.1"></a>
-  - [16.1](#blocks--braces) Use braces with all multi-line blocks. eslint: [`nonblock-statement-body-position`](https://eslint.org/docs/rules/nonblock-statement-body-position)
+  - [5.1](#blocks--braces) Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.
 
     ```javascript
     // bad
     if (test)
       return false;
 
-    // good
+    // bad
     if (test) return false;
 
     // good
     if (test) {
       return false;
     }
+    ```
 
+    ```javascript
     // bad
     function foo() { return false; }
 
     // good
-    function bar() {
+    function foo() {
       return false;
     }
     ```
 
-  <a name="blocks--cuddled-elses"></a><a name="16.2"></a>
-  - [16.2](#blocks--cuddled-elses) If you’re using multi-line blocks with `if` and `else`, put `else` on the same line as your `if` block’s closing brace. eslint: [`brace-style`](https://eslint.org/docs/rules/brace-style.html)
+**[⬆ back to top](#table-of-contents)**
+
+## If/Else Statements
+
+  <a name="if--branching"></a><a name="6.1"></a>
+  - [6.1](#if--branching) When using `if/else` statements, properly choose between various `if` and `else` patterns depending on whether the conditions relate to one another. Avoid redundant or unnecessary `if` tests.
+
+    ```javascript
+    // bad
+    if (grade >= 90) {
+      alert("You got an A!");
+    }
+    if (grade >= 80 && grade < 90) {
+      alert("You got a B!");
+    }
+    if (grade >= 70 && grade < 80) {
+      alert("You got a C!");
+    }
+
+    // good
+    if (grade >= 90) {
+      alert("You got an A!");
+    } else if (grade >= 80) {
+      alert("You got a B!");
+    } else if (grade >= 70) {
+      alert("You got a C!");
+    }
+    ```
+
+  <a name="if--factoring"></a><a name="6.2"></a>
+  - [6.2](#if--factoring) Move common code out of `if/else` statements to avoid redundancy.
+
+    ```javascript
+    // bad
+    if (x < y) {
+      foo();
+      x++;
+      alert("hi");
+    } else {
+      foo();
+      y++;
+      alert("hi");
+    }
+
+    // good
+    foo();
+    if (x < y) {
+      x++;
+    } else {
+      y++;
+    }
+    alert("hi");
+    ```
+
+    ```javascript
+    // bad
+    if (foo() || a) {
+      // ...
+    } else if (foo() || b) {
+      // ...
+    }
+
+    // good
+    let c = foo();
+    if (c || a) {
+      // ...
+    } else if (c || b) {
+      // ...
+    }
+    ```
+
+  <a name="if--cuddled-elses"></a><a name="6.3"></a>
+  - [6.3](#if--cuddled-elses) Put `else` on the same line as your `if` block’s closing brace.
 
     ```javascript
     // bad
@@ -451,96 +524,27 @@
     }
     ```
 
-  <a name="blocks--no-else-return"></a><a name="16.3"></a>
-  - [16.3](#blocks--no-else-return) If an `if` block always executes a `return` statement, the subsequent `else` block is unnecessary. A `return` in an `else if` block following an `if` block that contains a `return` can be separated into multiple `if` blocks. eslint: [`no-else-return`](https://eslint.org/docs/rules/no-else-return)
+  <a name="control-statements"></a><a name="6.4"></a>
+  - [6.4](#control-statements) In case your `if` gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line. The same is true for `else if` and `while`.
 
-    ```javascript
-    // bad
-    function foo() {
-      if (x) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-
-    // bad
-    function cats() {
-      if (x) {
-        return x;
-      } else if (y) {
-        return y;
-      }
-    }
-
-    // bad
-    function dogs() {
-      if (x) {
-        return x;
-      } else {
-        if (y) {
-          return y;
-        }
-      }
-    }
-
-    // good
-    function foo() {
-      if (x) {
-        return x;
-      }
-
-      return y;
-    }
-
-    // good
-    function cats() {
-      if (x) {
-        return x;
-      }
-
-      if (y) {
-        return y;
-      }
-    }
-
-    // good
-    function dogs(x) {
-      if (x) {
-        if (z) {
-          return y;
-        }
-      } else {
-        return z;
-      }
-    }
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-## Control Statements
-
-  <a name="control-statements"></a>
-  - [17.1](#control-statements) In case your control statement (`if`, `while` etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
-
-    > Why? Requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
+    > Why? Requiring operators at the beginning of the line keeps the operators aligned, improving readability by making it easier to visually follow complex logic.
 
     ```javascript
     // bad
     if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
-      thing1();
+      // ...
     }
 
     // bad
     if (foo === 123 &&
       bar === 'abc') {
-      thing1();
+      // ...
     }
 
     // bad
     if (foo === 123
       && bar === 'abc') {
-      thing1();
+      // ...
     }
 
     // bad
@@ -548,42 +552,28 @@
       foo === 123 &&
       bar === 'abc'
     ) {
-      thing1();
+      // ...
     }
 
-    // good
+    // bad
     if (
       foo === 123
       && bar === 'abc'
     ) {
-      thing1();
+      // ...
     }
 
     // good
-    if (
-      (foo === 123 || bar === 'abc')
+    if ((foo === 123 || bar === 'abc')
       && doesItLookGoodWhenItBecomesThatLong()
       && isThisReallyHappening()
     ) {
-      thing1();
+      // ...
     }
 
     // good
     if (foo === 123 && bar === 'abc') {
-      thing1();
-    }
-    ```
-
-  <a name="control-statement--value-selection"></a><a name="control-statements--value-selection"></a>
-  - [17.2](#control-statements--value-selection) Don't use selection operators in place of control statements.
-
-    ```javascript
-    // bad
-    !isRunning && startRunning();
-
-    // good
-    if (!isRunning) {
-      startRunning();
+      // ...
     }
     ```
 
