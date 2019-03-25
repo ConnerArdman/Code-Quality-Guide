@@ -13,7 +13,9 @@
   1. [Functions](#functions)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
   1. [Blocks](#blocks)
-  1. [Control Statements](#control-statements)
+  1. [If/Else Statements](#if/else-statements)
+  1. [Boolean Zen](#boolean-zen)
+  1. [Loops](#loops)
   1. [Comments](#comments)
   1. [Whitespace](#whitespace)
   1. [Commas](#commas)
@@ -576,6 +578,14 @@
       // ...
     }
     ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Boolean Zen
+
+**[⬆ back to top](#table-of-contents)**
+
+## Loops
 
 **[⬆ back to top](#table-of-contents)**
 
