@@ -278,6 +278,8 @@
   <a name="comparison--shortcuts"></a><a name="4.2"></a>
   - [4.2](#comparison--shortcuts) Use shortcuts for booleans and null checks, but explicit comparisons for strings and numbers.
 
+  **NOTE**: You will often hear instructors refer to this as boolean zen along with [this section](#boolean-zen)
+
     ```javascript
     // bad
     if (isValid === true) {
@@ -582,6 +584,36 @@
 **[⬆ back to top](#table-of-contents)**
 
 ## Boolean Zen
+
+  <a name="boolean--zen"></a><a name="7.1"></a>
+  - [7.1](#boolean--zen) Never test if a `boolean` value is `true` or `false` explicitly.
+
+    ```javascript
+    // bad
+    if (myBool == true) {
+      // ...
+    }
+
+    // good
+    if (myBool) {
+    // ...
+    }
+    ```
+
+  <a name="boolean--zen-return"></a><a name="7.2"></a>
+  - [7.2](#boolean--zen-return) If you have an `if/else` statement that returns a boolean value based on a test, just directly return the test's result instead.
+
+    ```javascript
+    // bad
+    if (score1 == score2) {
+      return true;
+    } else {
+      return false;
+    }
+
+    // good
+    return score1 == score2;
+    ```
 
 **[⬆ back to top](#table-of-contents)**
 
