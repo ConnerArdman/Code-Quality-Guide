@@ -25,7 +25,7 @@
 ## Variables
 
   <a name="variables--prefer-let"></a><a name="1.1"></a>
-  - [1.1](#variables--prefer-let) Use `let` for all of your variables; avoid using `var`.
+  - [1.1](#variables--prefer-let) Use `let` for all of your variables. Never use `var`.
     > Why? `let` is block-scoped rather than function-scoped like `var`.
 
     ```javascript
@@ -39,7 +39,7 @@
     ```
 
    <a name="variables--const"></a><a name="1.2"></a>
-  - [1.2](#variables--const) Use `const` for all of your constants with `UPPERCASE_NAMING`. Use this for any "magic" values appearing in your code and declare them at the top of the module pattern.
+  - [1.2](#variables--const) Use `const` for all of your constants with [`UPPERCASE_NAMING`](#naming--camelCase). Use this for any "magic" values appearing in your code and declare them at the top of the module pattern.
     > Why? Not only does `const` prevent a variable from being reassigned, but these can also make your code much easier to read. As a note here, it is very common in industry to always prefer const over let when possible. There are benefits to this approach, but we are going to stick to only using const at the module-global level in this class.
 
     ```javascript
@@ -111,12 +111,12 @@
 
     ```javascript
     // bad
-    if (list.indexOf("abc") >= 0) {
-      list.remove(list.indexOf("abc"));
+    if (list.indexOf('abc') >= 0) {
+      list.remove(list.indexOf('abc'));
     }
 
     // good
-    let index = list.indexOf("abc");
+    let index = list.indexOf('abc');
     if (index >= 0) {
       list.remove(index);
     }
@@ -233,7 +233,7 @@
     ```javascript
     // good
     let arr = [1, 2, 3, 4, 5];
-    arr = arr.filter(num => num % 2 != 0); // [1, 3, 5]
+    arr = arr.filter(num => num % 2 !== 0); // [1, 3, 5]
     ```
 
 
@@ -346,8 +346,8 @@
     ```javascript
     // bad
     let foo = maybe1 > maybe2
-      ? "bar"
-      : value1 > value2 ? "baz" : null;
+      ? 'bar'
+      : value1 > value2 ? 'baz' : null;
 
     // good - split into 2 separated ternary expressions
     let maybeNull = value1 > value2 ? 'baz' : null;
@@ -358,12 +358,10 @@
     ```javascript
     // bad
     let foo = a ? a : b;
-    let bar = c ? true : false;
     let baz = c ? false : true;
 
     // good
     let foo = a || b;
-    let bar = !!c;
     let baz = !c;
     ```
 
@@ -404,7 +402,7 @@
 
 ## Blocks
 
-  <a name="blocks--braces"></a><a name="16.1"></a>
+  <a name="blocks--braces"></a><a name="5.1"></a>
   - [5.1](#blocks--braces) Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.
 
     ```javascript
@@ -441,22 +439,22 @@
     ```javascript
     // bad
     if (grade >= 90) {
-      alert("You got an A!");
+      alert('You got an A!');
     }
     if (grade >= 80 && grade < 90) {
-      alert("You got a B!");
+      alert('You got a B!');
     }
     if (grade >= 70 && grade < 80) {
-      alert("You got a C!");
+      alert('You got a C!');
     }
 
     // good
     if (grade >= 90) {
-      alert("You got an A!");
+      alert('You got an A!');
     } else if (grade >= 80) {
-      alert("You got a B!");
+      alert('You got a B!');
     } else if (grade >= 70) {
-      alert("You got a C!");
+      alert('You got a C!');
     }
     ```
 
@@ -468,11 +466,11 @@
     if (x < y) {
       foo();
       x++;
-      alert("hi");
+      alert('hi');
     } else {
       foo();
       y++;
-      alert("hi");
+      alert('hi');
     }
 
     // good
@@ -482,7 +480,7 @@
     } else {
       y++;
     }
-    alert("hi");
+    alert('hi');
     ```
 
     ```javascript
@@ -748,9 +746,9 @@
 
     ```javascript
     // bad
-      console.log('fetching type...');
-      // set the default type to 'no type'
-      const type = this.type || 'no type';
+    console.log('fetching type...');
+    // set the default type to 'no type'
+    let type = this.type || 'no type';
 
     // bad
     function getType() {
@@ -797,10 +795,6 @@
     to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
     code found online, ask your TA or instructor first then cite it with permission.
 
-    ```javascript
-    
-    ```
-
 **[⬆ back to top](#table-of-contents)**
 
 ## Whitespace
@@ -808,7 +802,7 @@
   <a name="whitespace--spaces"></a><a name="10.1"></a>
   - [10.1](#whitespace--spaces) Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.
 
-    **NOTE**: Please ask a TA for assistance if you are unsure of how to correct this.
+    **NOTE**: Please ask a TA for assistance if you are unsure of how to correct this. The settings are a bit hard to find in Atom, and this can mess up your indentation when turning in files on GitGrade.
 
   <a name="whitespace--before-blocks"></a><a name="10.2"></a>
   - [10.2](#whitespace--before-blocks) Place 1 space before the leading brace.
@@ -968,7 +962,7 @@
 ## Semicolons
 
   <a name="semicolons--required"></a><a name="11.1"></a>
-  - [11.1](#semicolons--required) **Yup.**
+  - [11.1](#semicolons--required) **Use them.**
 
     > Why? When JavaScript encounters a line break without a semicolon, it uses a set of rules called [Automatic Semicolon Insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) to determine whether or not it should regard that line break as the end of a statement, and (as the name implies) place a semicolon into your code before the line break if it thinks so. ASI contains a few eccentric behaviors, though, and your code will break if JavaScript misinterprets your line break. These rules will become more complicated as new features become a part of JavaScript. Explicitly terminating your statements and configuring your linter to catch missing semicolons will help prevent you from encountering issues.
 
@@ -1002,22 +996,22 @@
 ## Naming Conventions
 
   <a name="naming--descriptive"></a><a name="12.1"></a>
-  - [12.1](#naming--descriptive) Avoid single letter names unless an index in a loop. Be descriptive with your naming.
+  - [12.1](#naming--descriptive) Avoid single letter names unless an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!
 
     ```javascript
     // bad
-    function q() {
+    function p() {
       // ...
     }
 
     // good
-    function query() {
+    function getPowerLevel() {
       // ...
     }
     ```
 
   <a name="naming--camelCase"></a><a name="12.2"></a>
-  - [12.2](#naming--camelCase) Use `camelCase` when naming variables, objects and functions. As stated above, use `UPPERCASE_NAMING` for constants.
+  - [12.2](#naming--camelCase) Use `camelCase` when naming variables, objects and functions. As stated [above](#variables--const), use `UPPERCASE_NAMING` for constants.
 
     ```javascript
     // bad
