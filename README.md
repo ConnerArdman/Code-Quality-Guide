@@ -699,23 +699,23 @@
 
     **NOTE**: The description of your function should describe what the function does, not how it does it. The most important thing is that your comments should describe how the state of the page (and potentially module-global variables) will change by calling the function. Think about how to explain the purpose of the function without implementation details. A good rule of thumb is to never mention processes such as "looping over" things.
 
-    ```javascript
-    // Single-line JSDoc comment:
-    /** Your comment here - description of function */
-    function simpleFunction() {
+      ```javascript
+      // Single-line JSDoc comment:
+      /** Your comment here - description of function */
+      function simpleFunction() {
 
-    }
+      }
 
-    // Multi-line JSDoc comment:
-    /**
-     * brief description of the function
-     * @param {datatype} parameterName1 - parameter description
-     * @param {datatype} parameterName2 - parameter description
-     * @return {datatype} Description of the return value
-     */
-     function functionName() {
+      // Multi-line JSDoc comment:
+      /**
+       * brief description of the function
+       * @param {datatype} parameterName1 - parameter description
+       * @param {datatype} parameterName2 - parameter description
+       * @return {datatype} Description of the return value
+       */
+       function functionName() {
 
-     }
+       }
     ```
 
   <a name="comments--multiline"></a><a name="9.2"></a>
