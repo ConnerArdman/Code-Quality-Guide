@@ -197,7 +197,7 @@
   <a name="long-functions"></a><a name="3.1"></a>
   - [3.1](#long--functions-last) If you have a single function that is very long, break it apart into smaller sub-functions. The definition of "very long" is vague, but often a function longer than 20-30 lines is pushing it.
 
-  If you try to describe the function's purpose and find yourself using the word "and" a lot, that probably means the function does too many things and should be split into sub-functions.
+    **TIP**: If you try to describe the function's purpose and find yourself using the word "and" a lot, that probably means the function does too many things and should be split into sub-functions.
 
   <a name="functions--anonymous"></a><a name="3.2"></a>
   - [3.2](#functions--anonymous) Always prefer named functions over anonymous functions. A good rule of thumb is that if you can think of a reasonable name, it should be named. Most anonymous functions should be 3 or less lines of code.
