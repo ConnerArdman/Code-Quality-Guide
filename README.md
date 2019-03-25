@@ -4,7 +4,7 @@
 
 > Questions about the changes? Most of them were to meet the learning objectives of the course and simplify the guide for our needs rather than opinions on code style, but feel free to ask [Conner](mailto:ardmanc@uw.edu) any questions.
 
-**NOTE** All JavaScript Code should be [validated](https://oxford.cs.washington.edu/154lint).
+**NOTE** All JavaScript Code should be [validated](https://oxford.cs.washington.edu/cse154/jslint/).
 
 ## Table of Contents
 
