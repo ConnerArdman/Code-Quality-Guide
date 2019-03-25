@@ -1125,7 +1125,7 @@
     div.innerHTML = '<img src="dog.jpg" alt="boundless pupper" />';
 
     // good
-    let img = document.CreateElement('img');
+    let img = document.createElement('img');
     img.src = 'dog.jpg';
     img.alt = 'boundless pupper';
     div.appendChild(img);
