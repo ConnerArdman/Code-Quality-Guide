@@ -761,9 +761,7 @@
     // good
     const luke = {};
     const yoda = {};
-    [luke, yoda].forEach((jedi) => {
-      jedi.force = 'strong';
-    });
+    [luke, yoda].forEach(jedi => jedi.force = 'strong');
 
     // good
     function foo() {
