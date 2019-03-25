@@ -1087,6 +1087,8 @@
   <a name="short--lines"></a><a name="13.1"></a>
   - [13.1](#short--lines) Always keep lines under 100 characters. It makes your code much easier to read. The one exception here is links. Any string containing a link can go over 100 characters.
 
+  **TIP**: Most IDE's let you set a line on the screen at a certain character limit. Set it to 80 characters and avoid going over that to be extra careful.
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Module Pattern & Strict Mode
