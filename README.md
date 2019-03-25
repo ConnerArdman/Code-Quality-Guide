@@ -8,7 +8,7 @@
 
 ## Table of Contents
 
-  1. [References](#references)
+  1. [Variables](#variables)
   1. [Objects](#objects)
   1. [Arrays](#arrays)
   1. [Destructuring](#destructuring)
@@ -19,7 +19,6 @@
   1. [Modules](#modules)
   1. [Iterators and Generators](#iterators-and-generators)
   1. [Properties](#properties)
-  1. [Variables](#variables)
   1. [Hoisting](#hoisting)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
   1. [Blocks](#blocks)
@@ -39,12 +38,11 @@
   1. [Contributors](#contributors)
   1. [Amendments](#amendments)
 
-## References
+## Variables
 
-  <a name="references--prefer-const"></a><a name="2.1"></a>
-  - [2.1](#references--prefer-const) Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](https://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](https://eslint.org/docs/rules/no-const-assign.html)
-
-    > Why? This ensures that you can’t reassign your references, which can lead to bugs and difficult to comprehend code.
+  <a name="variables--prefer-let"></a><a name="1.1"></a>
+  - [1.1](#variables--prefer-let) Use `let` for all of your variables; avoid using `var`.
+  > Why? `let` is block-scoped rather than function-scoped like `var`.
 
     ```javascript
     // bad
@@ -55,39 +53,124 @@
     const a = 1;
     const b = 2;
     ```
-
-  <a name="references--disallow-var"></a><a name="2.2"></a>
-  - [2.2](#references--disallow-var) If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](https://eslint.org/docs/rules/no-var.html)
-
-    > Why? `let` is block-scoped rather than function-scoped like `var`.
+    
+   <a name="variables--const"></a><a name="1.2"></a>
+  - [1.2](#variables--const) Use `const` for all of your constants with `UPPERCASE_NAMING`. Use this for any "magic" values appearing in your code and declare them at the top of the module pattern.
+  > Why? Not only does `const` prevent a variable from being reassigned, but these can also make your code much easier to read.
 
     ```javascript
     // bad
-    var count = 1;
-    if (true) {
-      count += 1;
-    }
-
-    // good, use the let.
-    let count = 1;
-    if (true) {
-      count += 1;
-    }
+    const alphabetLength = 26;
+    let ALPHABET_LENGTH = 26;
+    
+    // good
+    const ALPHABET_LENGTH = 26;
+    
+    // bad
+    (function() {  
+      function foo() {
+        for (let i = 0; i < 12; i++) {
+          ...
+        }
+      }
+	})();
+	
+    // good
+    (function() {  
+      const MONTHS = 12;
+      
+      function foo() {
+        for (let i = 0; i < MONTHS; i++) {
+          ...
+        }
+      }
+	})();
     ```
 
-  <a name="references--block-scope"></a><a name="2.3"></a>
-  - [2.3](#references--block-scope) Note that both `let` and `const` are block-scoped.
+  **Note** that both `let` and `const` are block-scoped, meaning that the variables only exist within the nearest curly braces.
 
     ```javascript
     // const and let only exist in the blocks they are defined in.
-    {
+    function foo() {
       let a = 1;
-      const b = 1;
+      const B = 1;
+      if (a == B) {
+        let c = 1;
+      }
+      console.log(c); // ReferenceError
     }
     console.log(a); // ReferenceError
-    console.log(b); // ReferenceError
+    console.log(B); // ReferenceError
     ```
 
+  <a name="variables--one-let"></a><a name="1.3"></a>
+  - [1.3](#variables--one-let) Use one `let` or `const` declaration per variable or assignment.
+
+    > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
+
+    ```javascript
+    // bad
+    let items = getItems(),
+        goSportsTeam = true,
+        dragonball = 'z';
+
+    // good
+    let items = getItems();
+    let goSportsTeam = true;
+    let dragonball = 'z';
+    ```
+
+  <a name="variables--define-where-used"></a><a name="1.4"></a>
+  - [1.4](#variables--define-where-used) Save expensive function calls into variables, but only once they are needed.
+
+    ```javascript
+    // bad
+    if (list.indexOf("abc") >= 0) {
+      list.remove(list.indexOf("abc"));
+    }
+    
+    // good
+    let index = list.indexOf("abc");
+    if (index >= 0) {
+      list.remove(index);
+    }
+	```  
+	  
+	```javascript
+    // bad - unnecessary function call
+    function checkName(hasName) {
+      let name = getName();
+
+      if (hasName) {
+        // Never used the name variable here!
+        return false;
+      }
+
+      if (name === 'test') {
+        setName('');
+        return false;
+      }
+
+      return name;
+    }
+
+    // good
+    function checkName(hasName) {
+      if (hasName) {
+        return false;
+      }
+
+      let name = getName();
+
+      if (name === 'test') {
+        setName('');
+        return false;
+      }
+
+      return name;
+    }
+    ```
+    
 **[⬆ back to top](#table-of-contents)**
 
 ## Objects
@@ -1499,238 +1582,6 @@
 
     // good
     const binary = 2 ** 10;
-    ```
-
-**[⬆ back to top](#table-of-contents)**
-
-## Variables
-
-  <a name="variables--const"></a><a name="13.1"></a>
-  - [13.1](#variables--const) Always use `const` or `let` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that. eslint: [`no-undef`](https://eslint.org/docs/rules/no-undef) [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
-
-    ```javascript
-    // bad
-    superPower = new SuperPower();
-
-    // good
-    const superPower = new SuperPower();
-    ```
-
-  <a name="variables--one-const"></a><a name="13.2"></a>
-  - [13.2](#variables--one-const) Use one `const` or `let` declaration per variable or assignment. eslint: [`one-var`](https://eslint.org/docs/rules/one-var.html)
-
-    > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
-
-    ```javascript
-    // bad
-    const items = getItems(),
-        goSportsTeam = true,
-        dragonball = 'z';
-
-    // bad
-    // (compare to above, and try to spot the mistake)
-    const items = getItems(),
-        goSportsTeam = true;
-        dragonball = 'z';
-
-    // good
-    const items = getItems();
-    const goSportsTeam = true;
-    const dragonball = 'z';
-    ```
-
-  <a name="variables--const-let-group"></a><a name="13.3"></a>
-  - [13.3](#variables--const-let-group) Group all your `const`s and then group all your `let`s.
-
-    > Why? This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
-
-    ```javascript
-    // bad
-    let i, len, dragonball,
-        items = getItems(),
-        goSportsTeam = true;
-
-    // bad
-    let i;
-    const items = getItems();
-    let dragonball;
-    const goSportsTeam = true;
-    let len;
-
-    // good
-    const goSportsTeam = true;
-    const items = getItems();
-    let dragonball;
-    let i;
-    let length;
-    ```
-
-  <a name="variables--define-where-used"></a><a name="13.4"></a>
-  - [13.4](#variables--define-where-used) Assign variables where you need them, but place them in a reasonable place.
-
-    > Why? `let` and `const` are block scoped and not function scoped.
-
-    ```javascript
-    // bad - unnecessary function call
-    function checkName(hasName) {
-      const name = getName();
-
-      if (hasName === 'test') {
-        return false;
-      }
-
-      if (name === 'test') {
-        this.setName('');
-        return false;
-      }
-
-      return name;
-    }
-
-    // good
-    function checkName(hasName) {
-      if (hasName === 'test') {
-        return false;
-      }
-
-      const name = getName();
-
-      if (name === 'test') {
-        this.setName('');
-        return false;
-      }
-
-      return name;
-    }
-    ```
-  <a name="variables--no-chain-assignment"></a><a name="13.5"></a>
-  - [13.5](#variables--no-chain-assignment) Don’t chain variable assignments. eslint: [`no-multi-assign`](https://eslint.org/docs/rules/no-multi-assign)
-
-    > Why? Chaining variable assignments creates implicit global variables.
-
-    ```javascript
-    // bad
-    (function example() {
-      // JavaScript interprets this as
-      // let a = ( b = ( c = 1 ) );
-      // The let keyword only applies to variable a; variables b and c become
-      // global variables.
-      let a = b = c = 1;
-    }());
-
-    console.log(a); // throws ReferenceError
-    console.log(b); // 1
-    console.log(c); // 1
-
-    // good
-    (function example() {
-      let a = 1;
-      let b = a;
-      let c = a;
-    }());
-
-    console.log(a); // throws ReferenceError
-    console.log(b); // throws ReferenceError
-    console.log(c); // throws ReferenceError
-
-    // the same applies for `const`
-    ```
-
-  <a name="variables--unary-increment-decrement"></a><a name="13.6"></a>
-  - [13.6](#variables--unary-increment-decrement) Avoid using unary increments and decrements (`++`, `--`). eslint [`no-plusplus`](https://eslint.org/docs/rules/no-plusplus)
-
-    > Why? Per the eslint documentation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like `num += 1` instead of `num++` or `num ++`. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
-
-    ```javascript
-    // bad
-
-    const array = [1, 2, 3];
-    let num = 1;
-    num++;
-    --num;
-
-    let sum = 0;
-    let truthyCount = 0;
-    for (let i = 0; i < array.length; i++) {
-      let value = array[i];
-      sum += value;
-      if (value) {
-        truthyCount++;
-      }
-    }
-
-    // good
-
-    const array = [1, 2, 3];
-    let num = 1;
-    num += 1;
-    num -= 1;
-
-    const sum = array.reduce((a, b) => a + b, 0);
-    const truthyCount = array.filter(Boolean).length;
-    ```
-
-<a name="variables--linebreak"></a>
-  - [13.7](#variables--linebreak) Avoid linebreaks before or after `=` in an assignment. If your assignment violates [`max-len`](https://eslint.org/docs/rules/max-len.html), surround the value in parens. eslint [`operator-linebreak`](https://eslint.org/docs/rules/operator-linebreak.html).
-
-    > Why? Linebreaks surrounding `=` can obfuscate the value of an assignment.
-
-    ```javascript
-    // bad
-    const foo =
-      superLongLongLongLongLongLongLongLongFunctionName();
-
-    // bad
-    const foo
-      = 'superLongLongLongLongLongLongLongLongString';
-
-    // good
-    const foo = (
-      superLongLongLongLongLongLongLongLongFunctionName()
-    );
-
-    // good
-    const foo = 'superLongLongLongLongLongLongLongLongString';
-    ```
-
-<a name="variables--no-unused-vars"></a>
-  - [13.8](#variables--no-unused-vars) Disallow unused variables. eslint: [`no-unused-vars`](https://eslint.org/docs/rules/no-unused-vars)
-
-    > Why? Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
-
-    ```javascript
-    // bad
-
-    var some_unused_var = 42;
-
-    // Write-only variables are not considered as used.
-    var y = 10;
-    y = 5;
-
-    // A read for a modification of itself is not considered as used.
-    var z = 0;
-    z = z + 1;
-
-    // Unused function arguments.
-    function getX(x, y) {
-        return x;
-    }
-
-    // good
-
-    function getXPlusY(x, y) {
-      return x + y;
-    }
-
-    var x = 1;
-    var y = a + 2;
-
-    alert(getXPlusY(x, y));
-
-    // 'type' is ignored even if unused because it has a rest property sibling.
-    // This is a form of extracting an object that omits the specified keys.
-    var { type, ...coords } = data;
-    // 'coords' is now the 'data' object without its 'type' property.
     ```
 
 **[⬆ back to top](#table-of-contents)**
