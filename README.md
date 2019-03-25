@@ -1165,8 +1165,38 @@
     helper(15);
     ```
 
-  <a name="no--log"></a><a name="15.3"></a>
-  - [15.3](#no--log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
+    <a name="no--css"></a><a name="15.3"></a>
+  - [15.3](#no--css) Do not include any CSS styles in JavaScript unless absoolutely necessary. Prefer adding and removing classes.
+
+    **TIP**: A good rule of thumb is that if you can make a CSS class to easily achieve your desired output, you should do that instead. Styling in JavaScript should only occur when adding dynamic styles (such as a random color) that cannot be predetermined with CSS classes.
+
+    ```javascript
+    // bad
+    div.style.color = 'red';
+
+    // better - this isn't great, because it would remove all other classes from div.
+    div.class = 'red';
+
+    // good
+    div.classList.add('red');
+    ```
+
+    ```javascript
+    // good - there is no way to do this in CSS!
+    div.style.color = genRandomColor();
+
+    /*
+     * Don't worry about what this function does. It is mostly black magic.
+     * From here: https://www.paulirish.com/2009/random-hex-color-code-snippets/
+     * @return {String} Random hex code starting with a '#'
+     */
+    function genRandomColor() {
+      return '#'+Math.floor(Math.random()*16777215).toString(16);
+    }
+    ```
+
+  <a name="no--log"></a><a name="15.4"></a>
+  - [15.4](#no--log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
 
 **[⬆ back to top](#table-of-contents)**
 
