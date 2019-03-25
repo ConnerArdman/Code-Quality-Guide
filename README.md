@@ -1120,13 +1120,16 @@
     
     ```javascript
     // bad
-    div.innerHTML = '<img src="dog.jpg" alt="boundless pupper" />'
+    div.innerHTML = '<img src="dog.jpg" alt="boundless pupper" />';
 
     // good
     let img = document.CreateElement('img');
     img.src = 'dog.jpg';
     img.alt = 'boundless pupper';
     div.appendChild(img);
+
+    // also good - clearing container
+    div.innerHTML = '';
     ```  
 
   <a name="minimize--redundancy"></a><a name="15.2"></a>
