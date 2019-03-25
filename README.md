@@ -917,6 +917,7 @@
     function myOtherFunc() {
       // ..
     }
+    ```
 
   <a name="whitespace--padded-blocks"></a><a name="10.6"></a>
   - [10.6](#whitespace--padded-blocks) Do not pad your blocks with blank lines. Too much spacing can be just as bad as not enough.
