@@ -1030,7 +1030,7 @@
     }
 
     // good
-    const thisIsMyObject = {};
+    let thisIsMyObject = {};
     function myFunction() {
       // ...
     }
