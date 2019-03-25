@@ -261,7 +261,7 @@
 ## Naming Conventions
 
   <a name="naming--descriptive"></a><a name="4.1"></a>
-  - [4.1](#naming--descriptive) Avoid single letter names unless an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!
+  - [4.1](#naming--descriptive) Avoid single letter names unless it is for an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!
 
     ```javascript
     // bad
@@ -382,7 +382,7 @@
   <a name="comparison--ternaries"></a><a name="5.3"></a>
   - [5.3](#comparison--ternaries) Ternaries can be used, but they should not be nested and generally be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.
 
-    > What's this? The ternary operator is a common shorthand notation in programming languages in the form of "let variable = expression ? value : value". If expression is true, the variable gets set to the first value after the "?". Otherwise, it is set to the value after the ":".
+    > What's this? The ternary operator is a common shorthand notation in programming languages in the form of "let variable = expression ? value1 : value2". If expression is true, the variable gets set to value1 after the "?". Otherwise, it is set to value2 after the ":".
 
     ```javascript
     // bad
