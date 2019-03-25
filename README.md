@@ -766,9 +766,11 @@
   - [11.1](#comments--header) Always include a file header comment as shown below
 
     ```javascript
-    Name: Mowgli Hovik
-    Date: 01.01.2019
-    Section: CSE 154 AX
+    /*
+      Name: Mowgli Hovik
+      Date: 01.01.2019
+      Section: CSE 154 AX
+    */
 
     This is the index.html page for my portfolio of web development work. It includes links to
     side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
