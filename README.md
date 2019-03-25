@@ -357,14 +357,14 @@
 
     ```javascript
     // bad
-    const foo = a ? a : b;
-    const bar = c ? true : false;
-    const baz = c ? false : true;
+    let foo = a ? a : b;
+    let bar = c ? true : false;
+    let baz = c ? false : true;
 
     // good
-    const foo = a || b;
-    const bar = !!c;
-    const baz = !c;
+    let foo = a || b;
+    let bar = !!c;
+    let baz = !c;
     ```
 
   <a name="comparison--no-mixed-operators"></a><a name="4.4"></a>
@@ -374,10 +374,10 @@
 
     ```javascript
     // bad
-    const foo = a && b < 0 || c > 0 || d + 1 === 0;
+    let foo = a && b < 0 || c > 0 || d + 1 === 0;
 
     // bad
-    const bar = a ** b - 5 % d;
+    let bar = a ** b - 5 % d;
 
     // bad
     // one may be confused into thinking (a || b) && c
@@ -386,10 +386,10 @@
     }
 
     // good
-    const foo = (a && b < 0) || c > 0 || (d + 1 === 0);
+    let foo = (a && b < 0) || c > 0 || (d + 1 === 0);
 
     // good
-    const bar = (a ** b) - (5 % d);
+    let bar = (a ** b) - (5 % d);
 
     // good
     if (a || (b && c)) {
@@ -397,7 +397,7 @@
     }
 
     // good
-    const bar = a + b / c * d;
+    let bar = a + b / c * d;
     ```
 
 **[⬆ back to top](#table-of-contents)**
