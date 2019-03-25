@@ -751,17 +751,19 @@
     let yoda = {}
     [luke, yoda].forEach(jedi => jedi.force = 'strong')
 
+    // good
+    const luke = {};
+    const yoda = {};
+    [luke, yoda].forEach(jedi => jedi.force = 'strong');
+    ```
+
+    ```javascript
     // bad - returns `undefined` instead of the value on the next line
     //       although you shouldn't return on a new line anyways
     function foo() {
       return
         'search your feelings, you know it to be foo'
     }
-
-    // good
-    const luke = {};
-    const yoda = {};
-    [luke, yoda].forEach(jedi => jedi.force = 'strong');
 
     // good
     function foo() {
