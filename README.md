@@ -904,7 +904,7 @@
     }
     ```
 
-  ```javascript
+    ```javascript
     // good
     funciton myFunc() {
       if (myBool) {
