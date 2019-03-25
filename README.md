@@ -751,7 +751,8 @@
     let yoda = {}
     [luke, yoda].forEach(jedi => jedi.force = 'strong')
 
-    // bad - returns `undefined` instead of the value on the next line - although don't return on a new line anyways
+    // bad - returns `undefined` instead of the value on the next line
+    //       although you shouldn't return on a new line anyways
     function foo() {
       return
         'search your feelings, you know it to be foo'
