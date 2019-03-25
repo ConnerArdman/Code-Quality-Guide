@@ -770,11 +770,11 @@
       Name: Mowgli Hovik
       Date: 01.01.2019
       Section: CSE 154 AX
-    */
 
-    This is the index.html page for my portfolio of web development work. It includes links to
-    side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
-    a crytogram generator.
+      This is the index.html page for my portfolio of web development work. It includes links to
+      side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
+      a crytogram generator.
+    */
     ```
 
   <a name="comments--function-header"></a><a name="11.2"></a>
