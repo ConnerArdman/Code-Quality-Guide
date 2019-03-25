@@ -949,18 +949,18 @@
 
     ```javascript
     // bad
-    const x=y+5;
+    let x=y+5;
 
     // bad
-    for (let i=0;i<arry.length;i++) {
+    for (let i=0;i<arr.length;i++) {
       // ...
     }
 
     // good
-    const x = y + 5;
+    let x = y + 5;
 
     // good
-    for (let i = 0; i <arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
       // ...
     }
     ```
