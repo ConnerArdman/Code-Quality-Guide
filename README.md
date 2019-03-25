@@ -35,8 +35,8 @@
     var b = 2;
 
     // good
-    const a = 1;
-    const b = 2;
+    let a = 1;
+    let b = 2;
     ```
 
    <a name="variables--const"></a><a name="1.2"></a>
