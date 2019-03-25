@@ -21,7 +21,6 @@
   1. [Semicolons](#semicolons)
   1. [Naming Conventions](#naming-conventions)
   1. [Contributors](#contributors)
-  1. [Amendments](#amendments)
 
 ## Variables
 
