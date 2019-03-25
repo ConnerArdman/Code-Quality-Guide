@@ -668,13 +668,25 @@
 
     ```javascript
     // bad
-    if (myBool == true) {
+    if (myBool === true) {
       // ...
     }
 
     // good
     if (myBool) {
-    // ...
+      // ...
+    }
+    ```
+
+    ```javascript
+    // bad
+    if (myBool === false) {
+      // ...
+    }
+
+    // good
+    if (!myBool) {
+      // ...
     }
     ```
 
