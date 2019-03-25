@@ -691,9 +691,7 @@
 ## Comments
 
   <a name="comments--function-header"></a><a name="9.1"></a>
-  - [9.1](#comments--function-header) For JavaScript code, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript.
-
-  In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
+  - [9.1](#comments--function-header) For JavaScript code, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript. In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
 
     **NOTE**: Notice that JSDoc comments start with `/**` not `/*`
 
@@ -716,7 +714,7 @@
        function functionName() {
 
        }
-    ```
+      ```
 
   <a name="comments--multiline"></a><a name="9.2"></a>
   - [9.2](#comments--multiline) Use `/* ... */` for multi-line comments.
