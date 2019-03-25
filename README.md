@@ -175,14 +175,14 @@
 ## Strings
 
   <a name="strings--quotes"></a><a name="2.1"></a>
-  - [2.1](#strings--quotes) You can use either single or double quotes for strings, just be consistent across all of your code.
+  - [2.1](#strings--quotes) You can use either single or double quotes for strings, just be consistent across all of your code. Don't use backticks unless for proper use of [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
     ```javascript
     // bad
     let name = "human";
     let friend = 'dog';
 
-    // bad - don't use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) unless for interpolation
+    // bad - don't use template literals unless for interpolation
     let name = `human`;
 
     // good
