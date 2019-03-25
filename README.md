@@ -17,9 +17,10 @@
   1. [Boolean Zen](#boolean-zen)
   1. [Loops](#loops)
   1. [Comments](#comments)
-  1. [Whitespace](#whitespace)
+  1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Semicolons](#semicolons)
   1. [Naming Conventions](#naming-conventions)
+  1. [Module Pattern & Strict Mode](#module-pattern--strict-mode)
   1. [Contributors](#contributors)
 
 ## Variables
@@ -797,7 +798,7 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-## Whitespace
+## Whitespace & Indentation
 
   <a name="whitespace--spaces"></a><a name="10.1"></a>
   - [10.1](#whitespace--spaces) Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.
@@ -957,6 +958,41 @@
     let arr = [1, 2];
     ```
 
+  <a name="whitespace--indenting"></a><a name="10.8"></a>
+  - [10.8](#whitespace--indenting) Always indent one time for each nested block.
+
+    ```javascript
+    // bad
+    if (myBool) {
+    return true;
+    }
+
+    // good
+    if (myBool) {
+      return true;
+    }
+    ```
+
+    ```javascript
+    // bad
+    if (myBool) {
+      for (let i = 0; i <arr.length; i++) {
+        doSomething(arr[i]);
+      }
+        doSomethingElse();
+        return true;
+    }
+
+    // good
+    if (myBool) {
+      for (let i = 0; i <arr.length; i++) {
+        doSomething(arr[i]);
+      }
+      doSomethingElse();
+      return true;
+    }
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Semicolons
@@ -969,8 +1005,8 @@
     ```javascript
     // bad - raises exception
     let luke = {}
-    let leia = {}
-    [luke, leia].forEach(jedi => jedi.father = 'vader')
+    let yoda = {}
+    [luke, yoda].forEach(jedi => jedi.force = 'strong')
 
     // bad - returns `undefined` instead of the value on the next line - although don't return on a new line anyways
     function foo() {
@@ -980,9 +1016,9 @@
 
     // good
     const luke = {};
-    const leia = {};
-    [luke, leia].forEach((jedi) => {
-      jedi.father = 'vader';
+    const yoda = {};
+    [luke, yoda].forEach((jedi) => {
+      jedi.force = 'strong';
     });
 
     // good
@@ -1025,6 +1061,28 @@
     function myFunction() {
       // ...
     }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Module Pattern & Strict Mode
+
+  <a name="module--pattern"></a><a name="13.1"></a>
+  - [13.1](#module-pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
+    
+    > Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file's function would override the first one's (since HTML is loaded from top to bottom).
+
+    See example in [13.2](#use-strict)
+
+  <a name="use--strict"></a><a name="13.2"></a>
+  - [13.2](#use-strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
+
+    ```javascript
+    // good
+    (function() {
+      "use strict";
+      // ...
+    })();
     ```
 
 **[⬆ back to top](#table-of-contents)**
