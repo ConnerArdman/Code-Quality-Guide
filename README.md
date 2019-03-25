@@ -182,7 +182,7 @@
     let name = "human";
     let friend = 'dog';
 
-    // bad - don't use template literals unless for interpolation
+    // bad - don't use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) unless for interpolation
     let name = `human`;
 
     // good
