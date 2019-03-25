@@ -194,8 +194,13 @@
 
 ## Functions
   
-  <a name="functions--anonymous"></a><a name="3.1"></a>
-  - [3.1](#functions--anonymous) Always prefer named functions over anonymous functions. A good rule of thumb is that if you can think of a reasonable name, it should be named. Most anonymous functions should be 3 or less lines of code.
+  <a name="long-functions"></a><a name="3.1"></a>
+  - [3.1](#long--functions-last) If you have a single function that is very long, break it apart into smaller sub-functions. The definition of "very long" is vague, but often a function longer than 20-30 lines is pushing it.
+
+  If you try to describe the function's purpose and find yourself using the word "and" a lot, that probably means the function does too many things and should be split into sub-functions.
+
+  <a name="functions--anonymous"></a><a name="3.2"></a>
+  - [3.2](#functions--anonymous) Always prefer named functions over anonymous functions. A good rule of thumb is that if you can think of a reasonable name, it should be named. Most anonymous functions should be 3 or less lines of code.
 
     ```javascript
     // really bad - long anonymous function
@@ -241,8 +246,8 @@
     ```
 
 
-  <a name="functions--defaults-last"></a><a name="3.2"></a>
-  - [3.2](#functions--defaults-last) Always put default parameters last.
+  <a name="functions--defaults-last"></a><a name="3.3"></a>
+  - [3.3](#functions--defaults-last) Always put default parameters last.
 
     ```javascript
     // bad
@@ -605,19 +610,89 @@
 
     ```javascript
     // bad
-    if (score1 == score2) {
+    if (score1 === score2) {
       return true;
     } else {
       return false;
     }
 
     // good
-    return score1 == score2;
+    return score1 === score2;
     ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ## Loops
+
+  <a name="for--while"></a><a name="8.1"></a>
+  - [8.1](#for--while) Use a `for` loop when the number of repetitions is known (definite). Use a `while` loop when the number of repetitions is unknown (indefinite).
+
+    ```javascript
+    // bad
+    let i = 0;
+    while (i < arr.length) {
+      console.log(arr[i]);
+      i++;
+    }
+
+    // good
+    for (let i = 0; i < arr.length; i++) {
+      console.log(arr[i]);
+    }
+    ```
+
+    ```javascript
+    // bad - notice the middle condition does not use i at all, and it is not used in the loop!
+    let sum = 0;
+    for (let i = 0; sum < 1000; i++) {
+      sum += Math.random();
+    }
+
+    // good
+    let sum = 0;
+    while (sum < 1000) {
+      sum += Math.random();
+    }
+    ```
+
+  <a name="break--continue"></a><a name="8.2"></a>
+  - [8.2](#break--continue) Never use break, continue or empty return statements in this class.
+
+    > Why? For the length and complexity of the programs we ask you to write, these statements deviate from clear logical flow and you should instead consider ways to refactor your conditional statements and loops to handle different cases without forced "shortcuts".
+
+    ```javascript
+    // bad - contrived example, but the idea is you can usually replace the break with conditions.
+    while (i < arr.length) {
+      if (i > 5) {
+        break;
+      }
+      console.log(arr[i]);
+      i++;
+    }
+
+    // good
+    while (i < arr.length && i <= 5) {
+      console.log(arr[i]);
+      i++;
+    }
+    ```
+
+    ```javascript
+    // bad
+    function foo(num) {
+      if (num === 1) {
+        return;
+      } 
+      console.log(num + 5);
+    }
+
+    // good
+    function foo(num) {
+      if (num !== 1) {
+        console.log(num + 5);
+      }
+    }
+    ```
 
 **[⬆ back to top](#table-of-contents)**
 
