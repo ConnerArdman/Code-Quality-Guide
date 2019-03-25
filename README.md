@@ -44,7 +44,7 @@
   - [1.1](#variables--prefer-let) Use `let` for all of your variables; avoid using `var`.
   > Why? `let` is block-scoped rather than function-scoped like `var`.
 
-	```javascript
+    ```javascript
     // bad
     var a = 1;
     var b = 2;
@@ -58,7 +58,7 @@
   - [1.2](#variables--const) Use `const` for all of your constants with `UPPERCASE_NAMING`. Use this for any "magic" values appearing in your code and declare them at the top of the module pattern.
   > Why? Not only does `const` prevent a variable from being reassigned, but these can also make your code much easier to read.
 
-	```javascript
+    ```javascript
     // bad
     const alphabetLength = 26;
     let ALPHABET_LENGTH = 26;
@@ -88,8 +88,8 @@
     ```
 
   **Note** that both `let` and `const` are block-scoped, meaning that the variables only exist within the nearest curly braces.
-
-	```javascript
+    
+    ```javascript
     // const and let only exist in the blocks they are defined in.
     function foo() {
       let a = 1;
