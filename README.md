@@ -1068,14 +1068,14 @@
 ## Module Pattern & Strict Mode
 
   <a name="module--pattern"></a><a name="13.1"></a>
-  - [13.1](#module-pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
+  - [13.1](#module--pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
     
     > Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file's function would override the first one's (since HTML is loaded from top to bottom).
 
-    See example in [13.2](#use-strict)
+    See example in [13.2](#use--strict)
 
   <a name="use--strict"></a><a name="13.2"></a>
-  - [13.2](#use-strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
+  - [13.2](#use--strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
 
     ```javascript
     // good
