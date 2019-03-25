@@ -698,141 +698,118 @@
 
 ## Comments
 
-  <a name="comments--multiline"></a><a name="17.1"></a>
-  - [18.1](#comments--multiline) Use `/** ... */` for multi-line comments.
+  <a name="comments--function-header"></a><a name="9.1"></a>
+  - [9.1](#comments--function-header) For JavaScript code, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript.
+
+  In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
+
+  **NOTE**: Notice that JSDoc comments start with `/**` not `/*`
+
+  **NOTE**: The description of your function should describe what the function does, not how it does it. The most important thing is that your comments should describe how the state of the page (and potentially module-global variables) will change by calling the function. Think about how to explain the purpose of the function without implementation details. A good rule of thumb is to never mention processes such as "looping over" things.
 
     ```javascript
-    // bad
-    // make() returns a new element
-    // based on the passed in tag name
-    //
-    // @param {String} tag
-    // @return {Element} element
-    function make(tag) {
+    // Single-line JSDoc comment:
+    /** Your comment here - description of function */
+    function simpleFunction() {
 
-      // ...
-
-      return element;
     }
 
-    // good
+    // Multi-line JSDoc comment:
     /**
-     * make() returns a new element
-     * based on the passed-in tag name
+     * brief description of the function
+     * @param {datatype} parameterName1 - parameter description
+     * @param {datatype} parameterName2 - parameter description
+     * @return {datatype} Description of the return value
      */
-    function make(tag) {
+     function functionName() {
 
-      // ...
-
-      return element;
-    }
+     }
     ```
 
-  <a name="comments--singleline"></a><a name="17.2"></a>
-  - [18.2](#comments--singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+  <a name="comments--multiline"></a><a name="9.2"></a>
+  - [9.2](#comments--multiline) Use `/* ... */` for multi-line comments.
 
     ```javascript
     // bad
-    const active = true;  // is current tab
+    // this comment is getting really really really long
+    // so I am going to break it into multiple lines, but now
+    // there are lots of those ugly start of comment // characters
+
+    // good
+    /*
+      This multiline comment is also getting really really long
+      but I chose to use the correct operator and it is a bit
+      nicer to look at
+     */
+    ```
+
+  <a name="comments--singleline"></a><a name="9.3"></a>
+  - [9.3](#comments--singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+
+    **NOTE**: While not required, many programmers like to comment each module-global variable with a single line comment.
+
+    ```javascript
+    // bad
+    let active = true;  // is current tab
 
     // good
     // is current tab
-    const active = true;
+    let active = true;
+    ```
 
+    ```javascript
     // bad
-    function getType() {
       console.log('fetching type...');
       // set the default type to 'no type'
       const type = this.type || 'no type';
 
-      return type;
-    }
+    // bad
+    function getType() {
+
+      // set the default type to 'no type'
+      return this.type || 'no type';
+    }    
 
     // good
     function getType() {
       console.log('fetching type...');
 
       // set the default type to 'no type'
-      const type = this.type || 'no type';
-
-      return type;
+      return this.type || 'no type';
     }
 
     // also good
     function getType() {
       // set the default type to 'no type'
-      const type = this.type || 'no type';
-
-      return type;
+      return this.type || 'no type';
     }
     ```
 
-  <a name="comments--spaces"></a>
-  - [18.3](#comments--spaces) Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](https://eslint.org/docs/rules/spaced-comment)
+  <a name="comments--spaces"></a><a name="9.4"></a>
+  - [9.4](#comments--spaces) Start all comments with a space to make it easier to read.
 
     ```javascript
     // bad
     //is current tab
-    const active = true;
+    let active = true;
 
     // good
     // is current tab
-    const active = true;
-
-    // bad
-    /**
-     *make() returns a new element
-     *based on the passed-in tag name
-     */
-    function make(tag) {
-
-      // ...
-
-      return element;
-    }
-
-    // good
-    /**
-     * make() returns a new element
-     * based on the passed-in tag name
-     */
-    function make(tag) {
-
-      // ...
-
-      return element;
-    }
+    let active = true;
     ```
 
-  <a name="comments--actionitems"></a><a name="17.3"></a>
-  - [18.4](#comments--actionitems) Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
+  <a name="comments--sources"></a><a name="9.5"></a>
+  - [9.5](#comments--sources) Always cite sources in your comments if you use anything found online.
 
-  <a name="comments--fixme"></a><a name="17.4"></a>
-  - [18.5](#comments--fixme) Use `// FIXME:` to annotate problems.
+    **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
 
-    ```javascript
-    class Calculator extends Abacus {
-      constructor() {
-        super();
-
-        // FIXME: shouldn’t use a global here
-        total = 0;
-      }
-    }
-    ```
-
-  <a name="comments--todo"></a><a name="17.5"></a>
-  - [18.6](#comments--todo) Use `// TODO:` to annotate solutions to problems.
+    **BIG NOTE**: You should not be citing any sources on homework assignments as everything should be
+    your own work or based on in class code (no need to cite our examples unless told otherwise). Feel free
+    to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
+    code found online, ask your TA or instructor first then cite it with permission.
 
     ```javascript
-    class Calculator extends Abacus {
-      constructor() {
-        super();
-
-        // TODO: total should be configurable by an options param
-        this.total = 0;
-      }
-    }
+    
     ```
 
 **[⬆ back to top](#table-of-contents)**
