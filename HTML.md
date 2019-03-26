@@ -70,4 +70,57 @@
     ```
 
 **[⬆ back to top](#table-of-contents)**
+
+## Naming Conventions
+
+  <a name="naming--descriptive"></a><a name="2.1"></a>
+  - [2.1](#naming--descriptive) Avoid single letter names for classes and IDs. Try to be as descriptive as possible.
+
+    ```HTML
+    <!-- bad -->
+    <div class="c">...</div>
+
+    <!-- good -->
+    <div class="image-container">...</div>
+    ```
+
+  <a name="lowercase--naming"></a><a name="2.2></a>
+  - [2.2](#lowercase--naming) Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.
+
+    ```HTML
+    <!-- bad -->
+    <h1 id="first_heading"></h1>
+    <p class="importantReminder"></p>
+
+    <!-- good -->
+    <h1 id="first-heading"></h1>
+    <p class="important-reminder"></p>
+
+    <!-- also good -->
+    <h1 id="firstheading"></h1>
+    <p class="importantreminder"></p>
+    ```
+
+  <a name="lowercase--elements"></a><a name="2.3></a>
+  - [2.3](#lowercase--elements) Use all lowercase for HTML elements and their attributes.
+
+    ```HTML
+    <!-- bad -->
+    <H1>Code Quality Guide</H1>
+
+    <!-- good -->
+    <h1>Code Quality Guide</H1>
+    ```
+
+    ```HTML
+    <!-- bad -->
+    <img SRC="cat.jpg" ALT="furry friend">
+    <img Src="cat.jpg" Alt="furry friend">
+
+    <!-- good -->
+    <img src="cat.jpg" alt="furry friend">
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
 # };
