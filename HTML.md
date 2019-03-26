@@ -89,16 +89,16 @@
 
     ```HTML
     <!-- bad -->
-    <h1 id="first_heading"></h1>
-    <p class="importantReminder"></p>
+    <h1 id="first_heading">My Awesome Website</h1>
+    <p class="importantReminder">do your homework</p>
 
     <!-- good -->
-    <h1 id="first-heading"></h1>
-    <p class="important-reminder"></p>
+    <h1 id="first-heading">My Awesome Website</h1>
+    <p class="important-reminder">do your homework</p>
 
     <!-- also good -->
-    <h1 id="firstheading"></h1>
-    <p class="importantreminder"></p>
+    <h1 id="firstheading">My Awesome Website</h1>
+    <p class="importantreminder">do your homework</p>
     ```
 
   <a name="lowercase--elements"></a><a name="2.3></a>
@@ -120,6 +120,69 @@
     <!-- good -->
     <img src="cat.jpg" alt="furry friend">
     ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Semantic Tags
+
+  <a name="prefer--semantic"></a><a name="3.1"></a>
+  - [3.1](#prefer--semantic) Always prefer semantic tags over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
+    
+    > Why? Semantic tags make our code more accessible, particularly to screen readers. `<div>` and `<span>` are ignored for anything other than grouping, but tags such as `<main>`, `<article>` and `<section>` carry semantic meaning and help the screen reader interpret the page for a user.
+
+    **TIP**: Semantic tags can be confusing to decide between. It can be helpful to wireframe your site and try to verbally describe each portion of your page. Here is a [great resource on the usage of these tags](https://www.semrush.com/blog/semantic-html5-guide/) as well as a [list of semantic tags](https://www.w3schools.com/html/html5_semantic_elements.asp).
+
+    ```HTML
+    <!-- bad -->
+    <div>
+      <div class="main-header">
+        <h1>CSE 154 Is The Best!</h1>  
+      </div>
+      <div class="section">
+        ....
+      </div>
+    </div>
+
+    <!-- good -->
+    <article>
+      <header>
+        <h1>CSE 154 Is The Best!</h1>  
+      </header>
+      <section>
+        ....
+      </section>
+    </article>
+    ```
+
+  <a name="order--heading"></a><a name="3.2"></a>
+  - [3.2](#order--heading) Heading tags denote heading levels, not font sizes. Never "skip" a level as this does not make semantic sense. For example, do not use `<h2>` unless your page has an `<h1>`. Do not use `<h3>` unless your page has an `<h2>`.
+    
+
+    ```HTML
+    <!-- bad -->
+    <h1>Main Heading</h1>
+    <h3>Smaller Heading</h3>
+
+    <!-- good -->
+    <h1>Main Heading</h1>
+    <h2>Smaller Heading</h2>
+    ```
+
+  <a name="presentation--tags"></a><a name="3.3"></a>
+  - [3.3](#presentation--tags) Do not use presentation tags, as they describe style rather than content. Most of these have been deprecated, and all of them can be replaced with CSS styles. For example, avoid `<i>`, `<b>`, `<u>`, `<font>`, `<big>`, `<small>` and `<center>`. `<strong>` and `<em>` are acceptable to use, because they carry semantic meaning.
+
+    ```HTML
+    <!-- bad -->
+    <b>Bold text!</b>
+
+    <!-- good -->
+    <strong>Strong text!</strong>
+    ```
+
+  <a name="tables--layout"></a><a name="3.4"></a>
+  - [3.4](#tables--layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
+
 
 **[⬆ back to top](#table-of-contents)**
 
