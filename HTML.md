@@ -37,5 +37,37 @@
     </ul>
     ```
 
+  <a name="single-class"></a><a name="1.3"></a>
+  - [1.3](#single-class) Classes should always appear at least twice in your HTML. Otherwise, you should use an ID.
+
+    ```HTML
+    <!-- bad -->
+    <div class="boundless-container">
+      <img src="pupper.jpg" alt="Dubs">
+    </div>
+
+    <!-- good -->
+    <div id="boundless-container">
+      <img src="pupper.jpg" alt="Dubs">
+    </div>
+    ```
+
+  <a name="unique-id"></a><a name="1.4"></a>
+  - [1.4](#unique-id) Each ID should be unique, only appearing once in the HTML.
+
+    ```HTML
+    <!-- bad -->
+    <h2>Dubs</h2>
+    <p id="bio">The adorable live mascot of UW</p>
+    <h2>Harry The Husky</h2>
+    <p id="bio">The body-suit mascot of UW</p>
+
+    <!-- good -->
+    <h2>Dubs</h2>
+    <p class="bio">The adorable live mascot of UW</p>
+    <h2>Harry The Husky</h2>
+    <p class="bio">The body-suit mascot of UW</p>
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 # };
