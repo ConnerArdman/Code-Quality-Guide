@@ -375,7 +375,7 @@
   <a name="redundant-tags"></a><a name="7.3"></a>
   - [7.3](#redundant-tags) Never have two tags grouping the same content unless there is a specific semantic reason for it or it is necessary for styling. 
 
-  **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `div` and `article`) should wrap the same content.
+    **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `div` and `article`) should wrap the same content.
     
     ```HTML
     <!-- bad -->
