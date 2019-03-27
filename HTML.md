@@ -2,7 +2,7 @@
 
 *A somewhat sensible set of HTML code quality guidelines for [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
 
-**NOTE** All HTML Code should be [validated](https://validator.w3.org/#validate_by_input).
+**NOTE**: All HTML Code should be [validated](https://validator.w3.org/#validate_by_input).
 
 ## Table of Contents
 

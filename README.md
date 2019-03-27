@@ -1,6 +1,6 @@
 # CSE 154 Code Quality Guide() {
 
-*A somewhat reasonable approach to web development for [CSE 154](https://cs.washington.edu/154) at the University of Washington. Portions of this guide were adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).*
+*A relatively rational approach to web development for [CSE 154](https://cs.washington.edu/154) at the University of Washington. Portions of this guide were adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).*
 
 > Questions about the guide? We are always looking to improve our resources, feel free to reach out to [Conner](mailto:ardmanc@uw.edu) with any questions or concerns!
 
