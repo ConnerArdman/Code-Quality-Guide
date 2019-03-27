@@ -224,7 +224,7 @@
 
 ## Comments
 
-    <a name="comments-inline"></a><a name="5.1"></a>
+  <a name="comments-inline"></a><a name="5.1"></a>
   - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
     
     ```HTML
