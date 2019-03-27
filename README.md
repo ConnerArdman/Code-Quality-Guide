@@ -300,6 +300,8 @@
   <a name="comparison--eqeqeq"></a><a name="5.1"></a>
   - [5.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
 
+    > What's the difference? `===` performs a "strict" equality check, meaning that it checks value and type. `==` only checks for value. For example, the string `"0" == 0` is `true`, but `"0" === 0` is `false`. Only using `=== `is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, [here](https://dorey.github.io/JavaScript-Equality-Table/) is a great table explaning the difference.
+
     ```javascript
     // bad
     if (a == b) {
@@ -363,7 +365,7 @@
     }
     ```
 
-    **NOTE**: Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+    **NOTE**: Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules. However, you should avoid using these "tricks" as they can make your code very hard to read:
 
     - **Objects** evaluate to **true**
     - **Undefined** evaluates to **false**
@@ -371,6 +373,8 @@
     - **Booleans** evaluate to **the value of the boolean**
     - **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
     - **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+
+    More on this [here](https://dorey.github.io/JavaScript-Equality-Table/).
 
     ```javascript
     if ([0] && []) {
