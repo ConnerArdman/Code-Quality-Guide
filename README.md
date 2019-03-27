@@ -42,16 +42,19 @@
     ```
 
    <a name="variables--const"></a><a name="1.2"></a>
-  - [1.2](#variables--const) Use `const` for all of your constants with [`UPPERCASE_NAMING`](#naming--camelCase). Use this for any "magic" values appearing in your code and declare them at the top of the module pattern.
+  - [1.2](#variables--const) Use `const` for all of your constants with [`UPPERCASE_NAMING`](#naming--camelCase). Use this for any "magic" values appearing in your code and declare them at the top of the module pattern. In general, you should avoid having "random" numbers and strings appear in your code, especially when there is a clear name you could give them.
+    
     > Why? Not only does `const` prevent a variable from being reassigned, but these can also make your code much easier to read. As a note here, it is very common in industry to always prefer const over let when possible. There are benefits to this approach, but we are going to stick to only using const at the module-global level in this class.
 
     ```javascript
     // bad
     const alphabetLength = 26;
     let ALPHABET_LENGTH = 26;
+    const FAVORITE-WEBSITE = 'https://www.omfgdogs.com/';
 
     // good
     const ALPHABET_LENGTH = 26;
+    const FAVORITE_WEBSITE = 'https://www.omfgdogs.com/';
     ```
 
     ```javascript
