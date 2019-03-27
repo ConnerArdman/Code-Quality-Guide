@@ -19,9 +19,9 @@
   <a name="comments--header"></a><a name="1.1"></a>
   - [1.1](#comments--header) Always include a file header comment at the top of each file with your name, the date, your section and a brief description of what the file does. See HTML example below:
 
-  **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
+    **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
 
-  **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output!
+    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output!
 
     ```HTML
     <!--
@@ -96,7 +96,7 @@
   <a name="short--lines"></a><a name="3.1"></a>
   - [3.1](#short--lines) Always keep lines under 100 characters. It makes your code much easier to read. The one exception here is links. Any string containing a link can go over 100 characters.
 
-  **TIP**: Most IDE's let you set a line on the screen at a certain character limit. Set it to 80 characters and avoid going over that to be extra careful.
+    **TIP**: Most IDE's let you set a line on the screen at a certain character limit. Set it to 80 characters and avoid going over that to be extra careful.
 
 **[⬆ back to top](#table-of-contents)**
 
