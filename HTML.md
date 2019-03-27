@@ -14,6 +14,10 @@
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Good HTML Design](#good-html-design)
 
+## Other Guides
+  1. [General Guidelines](README.md)
+  1. [JavaScript](javascript.md)
+
 ## Classes & IDs
 
   <a name="unused-classes"></a><a name="1.1"></a>
