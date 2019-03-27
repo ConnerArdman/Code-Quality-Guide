@@ -332,14 +332,28 @@
     </body>
     ```
 
- <a name="whitespace-equal"></a><a name="6.4"></a>
+  <a name="whitespace-equal"></a><a name="6.4"></a>
   - [6.4](#whitespace-equal) Never leave space around the equal sign for attributes.
+
     ```HTML
     <!-- bad -->
     <div class = "foo">
 
     <!-- good -->
     <div class="foo">
+    ```
+
+  <a name="extra-space"></a><a name="6.5"></a>
+  - [6.5](#extra-space) Do not add extra spacing inside of elements.
+
+    > Why? HTML generally ignores extra whitespace, so this won't cause too many bugs. However, there are some cases where extra spaces can cause unwanted alignment errors.
+
+    ```HTML
+    <!-- bad -->
+    <h1> My Webpage </h1>
+
+    <!-- good -->
+    <h1>My Webpage</h1>
     ```
 
 **[⬆ back to top](#table-of-contents)**
