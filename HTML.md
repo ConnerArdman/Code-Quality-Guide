@@ -14,7 +14,6 @@
   1. [Self Closing Tags](#self-closing-tags)
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
-  1. [Long Lines](#long-lines)
   1. [Good HTML Design](#good-html-design)
 
 ## Classes & IDs
@@ -84,7 +83,7 @@
     <div class="image-container">...</div>
     ```
 
-  <a name="lowercase--naming"></a><a name="2.2></a>
+  <a name="lowercase--naming"></a><a name="2.2"></a>
   - [2.2](#lowercase--naming) Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.
 
     ```HTML
@@ -101,7 +100,7 @@
     <p class="importantreminder">do your homework</p>
     ```
 
-  <a name="lowercase--elements"></a><a name="2.3></a>
+  <a name="lowercase--elements"></a><a name="2.3"></a>
   - [2.3](#lowercase--elements) Use all lowercase for HTML elements and their attributes.
 
     ```HTML
@@ -183,6 +182,245 @@
   <a name="tables--layout"></a><a name="3.4"></a>
   - [3.4](#tables--layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
 
+  <a name="blockquote"></a><a name="3.5"></a>
+  - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content to surround the `<p>`.
+    ```HTML
+    <!-- bad -->
+    <p>bark! bark! bark!</p>
+    <p>- Debug Dog</p>
+
+    <!-- good -->
+    <blockquote>
+      <p>bark! bark! bark!</p>
+    </blockquote>
+    <cite>- Debug Dog</cite>
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Self Closing Tags
+
+  <a name="self-closing"></a><a name="4.1"></a>
+  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self closing tags, but be consistent with all tags in your file, including those in the `head` as well as `br` and `hr` tags.
+
+    ```HTML
+    <!-- bad -->
+    <img src="foo.jpg" alt="foo description" />
+    <br>
+
+    <!-- good -->
+    <img src="foo.jpg" alt="foo description" />
+    <br />
+
+    <!-- also good -->
+    <img src="foo.jpg" alt="foo description">
+    <br>
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Comments
+
+  <a name="comments-header"></a><a name="5.1"></a>
+  - [5.1](#comments-header) Always include a file header comment as shown below
+
+    ```HTML
+    <!--
+      Name: Mowgli Hovik
+      Date: 01.01.2019
+      Section: CSE 154 AX
+
+      This is the index.html page for my portfolio of web development work. It includes links to
+      side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
+      a crytogram generator.
+    -->
+    ```
+
+  <a name="comments-sources"></a><a name="5.2"></a>
+  - [5.2](#comments-sources) Always cite sources in your comments if you use anything found online.
+
+    **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
+
+    **BIG NOTE**: You should not be citing any sources on homework assignments as everything should be
+    your own work or based on in class code (no need to cite our examples unless told otherwise). Feel free
+    to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
+    code found online, ask your TA or instructor first then cite it with permission.
+
+    <a name="comments-inline"></a><a name="5.3"></a>
+  - [5.3](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
+    
+    ```HTML
+    <!-- bad -->
+    <!-- main section -->
+    <main>
+      ...
+
+      <!- Game board to be populated by JavaScript -->
+      <div></div>
+    </main>
+
+    <!-- footer -->
+    <footer>
+      ...
+    </footer>
+    ```
+
+    ```HTML
+    <!-- good -->
+    <main>
+      ...
+
+      <!- Game board to be populated by JavaScript -->
+      <div></div>
+    </main>
+
+    <footer>
+      ...
+    </footer>
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Whitespace & Indentation
+
+  <a name="whitespace-spaces"></a><a name="6.1"></a>
+  - [6.1](#whitespace-spaces) Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.
+
+    **NOTE**: Please ask a TA for assistance if you are unsure of how to correct this. The settings are a bit hard to find in Atom, and this can mess up your indentation when turning in files on GitGrade.
+
+  <a name="whitespace-blocks"></a><a name="6.2"></a>
+  - [6.2](#whitespace-blocks) Go to a new line before each block element. Never place more than one block element on a single line.
+    
+    **NOTE**: Images are technically "inline-block" elements, but we will apply the same indentation rules to them. Place images on their own lines without block elements.
+
+    ```HTML
+    <!-- bad -->
+    <main><p>Go Dawgs!</p></main>
+
+    <!-- good -->
+    <main>
+      <p>Go Dawgs!</p>
+    </main>
+    ```
+
+  <a name="whitespace-indent"></a><a name="6.3"></a>
+  - [6.3](#whitespace-indent) Always indent one time for each nested block element.
+
+    ```HTML
+    <!-- bad -->
+    <body>
+    <main>
+      <div class="foo">
+      <p>bar</p>
+      <div>
+    </main>
+    <footer>
+      <p>baz</p>
+    </footer>
+    </body>
+
+    <!-- good -->
+    <body>
+      <main>
+        <div class="foo">
+          <p>bar</p>
+        <div>
+      </main>
+      <footer>
+        <p>baz</p>
+      </footer>
+    </body>
+    ```
+
+ <a name="whitespace-equal"></a><a name="6.4"></a>
+  - [6.4](#whitespace-equal) Never leave space around the equal sign for attributes.
+    ```HTML
+    <!-- bad -->
+    <div class = "foo">
+
+    <!-- good -->
+    <div class="foo">
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Good HTML Design
+
+  <a name="alt-attribute"></a><a name="7.1"></a>
+  - [7.1](#alt-attribute) Always use `alt` attributes for images.
+
+    > Why? Similar to semantic tags, alt attributes make our code more accessible to screen readers. Rather than just telling a user that there is an image, it can mention what is in the actual image. This is also useful when the image fails to load to give a better experience to users by displaying the text.
+    
+    ```HTML
+    <!-- bad -->
+    <img src="tree.jpg">
+
+    <!-- good -->
+    <img src="tree.jpg" alt="large oak tree">
+    ```
+
+    <a name="alt-attribute"></a><a name="7.2"></a>
+  - [7.2](#alt-attribute) Do not mention "image of" or anything similar in alt attribute text.
+
+    > Why? This is mostly a redundancy thing. By using an image tag, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as "image of image of fluffy dog"!
+    
+    ```HTML
+    <!-- bad -->
+    <img src="dog.jpg" alt="image of fluffy dog">
+
+    <!-- good -->
+    <img src="dog.jpg" alt="fluffy dog">
+    ```
+
+  <a name="redundant-tags"></a><a name="7.3"></a>
+  - [7.3](#redundant-tags) Never have two tags grouping the same content unless there is a specific semantic reason for it or it is necessary for styling. 
+
+  **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `div` and `article`) should wrap the same content.
+    
+    ```HTML
+    <!-- bad -->
+    <main>
+      <article>
+        ...
+      </article>
+    </main>
+
+    <!-- good -->
+    <main>
+      ...
+    </main>    
+    ```
+
+  <a name="js-in-html"></a><a name="7.4"></a>
+  - [7.4](#js-in-html) Do not use the `<script>` tag except to link to an external `.js` file. Do not use the `<style>` tag, and do not include any style related attributes in your HTML. Do all styling in CSS.
+
+      > Why? It is important to keep content, style and behavior seperate. This keeps our code modular and easy to interpret. Since HTML represents content, there should be no style or behavior information in it.
+
+  <a name="script-in-head"></a><a name="7.5"></a>
+  - [7.5](#script-in-head) Always put `<script>` tags in the head, not the body.
+
+      > Why? The body represents the actual content of the page, so it is semantically incorrect to put script tags there. That said, it can be common in industry to put scripts at the bottom of the body. The browser reads HTML from the top to the bottom, so if the script tag is last, then the browser will not parse the JavaScript file until the page has loaded. While this technique eliminates the need for 'window.addEventListener('load', init)`, we will consider it poor code quality in this course.
+
+  <a name="br-br"></a><a name="7.6"></a>
+  - [7.6](#br-br) Never use consecutive `<br>` tags. Additionally, do not use them to create extra margin between paragraphs.
+
+      > Why? Just like most other tags, `<br>` has semantic meaning - it represents a line break. It does not make semantic sense to have consecutive line breaks, because that is just a larger line break. In the case of needing more space between elements, CSS should be changed rather than HTML.
+
+      ```HTML
+      <!-- bad -->
+      <p>
+        ...
+      </p>
+      <br>
+      <p>
+        ...
+      </p>
+
+      <!-- bad -->
+      <p>
+        Dogs are<br><br>AMAZING!
+      </p>
+      ```
 
 **[⬆ back to top](#table-of-contents)**
 

@@ -44,7 +44,7 @@
    <a name="variables--const"></a><a name="1.2"></a>
   - [1.2](#variables--const) Use `const` for all of your constants with [`UPPERCASE_NAMING`](#naming--camelCase). Use this for any "magic" values appearing in your code and declare them at the top of the module pattern. In general, you should avoid having "random" numbers and strings appear in your code, especially when there is a clear name you could give them.
     
-    > Why? Not only does `const` prevent a variable from being reassigned, but these can also make your code much easier to read. As a note here, it is very common in industry to always prefer const over let when possible. There are benefits to this approach, but we are going to stick to only using const at the module-global level in this class.
+    > Why? Not only does `const` prevent a variable from being reassigned, but constants can also make your code much easier to read. As a note here, it is very common in industry to always prefer const over let when possible. There are benefits to this approach, but we are going to stick to only using const at the module-global level in this class.
 
     ```javascript
     // bad
@@ -98,7 +98,7 @@
   <a name="variables--one-let"></a><a name="1.3"></a>
   - [1.3](#variables--one-let) Use one `let` or `const` declaration per variable or assignment.
 
-    > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
+    > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,`. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
 
     ```javascript
     // bad
@@ -387,7 +387,7 @@
     ```
 
   <a name="comparison--ternaries"></a><a name="5.3"></a>
-  - [5.3](#comparison--ternaries) Ternaries can be used, but they should not be nested and generally be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.
+  - [5.3](#comparison--ternaries) Ternaries can be used, but they should not be nested and should be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.
 
     > What's this? The ternary operator is a common shorthand notation in programming languages in the form of "let variable = expression ? value1 : value2". If expression is true, the variable gets set to value1 after the "?". Otherwise, it is set to value2 after the ":".
 
@@ -1207,7 +1207,7 @@
     // good - there is no way to do this in CSS!
     div.style.color = genRandomColor();
 
-    /*
+    /**
      * Don't worry about what this function does. It is mostly black magic.
      * From here: https://www.paulirish.com/2009/random-hex-color-code-snippets/
      * @return {String} Random hex code starting with a '#'
