@@ -1,6 +1,6 @@
 # CSE 154 Code Quality Guide(HTML) {
 
-* HTML code quality guidelines for [CSE 154](https://cs.washington.edu/154) at the University of Washington.
+HTML code quality guidelines for [CSE 154](https://cs.washington.edu/154) at the University of Washington.
 
 **NOTE** All HTML Code should be [validated](https://validator.w3.org/#validate_by_input).
 
