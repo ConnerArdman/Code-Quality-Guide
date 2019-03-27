@@ -89,6 +89,21 @@
     }
     ```
 
+    ```HTML
+    <!-- bad -->
+    <p>super cool paragraph</p>
+
+
+    <p>other cool paragraph</p>
+    ```
+
+    ```HTML
+    <!-- good -->
+    <p>super cool paragraph</p>
+
+    <p>other cool paragraph</p>
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Long Lines
