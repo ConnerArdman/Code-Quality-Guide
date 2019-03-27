@@ -437,6 +437,25 @@
       </p>
       ```
 
+  <a name="always-nest"></a><a name="7.7"></a>
+  - [7.7](#always-nest) Always nest inline elements inside of block elements other than the body. Text should always be contained in a block element meant to contain text such as `<p>` or `<h1>`.
+
+      ```HTML
+      <!-- bad -->
+      <body>
+        This is text
+
+        <strong>This is also bad</strong>
+      </body>
+
+      <!-- good -->
+      <body>
+        <p>This is text</p>
+
+        <p>This is <strong>good</strong> now!</p>
+      </body>
+      ```
+
 **[⬆ back to top](#table-of-contents)**
 
 # };
