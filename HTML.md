@@ -2,8 +2,6 @@
 
 * HTML code quality guidelines for [CSE 154](https://cs.washington.edu/154) at the University of Washington.
 
-> Questions about the guide? We are always looking to improve our resources, feel free to reach out to [Conner](mailto:ardmanc@uw.edu) with any questions or concerns!
-
 **NOTE** All HTML Code should be [validated](https://validator.w3.org/#validate_by_input).
 
 ## Table of Contents
@@ -222,33 +220,8 @@
 
 ## Comments
 
-  <a name="comments-header"></a><a name="5.1"></a>
-  - [5.1](#comments-header) Always include a file header comment as shown below
-
-    ```HTML
-    <!--
-      Name: Mowgli Hovik
-      Date: 01.01.2019
-      Section: CSE 154 AX
-
-      This is the index.html page for my portfolio of web development work. It includes links to
-      side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
-      a crytogram generator.
-    -->
-    ```
-
-  <a name="comments-sources"></a><a name="5.2"></a>
-  - [5.2](#comments-sources) Always cite sources in your comments if you use anything found online.
-
-    **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
-
-    **BIG NOTE**: You should not be citing any sources on homework assignments as everything should be
-    your own work or based on in class code (no need to cite our examples unless told otherwise). Feel free
-    to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
-    code found online, ask your TA or instructor first then cite it with permission.
-
-    <a name="comments-inline"></a><a name="5.3"></a>
-  - [5.3](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
+    <a name="comments-inline"></a><a name="5.1"></a>
+  - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
     
     ```HTML
     <!-- bad -->
@@ -284,13 +257,8 @@
 
 ## Whitespace & Indentation
 
-  <a name="whitespace-spaces"></a><a name="6.1"></a>
-  - [6.1](#whitespace-spaces) Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.
-
-    **NOTE**: Please ask a TA for assistance if you are unsure of how to correct this. The settings are a bit hard to find in Atom, and this can mess up your indentation when turning in files on GitGrade.
-
-  <a name="whitespace-blocks"></a><a name="6.2"></a>
-  - [6.2](#whitespace-blocks) Go to a new line before each block element. Never place more than one block element on a single line.
+  <a name="whitespace-blocks"></a><a name="6.1"></a>
+  - [6.1](#whitespace-blocks) Go to a new line before each block element. Never place more than one block element on a single line.
     
     **NOTE**: Images are technically "inline-block" elements, but we will apply the same indentation rules to them. Place images on their own lines without block elements.
 
@@ -304,8 +272,8 @@
     </main>
     ```
 
-  <a name="whitespace-indent"></a><a name="6.3"></a>
-  - [6.3](#whitespace-indent) Always indent one time for each nested block element.
+  <a name="whitespace-indent"></a><a name="6.2"></a>
+  - [6.2](#whitespace-indent) Always indent one time for each nested block element.
 
     ```HTML
     <!-- bad -->
@@ -333,8 +301,8 @@
     </body>
     ```
 
-  <a name="whitespace-equal"></a><a name="6.4"></a>
-  - [6.4](#whitespace-equal) Never leave space around the equal sign for attributes.
+  <a name="whitespace-equal"></a><a name="6.3"></a>
+  - [6.3](#whitespace-equal) Never leave space around the equal sign for attributes.
 
     ```HTML
     <!-- bad -->
@@ -344,8 +312,8 @@
     <div class="foo">
     ```
 
-  <a name="extra-space"></a><a name="6.5"></a>
-  - [6.5](#extra-space) Do not add extra spacing inside of elements.
+  <a name="extra-space"></a><a name="6.4"></a>
+  - [6.4](#extra-space) Do not add extra spacing inside of elements.
 
     > Why? HTML generally ignores extra whitespace, so this won't cause too many bugs. However, there are some cases where extra spaces can cause unwanted alignment errors.
 
