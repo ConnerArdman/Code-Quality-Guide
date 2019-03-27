@@ -300,7 +300,7 @@
   <a name="comparison--eqeqeq"></a><a name="5.1"></a>
   - [5.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`.
 
-    > What's the difference? `===` performs a "strict" equality check, meaning that it checks value and type. `==` only checks for value. For example, the string `"0" == 0` is `true`, but `"0" === 0` is `false`. Only using `=== `is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, [here](https://dorey.github.io/JavaScript-Equality-Table/) is a great table explaning the difference.
+    > What's the difference? `===` performs a "strict" equality check, meaning that it checks value and type. `==` only checks for value. For example, the string `"0" == 0` is `true`, but `"0" === 0` is `false`. Only using `===` is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, [here](https://dorey.github.io/JavaScript-Equality-Table/) is a great table explaning the difference.
 
     ```javascript
     // bad
