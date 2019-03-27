@@ -50,7 +50,7 @@
     // bad
     const alphabetLength = 26;
     let ALPHABET_LENGTH = 26;
-    const FAVORITE-WEBSITE = 'https://www.omfgdogs.com/';
+    const FAVORITEWEBSITE = 'https://www.omfgdogs.com/';
 
     // good
     const ALPHABET_LENGTH = 26;
