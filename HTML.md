@@ -21,6 +21,8 @@
   <a name="unused-classes"></a><a name="1.1"></a>
   - [1.1](#unused-classes) Only add classes and IDs to your HTML when they are needed by CSS and/or JavaScript for selecting elements.
 
+    > Why? IDs and classes don't provide any semantic meaning to the HTML, so they are pointless if they are not being used by CSS or JavaScript.
+
   <a name="prefer-context"></a><a name="1.2"></a>
   - [1.2](#prefer-context) Prefer context selectors over adding classes when styling elements all in the same context. For example, to change fonts of all the paragraphs in `<main>`, use a context selector rather than applying the same class to all of the paragraphs.
 
@@ -156,7 +158,6 @@
 
   <a name="order--heading"></a><a name="3.2"></a>
   - [3.2](#order--heading) Heading tags denote heading levels, not font sizes. Never "skip" a level as this does not make semantic sense. For example, do not use `<h2>` unless your page has an `<h1>`. Do not use `<h3>` unless your page has an `<h2>`.
-    
 
     ```HTML
     <!-- bad -->
