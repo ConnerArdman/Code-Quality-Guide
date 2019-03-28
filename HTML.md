@@ -31,7 +31,7 @@
 
     **TIP**: If you can easily describe what elements you are selecting in reference to where they will appear on the page, then you can likely use a context selector. Classes will be more useful when you don't need all of the elements in a certain context (maybe you only want to change the color of 3 specific paragraphs).
 
-    ```HTML
+    ```html
     <!-- bad -->
     <ul>
       <li class="course">CSE 154</li>
@@ -44,7 +44,7 @@
   <a name="single-class"></a><a name="1.3"></a>
   - [1.3](#single-class) Classes should always appear at least twice in your HTML. Otherwise, you should use an ID.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <div class="boundless-container">
       <img src="pupper.jpg" alt="Dubs">
@@ -59,7 +59,7 @@
   <a name="unique-id"></a><a name="1.4"></a>
   - [1.4](#unique-id) Each ID should be unique, only appearing once in the HTML.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <h2>Dubs</h2>
     <p id="bio">The adorable live mascot of UW</p>
@@ -91,7 +91,7 @@
   <a name="lowercase--naming"></a><a name="2.2"></a>
   - [2.2](#lowercase--naming) Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <h1 id="first_heading">My Awesome Website</h1>
     <p class="importantReminder">do your homework</p>
@@ -108,7 +108,7 @@
   <a name="lowercase--elements"></a><a name="2.3"></a>
   - [2.3](#lowercase--elements) Use all lowercase for HTML elements and their attributes.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <H1>Code Quality Guide</H1>
 
@@ -116,7 +116,7 @@
     <h1>Code Quality Guide</H1>
     ```
 
-    ```HTML
+    ```html
     <!-- bad -->
     <img SRC="cat.jpg" ALT="furry friend">
     <img Src="cat.jpg" Alt="furry friend">
@@ -137,7 +137,7 @@
 
     **TIP**: Semantic tags can be confusing to decide between. It can be helpful to wireframe your site and try to verbally describe each portion of your page. Here is a [great resource on the usage of these tags](https://www.semrush.com/blog/semantic-html5-guide/) as well as a [list of semantic tags](https://www.w3schools.com/html/html5_semantic_elements.asp).
 
-    ```HTML
+    ```html
     <!-- bad -->
     <div>
       <div class="main-header">
@@ -162,7 +162,7 @@
   <a name="order--heading"></a><a name="3.2"></a>
   - [3.2](#order--heading) Heading tags denote heading levels, not font sizes. Never "skip" a level as this does not make semantic sense. For example, do not use `<h2>` unless your page has an `<h1>`. Do not use `<h3>` unless your page has an `<h2>`.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <h1>Main Heading</h1>
     <h3>Smaller Heading</h3>
@@ -175,7 +175,7 @@
   <a name="presentation--tags"></a><a name="3.3"></a>
   - [3.3](#presentation--tags) Do not use presentation tags, as they describe style rather than content. Most of these have been deprecated, and all of them can be replaced with CSS styles. For example, avoid `<i>`, `<b>`, `<u>`, `<font>`, `<big>`, `<small>` and `<center>`. `<strong>` and `<em>` are acceptable to use, because they carry semantic meaning.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <b>Bold text!</b>
 
@@ -188,7 +188,7 @@
 
   <a name="blockquote"></a><a name="3.5"></a>
   - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content to surround the `<p>`.
-    ```HTML
+    ```html
     <!-- bad -->
     <p>bark! bark! bark!</p>
     <p>- Debug Dog</p>
@@ -207,7 +207,7 @@
   <a name="self-closing"></a><a name="4.1"></a>
   - [4.1](#self-closing) You may choose to omit the ` /` at the end of self closing tags, but be consistent with all tags in your file, including those in the `head` as well as `br` and `hr` tags.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <img src="foo.jpg" alt="foo description" />
     <br>
@@ -228,7 +228,7 @@
   <a name="comments-inline"></a><a name="5.1"></a>
   - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
     
-    ```HTML
+    ```html
     <!-- bad -->
     <!-- main section -->
     <main>
@@ -244,7 +244,7 @@
     </footer>
     ```
 
-    ```HTML
+    ```html
     <!-- good -->
     <main>
       ...
@@ -267,7 +267,7 @@
     
     **NOTE**: Images are technically "inline-block" elements, but we will apply the same indentation rules to them. Place images on their own lines without block elements.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <main><p>Go Dawgs!</p></main>
 
@@ -280,7 +280,7 @@
   <a name="whitespace-indent"></a><a name="6.2"></a>
   - [6.2](#whitespace-indent) Always indent one time for each nested block element.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <body>
     <main>
@@ -309,7 +309,7 @@
   <a name="whitespace-equal"></a><a name="6.3"></a>
   - [6.3](#whitespace-equal) Never leave space around the equal sign for attributes.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <div class = "foo">
 
@@ -322,7 +322,7 @@
 
     > Why? HTML generally ignores extra whitespace, so this won't cause too many bugs. However, there are some cases where extra spaces can cause unwanted alignment errors.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <h1> My Webpage </h1>
 
@@ -339,7 +339,7 @@
 
     > Why? Similar to semantic tags, alt attributes make our code more accessible to screen readers. Rather than just telling a user that there is an image, it can mention what is in the actual image. This is also useful when the image fails to load to give a better experience to users by displaying the text.
     
-    ```HTML
+    ```html
     <!-- bad -->
     <img src="tree.jpg">
 
@@ -352,7 +352,7 @@
 
     > Why? This is mostly a redundancy thing. By using an image tag, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as "image of image of fluffy dog"!
     
-    ```HTML
+    ```html
     <!-- bad -->
     <img src="dog.jpg" alt="image of fluffy dog">
 
@@ -365,7 +365,7 @@
 
     **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `div` and `article`) should wrap the same content.
     
-    ```HTML
+    ```html
     <!-- bad -->
     <main>
       <article>
@@ -394,7 +394,7 @@
 
       > Why? Just like most other tags, `<br>` has semantic meaning - it represents a line break. It does not make semantic sense to have consecutive line breaks, because that is just a larger line break. In the case of needing more space between elements, CSS should be changed rather than HTML.
 
-      ```HTML
+      ```html
       <!-- bad -->
       <p>
         ...
@@ -413,7 +413,7 @@
   <a name="always-nest"></a><a name="7.7"></a>
   - [7.7](#always-nest) Always nest inline elements inside of block elements other than the body. Text should always be contained in a block element meant to contain text such as `<p>` or `<h1>`.
 
-      ```HTML
+      ```html
       <!-- bad -->
       <body>
         This is text

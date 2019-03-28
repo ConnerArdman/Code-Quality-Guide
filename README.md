@@ -24,7 +24,7 @@
 
     **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output!
 
-    ```HTML
+    ```html
     <!--
       Name: Mowgli Hovik
       Date: 01.01.2019
@@ -90,7 +90,7 @@
     }
     ```
 
-    ```HTML
+    ```html
     <!-- bad -->
     <p>super cool paragraph</p>
 
@@ -98,7 +98,7 @@
     <p>other cool paragraph</p>
     ```
 
-    ```HTML
+    ```html
     <!-- good -->
     <p>super cool paragraph</p>
 
