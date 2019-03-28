@@ -24,7 +24,7 @@
 
     > Why? It is important to make our CSS files easy to read and update in the future. Creating a simple convention such as this makes the file a bit easier to process. Another common convention would be to organize CSS in order of when items appear on the HTML page. However, this convention is not as scalable, since it begins to associate a particular stylesheet with a single HTML page rather than a larger website.
 
-    ```CSS
+    ```css
     /* bad */
     .dog-images {
       /* ... */

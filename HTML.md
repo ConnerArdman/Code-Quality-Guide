@@ -429,6 +429,11 @@
       </body>
       ```
 
+  <a name="font-import"></a><a name="7.8"></a>
+  - [7.8](#font-import) Never import fonts directly in HTML. Prefer `@import` statements in CSS.
+
+      > Why? Since fonts are stylistic information about the page, we should always prefer to keep anything related to them in our CSS files.
+
 **[⬆ back to top](#table-of-contents)**
 
 # };
