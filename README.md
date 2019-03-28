@@ -14,6 +14,7 @@
   1. [HTML](HTML.md)
   1. [CSS](CSS.md)
   1. [JavaScript](javascript.md)
+  1. [PHP](PHP.md)
 
 ## Comments
 

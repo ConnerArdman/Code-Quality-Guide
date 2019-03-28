@@ -27,11 +27,13 @@
   1. [General Guidelines](README.md)
   1. [HTML](HTML.md)
   1. [CSS](CSS.md)
+  1. [PHP](PHP.md)
 
 ## Variables
 
   <a name="variables--prefer-let"></a><a name="1.1"></a>
   - [1.1](#variables--prefer-let) Use `let` for all of your variables. Never use `var`.
+
     > Why? `let` is block-scoped rather than function-scoped like `var`.
 
     ```javascript
@@ -785,8 +787,8 @@
 
 ## Comments
 
-  <a name="comments--function-header"></a><a name="11.1"></a>
-  - [11.1](#comments--function-header) For JavaScript functions, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript. In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
+  <a name="comments-function-header"></a><a name="11.1"></a>
+  - [11.1](#comments-function-header) For JavaScript functions, we ask that you use [JSDoc](http://usejsdoc.org/) commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript. In this class, we expect you to use the `@param` and `@return` annotation tags in JSDoc when appropriate for the function. The `@param` annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The `@return` annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:
 
     **NOTE**: Notice that JSDoc comments start with `/**` not `/*`
 
@@ -1150,4 +1152,5 @@
   - [15.4](#no--log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
 
 **[⬆ back to top](#table-of-contents)**
+
 # };
