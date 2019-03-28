@@ -110,7 +110,7 @@
   <a name="strings-quotes"></a><a name="2.1"></a>
   - [2.1](#strings-quotes) Using double quotes is necessary in PHP for strings containing variables. For consistency, we prefer that you use double quotes for all strings, however you may use single quotes for strings not containing variables.
 
-    > Why? There is actually a really good argument here for single quotes. In double quoted strings, PHP has to search the string for variables, which slows down the runtime. Single quoted strings don't require the same level of processing.
+    > Why? There is actually a really good argument here for single quotes. In double quoted strings, PHP has to search the string for variables, which slows down the runtime. Single quoted strings don't require the same level of processing. That said, PHP is fast and this probably falls under the realm of useless micro-optimizations.
 
     ```php
     # bad
