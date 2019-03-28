@@ -77,7 +77,7 @@
 
 **[⬆ back to top](#table-of-contents)**
 
-  ## Redundancy
+## Redundancy
 
   <a name="redundant-rules"></a><a name="2.1"></a>
   - [2.1](#redundant-rules) Avoid writing redundant rules if they appear for the same reason. For example, if you want to make all headings red, use a single rule. However, if two unrelated elements are set to have `5px` margin, there is no need to factor that out. The general rule here is only group them together if changing one would always mean wanting to change both.
