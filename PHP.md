@@ -71,7 +71,7 @@
     ```php
     # bad - unnecessary function call
     function check_name($has_name) {
-      $name = getName();
+      $name = get_name();
 
       if ($has_name) {
         # Never used the $name variable here!
@@ -87,7 +87,7 @@
     }
 
     # good
-    function checkName($has_name) {
+    function check_name($has_name) {
       if ($has_name) {
         return false;
       }
@@ -140,7 +140,7 @@
     }
 
     # good
-    function getPowerLevel() {
+    function get_power_level() {
       # ...
     }
     ```
