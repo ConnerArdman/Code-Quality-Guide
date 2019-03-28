@@ -66,9 +66,9 @@
     if (strlen($text) >= 0) {
       $text = strtolower($text);
     }
-  ```  
+    ```  
 
-  ```php
+    ```php
     # bad - unnecessary function call
     function check_name($has_name) {
       $name = getName();
@@ -865,6 +865,14 @@
       header("Content-type: text/plain");
       echo "There was no JSON";
     }
+    ```
+
+  <a name="use-die"></a><a name="10.3"></a>
+  - [10.3](#use-die) Use `die()` instead of `print` or `echo` when outputting errors.
+    
+    > Why? `die()` kills the program, which is important after an error has occured. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.
+
+
 **[⬆ back to top](#table-of-contents)**
 
 # };
