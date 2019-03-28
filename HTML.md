@@ -16,6 +16,7 @@
 
 ## Other Guides
   1. [General Guidelines](README.md)
+  1. [CSS](CSS.md)
   1. [JavaScript](javascript.md)
 
 ## Classes & IDs
@@ -79,7 +80,7 @@
   <a name="naming--descriptive"></a><a name="2.1"></a>
   - [2.1](#naming--descriptive) Avoid single letter names for classes and IDs. Try to be as descriptive as possible.
 
-    ```HTML
+    ```html
     <!-- bad -->
     <div class="c">...</div>
 

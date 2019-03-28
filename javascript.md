@@ -26,6 +26,7 @@
 ## Other Guides
   1. [General Guidelines](README.md)
   1. [HTML](HTML.md)
+  1. [CSS](CSS.md)
 
 ## Variables
 
