@@ -119,6 +119,26 @@
 
     ```
 
+**[⬆ back to top](#table-of-contents)**
+
+## Vendor-Prefix CSS
+
+ <a name="no-vendor"></a><a name="3.1"></a>
+  - [3.1](#no-vendor) Never use vendor-prefix CSS rules for homework assignments in this class unless explicitly told otherwise. You may however use them in your creative project if necessary.
+
+    > What's this? Some major browsers have created nonstandard CSS properties that can be used with browser-specific prefixes. These are generally experimental and we will avoid them in this course (although they can be very powerful and could be worth learning about after 154). More on these [here](https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix).
+
+    ```css
+    /* bad */
+    div {
+      -webkit-border-radius: 10px;
+    }
+
+    /* good */
+    div {
+      border-radius: 10px;
+    }
+    ```
 
 **[⬆ back to top](#table-of-contents)**
 
