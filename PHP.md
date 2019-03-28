@@ -29,7 +29,7 @@
   <a name="no-global"></a><a name="1.1"></a>
   - [1.1](#no-global) Never use the `global` keyword. Instead, pass variables as parameters.
 
-    > Why? It is important to keep our functions modular, meaning they are not dependant on other code. By passing parameters, our functions work regardless of the names of variables. Think of the global scope as being equivilent to a "main" function in another language, where we would call functions with parameters created in main.
+    > Why? It is important to keep our functions modular, meaning they are not dependant on other code. By passing parameters, our functions work regardless of the names of variables. Think of the global scope as being equivalent to a "main" function in another language, where we would call functions with parameters created in main.
 
     ```php
     # bad
