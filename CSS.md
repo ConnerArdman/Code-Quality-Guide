@@ -11,6 +11,7 @@
   1. [Vendor-Prefix CSS](#vendor-prefix-css)
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
+  1. [Good CSS Design](#good-css-design)
 
 ## Other Guides
   1. [General Guidelines](README.md)
@@ -267,6 +268,17 @@
       font-size: 14pt;
     }    
     ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Good HTML Design
+
+  <a name="never-star"></a><a name="6.1"></a>
+  - [6.1](#never-star) Never apply styles to all elements using the `*` or `html` selectors. Prefer styling `body`.
+
+    **NOTE**: Not all elements inherit from their parent, so you might need to use a comma seperated selector rather than just `body`. For example, `button` elements do not inherit font information by default.
+
+    > Why? Using the `*` selector applies styles to every single element, even the ones that don't need the style such as those in the `head`. Similarly, `html` contains the `head`, where we don't want to apply styles as they have no meaning. As a note, there are actually some specific cases where styling the `html` element is the only solution, but you should not run into them in this class.
 
 **[⬆ back to top](#table-of-contents)**
 
