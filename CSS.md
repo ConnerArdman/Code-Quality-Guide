@@ -142,4 +142,132 @@
 
 **[⬆ back to top](#table-of-contents)**
 
+## Comments
+
+  <a name="no-comment"></a><a name="4.1"></a>
+  - [4.1](#no-comment) Similar to HTML, there isn't really any need to make inline comments in CSS, and they can actually make your code less readable. However, you could make some simple comments related to your [ordering](#ordering) or if you have some complex CSS animations (we won't get to these in lecture, but there might be an exploration session on them).
+
+**[⬆ back to top](#table-of-contents)**
+
+## Whitespace & Indentation
+
+  <a name="whitespace-before-curly"></a><a name="5.1"></a>
+  - [5.1](#whitespace-before-curly) Place 1 space before the leading brace to begin a rule set.
+    
+    ```css
+    /* bad */
+    div{
+      margin: auto;
+    }
+
+    /* good */
+    div {
+      margin: auto;
+    }
+    ```  
+
+  <a name="newline"></a><a name="5.2"></a>
+  - [5.2](#newline) Place each rule on its own line. Do not place any rules on the same line as a curly brace.
+    
+    ```css
+    /* bad */
+    div { border: 5px solid black;
+      background-color: PapayaWhip; margin: auto;
+    }
+
+    /* good */
+    div {
+      border: 5px solid black;
+      background-color: PapayaWhip;
+      margin: auto;
+    }
+    ```  
+  
+  <a name="colon-space"></a><a name="5.3"></a>
+  - [5.3](#colon-space) Place one space after each colon and none before them.
+    
+    ```css
+    /* bad */
+    h1 {
+      color : Gainsboro;
+      text-align :center;
+      text-decoration:underline;
+    }
+
+    /* good */
+    h1 {
+      color: Gainsboro;
+      text-align: center;
+      text-decoration: underline;
+    }
+    ```
+
+  <a name="blank-lines"></a><a name="5.4"></a>
+  - [5.4](#blank-lines) Place exactly one blank line between rule sets. Place no blank lines between rules.
+    
+    ```css
+    /* bad */
+    h1 {
+      color: LavenderBlush;
+      text-decoration: underline;
+
+      text-align: center;
+    }
+    h2 {
+      color: Chartreuse;
+    }
+    ```
+
+    ```css
+    /* good */
+    h1 {
+      color: LavenderBlush;
+      text-decoration: underline;
+      text-align: center;
+    }
+
+    h2 {
+      color: Chartreuse;
+    }
+    ``` 
+
+  <a name="indent"></a><a name="5.5"></a>
+  - [5.5](#indent) Indent exactly one time for rules. Do not indent anywhere else in CSS.
+    
+    ```css
+    /* bad */ 
+    div {
+     font-size: 18pt;
+      color: #222222;
+    }
+
+      img {
+    width: 50%;
+      }
+
+    p {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14pt;
+    }
+    ```
+
+    ```css
+    /* good */ 
+    div {
+      font-size: 18pt;
+      color: #222222;
+    }
+
+    img {
+      width: 50%;
+    }
+
+    p {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 14pt;
+    }    
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
 # };
