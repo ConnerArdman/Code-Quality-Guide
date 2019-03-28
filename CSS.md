@@ -70,6 +70,11 @@
     }
     ```
 
+  <a name="font-first"></a><a name="1.1"></a>
+  - [1.2](#font-first) Always place `@import` statements before any rule sets.
+
+    > Why? Keeping `@import` statements together at the top of the file is similar to putting constants at the top of a JavaScript file. It makes your CSS easy to read, from top to bottom (you don't want to get to a `font-family` line before having read about the required import).
+
 **[⬆ back to top](#table-of-contents)**
 
 # };
