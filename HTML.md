@@ -18,6 +18,7 @@
   1. [General Guidelines](README.md)
   1. [CSS](CSS.md)
   1. [JavaScript](javascript.md)
+  1. [PHP](PHP.md)
 
 ## Classes & IDs
 
@@ -77,8 +78,8 @@
 
 ## Naming Conventions
 
-  <a name="naming--descriptive"></a><a name="2.1"></a>
-  - [2.1](#naming--descriptive) Avoid single letter names for classes and IDs. Try to be as descriptive as possible.
+  <a name="naming-descriptive"></a><a name="2.1"></a>
+  - [2.1](#naming-descriptive) Avoid single letter names for classes and IDs. Try to be as descriptive as possible.
 
     ```html
     <!-- bad -->
@@ -88,8 +89,8 @@
     <div class="image-container">...</div>
     ```
 
-  <a name="lowercase--naming"></a><a name="2.2"></a>
-  - [2.2](#lowercase--naming) Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.
+  <a name="lowercase-naming"></a><a name="2.2"></a>
+  - [2.2](#lowercase-naming) Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.
 
     ```html
     <!-- bad -->
@@ -105,8 +106,8 @@
     <p class="importantreminder">do your homework</p>
     ```
 
-  <a name="lowercase--elements"></a><a name="2.3"></a>
-  - [2.3](#lowercase--elements) Use all lowercase for HTML elements and their attributes.
+  <a name="lowercase-elements"></a><a name="2.3"></a>
+  - [2.3](#lowercase-elements) Use all lowercase for HTML elements and their attributes.
 
     ```html
     <!-- bad -->
@@ -130,8 +131,8 @@
 
 ## Semantic Tags
 
-  <a name="prefer--semantic"></a><a name="3.1"></a>
-  - [3.1](#prefer--semantic) Always prefer semantic tags over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
+  <a name="prefer-semantic"></a><a name="3.1"></a>
+  - [3.1](#prefer-semantic) Always prefer semantic tags over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
     
     > Why? Semantic tags make our code more accessible, particularly to screen readers. `<div>` and `<span>` are ignored for anything other than grouping, but tags such as `<main>`, `<article>` and `<section>` carry semantic meaning and help the screen reader interpret the page for a user.
 
@@ -159,8 +160,8 @@
     </article>
     ```
 
-  <a name="order--heading"></a><a name="3.2"></a>
-  - [3.2](#order--heading) Heading tags denote heading levels, not font sizes. Never "skip" a level as this does not make semantic sense. For example, do not use `<h2>` unless your page has an `<h1>`. Do not use `<h3>` unless your page has an `<h2>`.
+  <a name="order-heading"></a><a name="3.2"></a>
+  - [3.2](#order-heading) Heading tags denote heading levels, not font sizes. Never "skip" a level as this does not make semantic sense. For example, do not use `<h2>` unless your page has an `<h1>`. Do not use `<h3>` unless your page has an `<h2>`.
 
     ```html
     <!-- bad -->
@@ -172,8 +173,8 @@
     <h2>Smaller Heading</h2>
     ```
 
-  <a name="presentation--tags"></a><a name="3.3"></a>
-  - [3.3](#presentation--tags) Do not use presentation tags, as they describe style rather than content. Most of these have been deprecated, and all of them can be replaced with CSS styles. For example, avoid `<i>`, `<b>`, `<u>`, `<font>`, `<big>`, `<small>` and `<center>`. `<strong>` and `<em>` are acceptable to use, because they carry semantic meaning.
+  <a name="presentation-tags"></a><a name="3.3"></a>
+  - [3.3](#presentation-tags) Do not use presentation tags, as they describe style rather than content. Most of these have been deprecated, and all of them can be replaced with CSS styles. For example, avoid `<i>`, `<b>`, `<u>`, `<font>`, `<big>`, `<small>` and `<center>`. `<strong>` and `<em>` are acceptable to use, because they carry semantic meaning.
 
     ```html
     <!-- bad -->
@@ -183,8 +184,8 @@
     <strong>Strong text!</strong>
     ```
 
-  <a name="tables--layout"></a><a name="3.4"></a>
-  - [3.4](#tables--layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
+  <a name="tables-layout"></a><a name="3.4"></a>
+  - [3.4](#tables-layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
 
   <a name="blockquote"></a><a name="3.5"></a>
   - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content to surround the `<p>`.
