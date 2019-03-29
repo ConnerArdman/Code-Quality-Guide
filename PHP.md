@@ -248,6 +248,7 @@
     $foo = $a && $b < 0 || $c > 0 || $d + 1 === 0;
 
     # bad
+    # note "**" is the exponentiation operator
     $bar = $a ** $b - 5 % $d;
 
     # bad
@@ -937,7 +938,7 @@
     ```
 
   <a name="min-db-calls"></a><a name="10.6"></a>
-  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in win result in needing to make a database call.
+  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in will result in needing to make a database call.
     
     > Why? Calling the database can be slow and error prone, so we should avoid doing so until necessary.
 

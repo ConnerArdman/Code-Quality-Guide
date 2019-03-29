@@ -60,7 +60,7 @@
 
     -- good
     SELECT name, descripion
-    FORM courses
+    FROM courses
     WHERE dept = 'CSE';
     ```
 

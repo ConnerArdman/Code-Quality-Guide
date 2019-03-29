@@ -27,6 +27,7 @@
     **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](PHP.md/#comments-header)
 
     ```html
+    <!DOCTYPE html>
     <!--
       Name: Mowgli Hovik
       Date: 01.01.2019
@@ -41,12 +42,12 @@
   <a name="comments-sources"></a><a name="1.2"></a>
   - [1.2](#comments-sources) Always cite sources in your comments if you use anything found online.
 
-    **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
+    **NOTE**: It is preferred to cite sources in the text content of the HTML so that your users actually see it!
 
     **BIG NOTE**: You should not be citing any sources on homework assignments as everything should be
-    your own work or based on in class code (no need to cite our examples unless told otherwise). Feel free
-    to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
-    code found online, ask your TA or instructor first then cite it with permission.
+    your own work. Feel free to use outside artwork, quotes, etc. in your creative projects with proper citations.
+    If you want to use code found online, ask your TA or instructor first then cite it with permission. Additionally, if you copy
+    any lecture code for your creative projects, please cite that as well.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -62,8 +63,8 @@
 
     ```javascript
     // bad
-    funciton myFunc() {
-      if (myBool) {
+    function myFunc(foo) {
+      if (foo === 'baz') {
         return true;
       }
 
@@ -79,8 +80,8 @@
 
     ```javascript
     // good
-    funciton myFunc() {
-      if (myBool) {
+    function myFunc(foo) {
+      if (foo === 'baz') {
         return true;
       }
 

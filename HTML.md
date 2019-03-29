@@ -35,6 +35,10 @@
 
     ```html
     <!-- bad -->
+    <!-- 
+      in CSS, the "course" class could easily be selected 
+      with the context selector "ul li".
+    -->
     <ul>
       <li class="course">CSE 154</li>
       <li class="course">CSE 160</li>
@@ -208,7 +212,7 @@
 ## Self Closing Tags
 
   <a name="self-closing"></a><a name="4.1"></a>
-  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self-closing tags, but be consistent with all tags in your file, including those in the `<head>` as well as `<br>` and `<hr>` tags.
+  - [4.1](#self-closing) You may choose to omit the `/` at the end of self-closing tags, but be consistent with all tags in your file, including those in the `<head>` as well as `<br>` and `<hr>` tags.
 
     ```html
     <!-- bad -->
@@ -216,6 +220,7 @@
     <br>
 
     <!-- good -->
+    <!-- note that there is a space before the "/" -->
     <img src="foo.jpg" alt="foo description" />
     <br />
 

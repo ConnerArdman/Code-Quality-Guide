@@ -795,7 +795,7 @@
 
     **NOTE**: The description of your function should describe what the function does, not how it does it. The most important thing is that your comments should describe how the state of the page (and potentially module-global variables) will change by calling the function. Think about how to explain the purpose of the function without implementation details. A good rule of thumb is to never mention processes such as "looping over" things.
 
-    **NOTE**: If there are no parameters or no return value, there is no need for JSDoc annotations.
+    **NOTE**: If there are no parameters or no return value, there should still be a descriptive comment, but you can omit `@param` and `@return` annotations.
 
       ```javascript
       // Single-line JSDoc comment:
