@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+
+	<title>JavaScript Code Quality Guide</title>
+
+	<link rel="canonical" href="/javascript/">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/style/normalize.css">
+	<link rel="stylesheet" href="/style/theme.css">
+	<link rel="stylesheet" href="/style/coursewebsite.css">
+
+	<script type="text/javascript" src="/scripts/navbar.js"></script>
+</head>
+
+
+  <body>
+    <!-- Navigation Bar -->
+<header class="navbar">
+	<h1>Code Quality Guide</h1>
+	 
+	
+		<a href="/">General Guidelines</a>
+	
+	  
+	
+		<a href="/html/">HTML</a>
+	
+	  
+	
+		<a href="/css/">CSS</a>
+	
+	  
+	
+		<a class="active" href="/javascript/">JavaScript</a>
+	
+	  
+	
+		<a href="/php/">PHP</a>
+	
+	  
+	
+		<a href="/sql/">SQL</a>
+	
+	 
+	<svg id="mobile-dropdown-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#menu-1"></use>
+	</svg>
+	<svg id="mobile-x-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#close-1"></use>
+	</svg>
+</header>
+
+
+    <main>
+          <h1 id="cse-154-code-quality-guidejavascript-">CSE 154 Code Quality Guide(JavaScript) {</h1>
+
+<p><em>A mostly reasonable approach to JavaScript adapted from <a href="https://github.com/airbnb/javascript">Airbnb’s JavaScript Style Guide</a> for <a href="https://cs.washington.edu/154">CSE 154</a> at the University of Washington.</em></p>
+
+<blockquote>
+  <p>Questions about the changes? Most of them were to meet the learning objectives of the course and simplify the guide for our needs rather than opinions on code style, but feel free to ask <a href="mailto:ardmanc@uw.edu">Conner</a> any questions.</p>
+</blockquote>
+
+<p><strong>NOTE</strong>: All JavaScript Code should be <a href="https://oxford.cs.washington.edu/cse154/jslint/">validated</a>.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#variables">Variables</a></li>
+  <li><a href="#strings">Strings</a></li>
+  <li><a href="#functions">Functions</a></li>
+  <li><a href="#naming-conventions">Naming Conventions</a></li>
+  <li><a href="#comparison-operators--equality">Comparison Operators &amp; Equality</a></li>
+  <li><a href="#loops">Loops</a></li>
+  <li><a href="#ifelse-statements">If/Else Statements</a></li>
+  <li><a href="#boolean-zen">Boolean Zen</a></li>
+  <li><a href="#curly-braces">Curly Braces</a></li>
+  <li><a href="#semicolons">Semicolons</a></li>
+  <li><a href="#comments">Comments</a></li>
+  <li><a href="#whitespace--indentation">Whitespace &amp; Indentation</a></li>
+  <li><a href="#module-pattern--strict-mode">Module Pattern &amp; Strict Mode</a></li>
+  <li><a href="#good-javascript-design">Good JavaScript Design</a></li>
+</ol>
+
+<h2 id="variables">Variables</h2>
+
+<p><a name="variables-prefer-let"></a><a name="1.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#variables-prefer-let">1.1</a> Use <code class="highlighter-rouge">let</code> for all of your variables. Never use <code class="highlighter-rouge">var</code>.</p>
+
+    <blockquote>
+      <p>Why? <code class="highlighter-rouge">let</code> is block-scoped rather than function-scoped like <code class="highlighter-rouge">var</code>.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="variables-const"></a><a name="1.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#variables-const">1.2</a> Use <code class="highlighter-rouge">const</code> for all of your constants with <a href="#naming-camelCase"><code class="highlighter-rouge">UPPERCASE_NAMING</code></a>. Use this for any “magic” values appearing in your code and declare them at the top of the module pattern. In general, you should avoid having “random” numbers and strings appear in your code, especially when there is a clear name you could give them.</p>
+
+    <blockquote>
+      <p>Why? Not only does <code class="highlighter-rouge">const</code> prevent a variable from being reassigned, but constants can also make your code much easier to read. As a note here, it is very common in industry to always prefer const over let when possible. There are benefits to this approach, but we are going to stick to only using const at the module-global level in this class.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">const</span> <span class="nx">alphabetLength</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">ALPHABET_LENGTH</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">FAVORITEWEBSITE</span> <span class="o">=</span> <span class="s1">'https://www.omfgdogs.com/'</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">const</span> <span class="nx">ALPHABET_LENGTH</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">FAVORITE_WEBSITE</span> <span class="o">=</span> <span class="s1">'https://www.omfgdogs.com/'</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})();</span>
+
+<span class="c1">// good</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="kd">const</span> <span class="nx">MONTHS</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">MONTHS</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})();</span>
+</code></pre></div>    </div>
+
+    <p><strong>NOTE</strong>: Both <code class="highlighter-rouge">let</code> and <code class="highlighter-rouge">const</code> are block-scoped, meaning that the variables only exist within the nearest curly braces.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// const and let only exist in the blocks they are defined in.</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">==</span> <span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">B</span><span class="p">);</span> <span class="c1">// ReferenceError</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="variables-one-let"></a><a name="1.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#variables-one-let">1.3</a> Use one <code class="highlighter-rouge">let</code> or <code class="highlighter-rouge">const</code> declaration per variable or assignment.</p>
+
+    <blockquote>
+      <p>Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a <code class="highlighter-rouge">;</code> for a <code class="highlighter-rouge">,</code>. You can also step through each declaration with the debugger, instead of jumping through all of them at once.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">getItems</span><span class="p">(),</span>
+    <span class="nx">goSportsTeam</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">dragonball</span> <span class="o">=</span> <span class="s1">'z'</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">getItems</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">goSportsTeam</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">dragonball</span> <span class="o">=</span> <span class="s1">'z'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="variables-define-where-used"></a><a name="1.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#variables-define-where-used">1.4</a> Save expensive function calls into variables, but only once they are needed.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">list</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">list</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad - unnecessary function call</span>
+<span class="kd">function</span> <span class="nx">checkName</span><span class="p">(</span><span class="nx">hasName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">getName</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">hasName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Never used the name variable here!</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">'test'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setName</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">checkName</span><span class="p">(</span><span class="nx">hasName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">hasName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">getName</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">'test'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setName</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="strings">Strings</h2>
+
+<p><a name="strings-quotes"></a><a name="2.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#strings-quotes">2.1</a> You can use either single or double quotes for strings, just be consistent across all of your code. Don’t use backticks unless for proper use of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template literals</a>.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"human"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">friend</span> <span class="o">=</span> <span class="s1">'dog'</span><span class="p">;</span>
+
+<span class="c1">// bad - don't use template literals unless for interpolation</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">`human`</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">'human'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">friend</span> <span class="o">=</span> <span class="s1">'dog'</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"human"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">friend</span> <span class="o">=</span> <span class="s2">"dog"</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="functions">Functions</h2>
+
+<p><a name="long-functions"></a><a name="3.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#long-functions-last">3.1</a> If you have a single function that is very long, break it apart into smaller sub-functions. The definition of “very long” is vague, but often a function longer than 20-30 lines is pushing it.</p>
+
+    <p><strong>TIP</strong>: If you try to describe the function’s purpose and find yourself using the word “and” a lot, that probably means the function does too many things and should be split into sub-functions.</p>
+  </li>
+</ul>
+
+<p><a name="functions-anonymous"></a><a name="3.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#functions-anonymous">3.2</a> Always prefer named functions over anonymous functions. A good rule of thumb is that if you can think of a reasonable name, it should be named. Most anonymous functions should be 3 or less lines of code.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// really bad - long anonymous function</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">checkStatus</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">names</span> <span class="o">=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">names</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">names</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">sayHello</span><span class="p">(</span><span class="nx">names</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// also really bad - nested anonymous functions</span>
+<span class="nx">myButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'hi!'</span><span class="p">);</span>
+  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// good</span>
+<span class="nx">myButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">myButtonClick</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">myButtonClick</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">sayHi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'hi!'</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div>    </div>
+
+    <p><strong>NOTE</strong>: This does not mean that there is no place for anonymous functions and arrow functions. For example, when passing simple callback functions as parameters, it can often be clear and concise to use these. Generally arrow functions are preferred, but either is fine in this course.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="nx">arr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">num</span> <span class="o">=&gt;</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// [1, 3, 5]</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="functions-defaults-last"></a><a name="3.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#functions-defaults-last">3.3</a> Always put default parameters last.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">handleThings</span><span class="p">(</span><span class="nx">opts</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">handleThings</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+
+<p><a name="naming-descriptive"></a><a name="4.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#naming-descriptive">4.1</a> Avoid single letter names unless it is for an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">p</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">getPowerLevel</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="naming-camelCase"></a><a name="4.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#naming-camelCase">4.2</a> Use <code class="highlighter-rouge">camelCase</code> when naming variables, objects and functions. As stated <a href="#variables-const">above</a>, use <code class="highlighter-rouge">UPPERCASE_NAMING</code> for constants.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">this_is_my_object</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">function</span> <span class="nx">MyFunction</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">thisIsMyObject</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">function</span> <span class="nx">myFunction</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="comparison-operators--equality">Comparison Operators &amp; Equality</h2>
+
+<p><a name="comparison-eqeqeq"></a><a name="5.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-eqeqeq">5.1</a> Use <code class="highlighter-rouge">===</code> and <code class="highlighter-rouge">!==</code> over <code class="highlighter-rouge">==</code> and <code class="highlighter-rouge">!=</code>.</p>
+
+    <blockquote>
+      <p>What’s the difference? <code class="highlighter-rouge">===</code> performs a “strict” equality check, meaning that it checks value and type. <code class="highlighter-rouge">==</code> only checks for value. For example, the string <code class="highlighter-rouge">"0" == 0</code> is <code class="highlighter-rouge">true</code>, but <code class="highlighter-rouge">"0" === 0</code> is <code class="highlighter-rouge">false</code>. Only using <code class="highlighter-rouge">===</code> is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, <a href="https://dorey.github.io/JavaScript-Equality-Table/">here</a> is a great table explaning the difference.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">==</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">===</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comparison-shortcuts"></a><a name="5.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-shortcuts">5.2</a> Use shortcuts for booleans and null checks, but explicit comparisons for strings and numbers.</p>
+
+    <p><strong>NOTE</strong>: You will often hear instructors refer to this as boolean zen along with <a href="#boolean-zen">this section</a></p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">!==</span> <span class="s1">''</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">collection</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">collection</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p><strong>NOTE</strong>: Conditional statements such as the <code class="highlighter-rouge">if</code> statement evaluate their expression using coercion with the <code class="highlighter-rouge">ToBoolean</code> abstract method and always follow these simple rules. However, you should avoid using these “tricks” as they can make your code very hard to read:</p>
+
+    <ul>
+      <li><strong>Objects</strong> evaluate to <strong>true</strong></li>
+      <li><strong>Undefined</strong> evaluates to <strong>false</strong></li>
+      <li><strong>Null</strong> evaluates to <strong>false</strong></li>
+      <li><strong>Booleans</strong> evaluate to <strong>the value of the boolean</strong></li>
+      <li><strong>Numbers</strong> evaluate to <strong>false</strong> if <strong>+0, -0, or NaN</strong>, otherwise <strong>true</strong></li>
+      <li><strong>Strings</strong> evaluate to <strong>false</strong> if an empty string <code class="highlighter-rouge">''</code>, otherwise <strong>true</strong></li>
+    </ul>
+
+    <p>More on this <a href="https://dorey.github.io/JavaScript-Equality-Table/">here</a>.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">[])</span> <span class="p">{</span>
+  <span class="c1">// true</span>
+  <span class="c1">// an array (even an empty one) is an object, objects will evaluate to true</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comparison-ternaries"></a><a name="5.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-ternaries">5.3</a> Ternaries can be used, but they should not be nested and should be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.</p>
+
+    <blockquote>
+      <p>What’s this? The ternary operator is a common shorthand notation in programming languages in the form of “let variable = expression ? value1 : value2”. If expression is true, the variable gets set to value1 after the “?”. Otherwise, it is set to value2 after the “:”.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">maybe1</span> <span class="o">&gt;</span> <span class="nx">maybe2</span>
+  <span class="p">?</span> <span class="s1">'bar'</span>
+  <span class="p">:</span> <span class="nx">value1</span> <span class="o">&gt;</span> <span class="nx">value2</span> <span class="p">?</span> <span class="s1">'baz'</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// good - split into 2 separated ternary expressions</span>
+<span class="kd">let</span> <span class="nx">maybeNull</span> <span class="o">=</span> <span class="nx">value1</span> <span class="o">&gt;</span> <span class="nx">value2</span> <span class="p">?</span> <span class="s1">'baz'</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">maybe1</span> <span class="o">&gt;</span> <span class="nx">maybe2</span> <span class="p">?</span> <span class="s1">'bar'</span> <span class="p">:</span> <span class="nx">maybeNull</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">a</span> <span class="p">?</span> <span class="nx">a</span> <span class="p">:</span> <span class="nx">b</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">baz</span> <span class="o">=</span> <span class="nx">c</span> <span class="p">?</span> <span class="kc">false</span> <span class="p">:</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">baz</span> <span class="o">=</span> <span class="o">!</span><span class="nx">c</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comparison-no-mixed-operators"></a><a name="5.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-no-mixed-operators">5.4</a> When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators (<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">*</code>, &amp; <code class="highlighter-rouge">/</code>) since their precedence is broadly understood.</p>
+
+    <blockquote>
+      <p>Why? This improves readability and clarifies the developer’s intention.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">c</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">**</span> <span class="nx">b</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">%</span> <span class="nx">d</span><span class="p">;</span>
+
+<span class="c1">// bad</span>
+<span class="c1">// one may be confused into thinking (a || b) &amp;&amp; c</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span> <span class="o">&amp;&amp;</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="nx">c</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="nx">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span> <span class="o">**</span> <span class="nx">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">5</span> <span class="o">%</span> <span class="nx">d</span><span class="p">);</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">||</span> <span class="p">(</span><span class="nx">b</span> <span class="o">&amp;&amp;</span> <span class="nx">c</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">/</span> <span class="nx">c</span> <span class="o">*</span> <span class="nx">d</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="loops">Loops</h2>
+
+<p><a name="for-while"></a><a name="6.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#for-while">6.1</a> Use a <code class="highlighter-rouge">for</code> loop when the number of repetitions is known (definite). Use a <code class="highlighter-rouge">while</code> loop when the number of repetitions is unknown (indefinite).</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad - notice the middle condition does not use i at all, and it is not used in the loop!</span>
+<span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">sum</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sum</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">sum</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sum</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="break-continue"></a><a name="6.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#break-continue">6.2</a> Never use break, continue or empty return statements in this class.</p>
+
+    <blockquote>
+      <p>Why? For the length and complexity of the programs we ask you to write, these statements deviate from clear logical flow and you should instead consider ways to refactor your conditional statements and loops to handle different cases without forced “shortcuts”.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad - contrived example, but the idea is you can usually replace the break with conditions.</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">num</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">num</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="ifelse-statements">If/Else Statements</h2>
+
+<p><a name="if-branching"></a><a name="7.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#if-branching">7.1</a> When using <code class="highlighter-rouge">if/else</code> statements, properly choose between various <code class="highlighter-rouge">if</code> and <code class="highlighter-rouge">else</code> patterns depending on whether the conditions relate to one another. Avoid redundant or unnecessary <code class="highlighter-rouge">if</code> tests.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">grade</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'You got an A!'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">grade</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="nx">grade</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'You got a B!'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">grade</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="o">&amp;&amp;</span> <span class="nx">grade</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'You got a C!'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">grade</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'You got an A!'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">grade</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'You got a B!'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">grade</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'You got a C!'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="if-factoring"></a><a name="7.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#if-factoring">7.2</a> Move common code out of <code class="highlighter-rouge">if/else</code> statements to avoid redundancy.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="p">();</span>
+  <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="p">();</span>
+  <span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="nx">foo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">foo</span><span class="p">()</span> <span class="o">||</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">foo</span><span class="p">()</span> <span class="o">||</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">c</span> <span class="o">||</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">c</span> <span class="o">||</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="if-cuddled-elses"></a><a name="7.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#if-cuddled-elses">7.3</a> Put <code class="highlighter-rouge">else</code> on the same line as your <code class="highlighter-rouge">if</code> block’s closing brace.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">thing1</span><span class="p">();</span>
+  <span class="nx">thing2</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="nx">thing3</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">thing1</span><span class="p">();</span>
+  <span class="nx">thing2</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">thing3</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="control-statements"></a><a name="7.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#control-statements">7.4</a> In case your <code class="highlighter-rouge">if</code> gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line. The same is true for <code class="highlighter-rouge">else if</code> and <code class="highlighter-rouge">while</code>.</p>
+
+    <blockquote>
+      <p>Why? Requiring operators at the beginning of the line keeps the operators aligned, improving readability by making it easier to visually follow complex logic.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">((</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">||</span> <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">doesItLookGoodWhenItBecomesThatLong</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">isThisReallyHappening</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span>
+  <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span>
+  <span class="o">&amp;&amp;</span> <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span>
+  <span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span>
+  <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span>
+  <span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span>
+  <span class="o">&amp;&amp;</span> <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">((</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">||</span> <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span><span class="p">)</span>
+  <span class="o">&amp;&amp;</span> <span class="nx">doesItLookGoodWhenItBecomesThatLong</span><span class="p">()</span>
+  <span class="o">&amp;&amp;</span> <span class="nx">isThisReallyHappening</span><span class="p">()</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span> <span class="nx">bar</span> <span class="o">===</span> <span class="s1">'abc'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="boolean-zen">Boolean Zen</h2>
+
+<p><a name="boolean-zen"></a><a name="8.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#boolean-zen">8.1</a> Never test if a <code class="highlighter-rouge">boolean</code> value is <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code> explicitly.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">myBool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="boolean-zen-return"></a><a name="8.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#boolean-zen-return">8.2</a> If you have an <code class="highlighter-rouge">if/else</code> statement that returns a boolean value based on a test, just directly return the test’s result instead.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">score1</span> <span class="o">===</span> <span class="nx">score2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">return</span> <span class="nx">score1</span> <span class="o">===</span> <span class="nx">score2</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="curly-braces">Curly Braces</h2>
+
+<p><a name="blocks-braces"></a><a name="9.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#blocks-braces">9.1</a> Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="semicolons">Semicolons</h2>
+
+<p><a name="semicolons-required"></a><a name="10.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#semicolons-required">10.1</a> <strong>Use them.</strong></p>
+
+    <blockquote>
+      <p>Why? When JavaScript encounters a line break without a semicolon, it uses a set of rules called <a href="https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion">Automatic Semicolon Insertion</a> to determine whether or not it should regard that line break as the end of a statement, and (as the name implies) place a semicolon into your code before the line break if it thinks so. ASI contains a few eccentric behaviors, though, and your code will break if JavaScript misinterprets your line break. These rules will become more complicated as new features become a part of JavaScript. Explicitly terminating your statements and configuring your linter to catch missing semicolons will help prevent you from encountering issues.</p>
+    </blockquote>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad - raises exception</span>
+<span class="kd">let</span> <span class="nx">luke</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">yoda</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="p">[</span><span class="nx">luke</span><span class="p">,</span> <span class="nx">yoda</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">jedi</span> <span class="o">=&gt;</span> <span class="nx">jedi</span><span class="p">.</span><span class="nx">force</span> <span class="o">=</span> <span class="s1">'strong'</span><span class="p">)</span>
+
+<span class="c1">// good</span>
+<span class="kd">const</span> <span class="nx">luke</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">const</span> <span class="nx">yoda</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="p">[</span><span class="nx">luke</span><span class="p">,</span> <span class="nx">yoda</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">jedi</span> <span class="o">=&gt;</span> <span class="nx">jedi</span><span class="p">.</span><span class="nx">force</span> <span class="o">=</span> <span class="s1">'strong'</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad - returns `undefined` instead of the value on the next line</span>
+<span class="c1">//       although you shouldn't return on a new line anyways</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span>
+    <span class="s1">'search your feelings, you know it to be foo'</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s1">'search your feelings, you know it to be foo'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="comments">Comments</h2>
+
+<p><a name="comments-function-header"></a><a name="11.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-function-header">11.1</a> For JavaScript functions, we ask that you use <a href="http://usejsdoc.org/">JSDoc</a> commenting syntax. This syntax provides a clear template for declaring parameters, return types, and special cases. If you have used JavaDoc before, this is a similar commenting style, only for JavaScript. In this class, we expect you to use the <code class="highlighter-rouge">@param</code> and <code class="highlighter-rouge">@return</code> annotation tags in JSDoc when appropriate for the function. The <code class="highlighter-rouge">@param</code> annotation specifies the name and type of each parameter, as well as what the purpose of that parameter is in the function. The <code class="highlighter-rouge">@return</code> annotation specifies the type and expected value of what is returned given the parameters and any other conditions of the function. You do not need to use any other JSDoc annotations in CSE 154. Here is an example of a function comment skeleton as reference:</p>
+
+    <p><strong>NOTE</strong>: Notice that JSDoc comments start with <code class="highlighter-rouge">/**</code> not <code class="highlighter-rouge">/*</code></p>
+
+    <p><strong>NOTE</strong>: The description of your function should describe what the function does, not how it does it. The most important thing is that your comments should describe how the state of the page (and potentially module-global variables) will change by calling the function. Think about how to explain the purpose of the function without implementation details. A good rule of thumb is to never mention processes such as “looping over” things.</p>
+
+    <p><strong>NOTE</strong>: If there are no parameters or no return value, there should still be a descriptive comment, but you can omit <code class="highlighter-rouge">@param</code> and <code class="highlighter-rouge">@return</code> annotations.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Single-line JSDoc comment:</span>
+  <span class="cm">/** Your comment here - description of function */</span>
+  <span class="kd">function</span> <span class="nx">simpleFunction</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="p">}</span>
+
+  <span class="c1">// Multi-line JSDoc comment:</span>
+  <span class="cm">/**
+   * brief description of the function
+   * @param {datatype} parameterName1 - parameter description
+   * @param {datatype} parameterName2 - parameter description
+   * @return {datatype} Description of the return value
+   */</span>
+   <span class="kd">function</span> <span class="nx">functionName</span><span class="p">()</span> <span class="p">{</span>
+
+   <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-multiline"></a><a name="11.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-multiline">11.2</a> Use <code class="highlighter-rouge">/* ... */</code> for multi-line comments.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="c1">// this comment is getting really really really long</span>
+<span class="c1">// so I am going to break it into multiple lines, but now</span>
+<span class="c1">// there are lots of those ugly start of comment // characters</span>
+
+<span class="c1">// good</span>
+<span class="cm">/*
+  This multiline comment is also getting really really long
+  but I chose to use the correct operator and it is a bit
+  nicer to look at
+ */</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-singleline"></a><a name="11.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-singleline">11.3</a> Use <code class="highlighter-rouge">//</code> for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.</p>
+
+    <p><strong>NOTE</strong>: While not required, many programmers like to comment each module-global variable with a single line comment.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>  <span class="c1">// is current tab</span>
+
+<span class="c1">// good</span>
+<span class="c1">// is current tab</span>
+<span class="kd">let</span> <span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'fetching type...'</span><span class="p">);</span>
+<span class="c1">// set the default type to 'no type'</span>
+<span class="kd">let</span> <span class="nx">type</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="s1">'no type'</span><span class="p">;</span>
+
+<span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">getType</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// set the default type to 'no type'</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="s1">'no type'</span><span class="p">;</span>
+<span class="p">}</span>    
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">getType</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'fetching type...'</span><span class="p">);</span>
+
+  <span class="c1">// set the default type to 'no type'</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="s1">'no type'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// also good</span>
+<span class="kd">function</span> <span class="nx">getType</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// set the default type to 'no type'</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">||</span> <span class="s1">'no type'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-spaces"></a><a name="11.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-spaces">11.4</a> Start all comments with a space to make it easier to read.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="c1">//is current tab</span>
+<span class="kd">let</span> <span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="c1">// is current tab</span>
+<span class="kd">let</span> <span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="whitespace--indentation">Whitespace &amp; Indentation</h2>
+
+<p><a name="whitespace-before-blocks"></a><a name="12.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-before-blocks">12.1</a> Place 1 space before the leading brace.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">test</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBoolean</span><span class="p">){</span>
+
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBoolean</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-around-keywords"></a><a name="12.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-around-keywords">12.2</a> Place 1 space before the opening parenthesis in control statements (<code class="highlighter-rouge">if</code>, <code class="highlighter-rouge">while</code> etc.). Place no space between the argument list and the function name in function calls and declarations.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">isJedi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fight</span> <span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isJedi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fight</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">fight</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s1">'Swooosh!'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">fight</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Swooosh!'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-infix-ops"></a><a name="12.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-infix-ops">12.3</a> Set off operators with spaces.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">x</span><span class="o">=</span><span class="nx">y</span><span class="o">+</span><span class="mi">5</span><span class="p">;</span>
+
+<span class="c1">// bad</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-padded-blocks"></a><a name="12.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-padded-blocks">12.4</a> Do not pad your blocks with blank lines. Too much spacing can be just as bad as not enough.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">baz</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">qux</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">baz</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">qux</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-comma-spacing"></a><a name="12.5"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-comma-spacing">12.5</a> Avoid spaces before commas and require a space after commas.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+
+<span class="c1">// bad</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-indenting"></a><a name="12.6"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-indenting">12.6</a> Always indent one time for each nested block.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+    <span class="nx">doSomethingElse</span><span class="p">();</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">myBool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="nx">doSomethingElse</span><span class="p">();</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="module-pattern--strict-mode">Module Pattern &amp; Strict Mode</h2>
+
+<p><a name="module-pattern"></a><a name="14.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#module-pattern">14.1</a> Always use the module pattern to contain your code. No code should exist outside of this pattern.</p>
+
+    <blockquote>
+      <p>Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file’s function would override the first one’s (since HTML is loaded from top to bottom).</p>
+    </blockquote>
+
+    <p>See example in <a href="#use-strict">14.2</a></p>
+  </li>
+</ul>
+
+<p><a name="use-strict"></a><a name="13.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#use-strict">14.2</a> Always write a <code class="highlighter-rouge">"use strict";</code> declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// good</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s2">"use strict"</span><span class="p">;</span>
+  <span class="c1">// ...</span>
+<span class="p">})();</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="good-javascript-design">Good JavaScript Design</h2>
+
+<p><a name="unobtrusive-js"></a><a name="15.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#unobtrusive-js">15.1</a> Never use element.innerHTML for anything other than clearing containers. Prefer createElement().</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'&lt;img src="dog.jpg" alt="boundless pupper" /&gt;'</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="kd">let</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'dog.jpg'</span><span class="p">;</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">alt</span> <span class="o">=</span> <span class="s1">'boundless pupper'</span><span class="p">;</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+
+<span class="c1">// also good - clearing container</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="minimize-redundancy"></a><a name="15.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#minimize-redundancy">15.2</a> Minimize redundant code as much as possible.</p>
+
+    <p><strong>TIP</strong>: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="nx">foo</span><span class="p">();</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+
+<span class="c1">// somewhere later in the code...</span>
+<span class="nx">foo</span><span class="p">();</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">helper</span><span class="p">(</span><span class="nx">newX</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="p">();</span>
+  <span class="nx">x</span> <span class="o">=</span> <span class="nx">newX</span><span class="p">;</span>
+  <span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">helper</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="c1">// somewhere later in the code...</span>
+<span class="nx">helper</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <p><a name="no-css"></a><a name="15.3"></a></p>
+  </li>
+  <li>
+    <p><a href="#no-css">15.3</a> Do not include any CSS styles in JavaScript unless absoolutely necessary. Prefer adding and removing classes.</p>
+
+    <p><strong>TIP</strong>: A good rule of thumb is that if you can make a CSS class to easily achieve your desired output, you should do that instead. Styling in JavaScript should only occur when adding dynamic styles (such as a random color) that cannot be predetermined with CSS classes.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">'red'</span><span class="p">;</span>
+
+<span class="c1">// better - this isn't great, because it would remove all other classes from div.</span>
+<span class="nx">div</span><span class="p">.</span><span class="kd">class</span> <span class="o">=</span> <span class="s1">'red'</span><span class="p">;</span>
+
+<span class="c1">// good</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'red'</span><span class="p">);</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// good - there is no way to do this in CSS!</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">genRandomColor</span><span class="p">();</span>
+
+<span class="cm">/**
+ * Don't worry about what this function does. It is mostly black magic.
+ * From here: https://www.paulirish.com/2009/random-hex-color-code-snippets/
+ * @return {String} Random hex code starting with a '#'
+ */</span>
+<span class="kd">function</span> <span class="nx">genRandomColor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s1">'#'</span><span class="o">+</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">16777215</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="no-log"></a><a name="15.4"></a></p>
+<ul>
+  <li><a href="#no-log">15.4</a> Never turn in code with <code class="highlighter-rouge">console.log()</code>, <code class="highlighter-rouge">alert()</code>, <code class="highlighter-rouge">debugger</code>, commented out code or other debugging code left in. The one exception here is you can use <code class="highlighter-rouge">.catch(console.log)</code> when we do not specify anything else to do with the error.</li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h1>};</h1>
+
+
+    </main>
+    <!-- Footer Information -->
+<footer class="text-focus-in">
+	<hr>
+	<div id="footer-items-container">
+		<img src="/assets/cse-wordmark.png" alt="CSE Watermark">
+		<a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+	</div>
+</footer>
+
+  </body>
+</html>

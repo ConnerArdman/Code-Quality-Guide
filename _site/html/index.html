@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+
+	<title>HTML Code Quality Guide</title>
+
+	<link rel="canonical" href="/html/">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/style/normalize.css">
+	<link rel="stylesheet" href="/style/theme.css">
+	<link rel="stylesheet" href="/style/coursewebsite.css">
+
+	<script type="text/javascript" src="/scripts/navbar.js"></script>
+</head>
+
+
+  <body>
+    <!-- Navigation Bar -->
+<header class="navbar">
+	<h1>Code Quality Guide</h1>
+	 
+	
+		<a href="/">General Guidelines</a>
+	
+	  
+	
+		<a class="active" href="/html/">HTML</a>
+	
+	  
+	
+		<a href="/css/">CSS</a>
+	
+	  
+	
+		<a href="/javascript/">JavaScript</a>
+	
+	  
+	
+		<a href="/php/">PHP</a>
+	
+	  
+	
+		<a href="/sql/">SQL</a>
+	
+	 
+	<svg id="mobile-dropdown-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#menu-1"></use>
+	</svg>
+	<svg id="mobile-x-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#close-1"></use>
+	</svg>
+</header>
+
+
+    <main>
+          <h1 id="cse-154-code-quality-guidehtml-">CSE 154 Code Quality Guide(HTML) {</h1>
+
+<p><em>A somewhat sensible set of HTML code quality guidelines for <a href="https://cs.washington.edu/154">CSE 154</a> at the University of Washington.</em></p>
+
+<p><strong>NOTE</strong>: All HTML Code should be <a href="https://validator.w3.org/#validate_by_input">validated</a>.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#classes--ids">Classes &amp; IDs</a></li>
+  <li><a href="#naming-conventions">Naming Conventions</a></li>
+  <li><a href="#semantic-tags">Semantic Tags</a></li>
+  <li><a href="#self-closing-tags">Self Closing Tags</a></li>
+  <li><a href="#comments">Comments</a></li>
+  <li><a href="#whitespace--indentation">Whitespace &amp; Indentation</a></li>
+  <li><a href="#good-html-design">Good HTML Design</a></li>
+</ol>
+
+<h2 id="classes--ids">Classes &amp; IDs</h2>
+
+<p><a name="unused-classes"></a><a name="1.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#unused-classes">1.1</a> Only add classes and IDs to your HTML when they are needed by CSS and/or JavaScript for selecting elements.</p>
+
+    <blockquote>
+      <p>Why? IDs and classes don’t provide any semantic meaning to the HTML, so they just clutter the HTML if they are not being used by CSS or JavaScript.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a name="prefer-context"></a><a name="1.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#prefer-context">1.2</a> Prefer context selectors over adding classes when styling elements all in the same context. For example, to change fonts of all the paragraphs in <code class="highlighter-rouge">&lt;main&gt;</code>, use a context selector rather than applying the same class to all of the paragraphs.</p>
+
+    <p><strong>TIP</strong>: If you can easily describe what elements you are selecting in reference to where they will appear on the page, then you can likely use a context selector. Classes will be more useful when you don’t need all of the elements in a certain context (maybe you only want to change the color of 3 specific paragraphs).</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="c">&lt;!--
+  in CSS, the "course" class could easily be selected
+  with the context selector "ul li".
+--&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"course"</span><span class="nt">&gt;</span>CSE 154<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"course"</span><span class="nt">&gt;</span>CSE 160<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"course"</span><span class="nt">&gt;</span>CSE 142<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"course"</span><span class="nt">&gt;</span>CSE 143<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="single-class"></a><a name="1.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#single-class">1.3</a> Classes should always appear at least twice in your HTML. Otherwise, you should use an ID.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"boundless-container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"pupper.jpg"</span> <span class="na">alt=</span><span class="s">"Dubs"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"boundless-container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"pupper.jpg"</span> <span class="na">alt=</span><span class="s">"Dubs"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="unique-id"></a><a name="1.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#unique-id">1.4</a> Each ID should be unique, only appearing once in the HTML.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Dubs<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"bio"</span><span class="nt">&gt;</span>The adorable live mascot of UW<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Harry The Husky<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"bio"</span><span class="nt">&gt;</span>The body-suit mascot of UW<span class="nt">&lt;/p&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Dubs<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"bio"</span><span class="nt">&gt;</span>The adorable live mascot of UW<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Harry The Husky<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"bio"</span><span class="nt">&gt;</span>The body-suit mascot of UW<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+
+<p><a name="naming-descriptive"></a><a name="2.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#naming-descriptive">2.1</a> Avoid single letter names for classes and IDs. Try to be as descriptive as possible.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"pd"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/p&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"project-description"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="lowercase-naming"></a><a name="2.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#lowercase-naming">2.2</a> Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"first_heading"</span><span class="nt">&gt;</span>My Awesome Website<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"importantReminder"</span><span class="nt">&gt;</span>do your homework<span class="nt">&lt;/p&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"first-heading"</span><span class="nt">&gt;</span>My Awesome Website<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"important-reminder"</span><span class="nt">&gt;</span>do your homework<span class="nt">&lt;/p&gt;</span>
+
+<span class="c">&lt;!-- also good --&gt;</span>
+<span class="nt">&lt;h1</span> <span class="na">id=</span><span class="s">"firstheading"</span><span class="nt">&gt;</span>My Awesome Website<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"importantreminder"</span><span class="nt">&gt;</span>do your homework<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="lowercase-elements"></a><a name="2.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#lowercase-elements">2.3</a> Use all lowercase for HTML elements and their attributes.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;H1&gt;</span>Code Quality Guide<span class="nt">&lt;/H1&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Code Quality Guide<span class="nt">&lt;/H1&gt;</span>
+</code></pre></div>    </div>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">SRC=</span><span class="s">"cat.jpg"</span> <span class="na">ALT=</span><span class="s">"furry friend"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">Src=</span><span class="s">"cat.jpg"</span> <span class="na">Alt=</span><span class="s">"furry friend"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"cat.jpg"</span> <span class="na">alt=</span><span class="s">"furry friend"</span><span class="nt">&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="semantic-tags">Semantic Tags</h2>
+
+<p><a name="prefer-semantic"></a><a name="3.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#prefer-semantic">3.1</a> Always prefer semantic tags (such as <code class="highlighter-rouge">&lt;section&gt;</code>) over generic ones (such as <code class="highlighter-rouge">&lt;div&gt;</code> and <code class="highlighter-rouge">&lt;span&gt;</code>). Never use classes that share a name with a tag, use that tag instead.</p>
+
+    <blockquote>
+      <p>Why? Semantic tags make our code more accessible, particularly to screen readers. <code class="highlighter-rouge">&lt;div&gt;</code> and <code class="highlighter-rouge">&lt;span&gt;</code> are ignored for anything other than grouping, but tags such as <code class="highlighter-rouge">&lt;main&gt;</code>, <code class="highlighter-rouge">&lt;article&gt;</code> and <code class="highlighter-rouge">&lt;section&gt;</code> carry semantic meaning and help the screen reader interpret the page for a user.</p>
+    </blockquote>
+
+    <p><strong>TIP</strong>: Semantic tags can be confusing to decide between. It can be helpful to wireframe your site and try to verbally describe each portion of your page. Here is a <a href="https://www.semrush.com/blog/semantic-html5-guide/">great resource on the usage of these tags</a> as well as a <a href="https://www.w3schools.com/html/html5_semantic_elements.asp">list of semantic tags</a>.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main-header"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>CSE 154 Is The Best!<span class="nt">&lt;/h1&gt;</span>  
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"section"</span><span class="nt">&gt;</span>
+    ....
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;article&gt;</span>
+  <span class="nt">&lt;header&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>CSE 154 Is The Best!<span class="nt">&lt;/h1&gt;</span>  
+  <span class="nt">&lt;/header&gt;</span>
+  <span class="nt">&lt;section&gt;</span>
+    ....
+  <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="order-heading"></a><a name="3.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#order-heading">3.2</a> Heading tags denote heading levels, not font sizes. Never “skip” a level as this does not make semantic sense. For example, do not use <code class="highlighter-rouge">&lt;h2&gt;</code> unless your page has an <code class="highlighter-rouge">&lt;h1&gt;</code>. Do not use <code class="highlighter-rouge">&lt;h3&gt;</code> unless your page has an <code class="highlighter-rouge">&lt;h2&gt;</code>.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Main Heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h3&gt;</span>Smaller Heading<span class="nt">&lt;/h3&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Main Heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Smaller Heading<span class="nt">&lt;/h2&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="presentation-tags"></a><a name="3.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#presentation-tags">3.3</a> Do not use presentation tags, as they describe style rather than content. Most of these have been deprecated, and all of them can be replaced with CSS styles. For example, avoid <code class="highlighter-rouge">&lt;i&gt;</code>, <code class="highlighter-rouge">&lt;b&gt;</code>, <code class="highlighter-rouge">&lt;u&gt;</code>, <code class="highlighter-rouge">&lt;font&gt;</code>, <code class="highlighter-rouge">&lt;big&gt;</code>, <code class="highlighter-rouge">&lt;small&gt;</code> and <code class="highlighter-rouge">&lt;center&gt;</code>. <code class="highlighter-rouge">&lt;strong&gt;</code> and <code class="highlighter-rouge">&lt;em&gt;</code> are acceptable to use, because they carry semantic meaning.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;b&gt;</span>Bold text!<span class="nt">&lt;/b&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;strong&gt;</span>Strong text!<span class="nt">&lt;/strong&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="tables-layout"></a><a name="3.4"></a></p>
+<ul>
+  <li><a href="#tables-layout">3.4</a> Do not use <code class="highlighter-rouge">&lt;table&gt;</code> for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.</li>
+</ul>
+
+<p><a name="blockquote"></a><a name="3.5"></a></p>
+<ul>
+  <li>
+    <p><a href="#blockquote">3.5</a> Use <code class="highlighter-rouge">&lt;blockquote&gt;</code> and <code class="highlighter-rouge">&lt;cite&gt;</code> when quoting content.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;p&gt;</span>bark! bark! bark!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>- Debug Dog<span class="nt">&lt;/p&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;blockquote&gt;</span>
+  <span class="nt">&lt;p&gt;</span>bark! bark! bark!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/blockquote&gt;</span>
+<span class="nt">&lt;cite&gt;</span>- Debug Dog<span class="nt">&lt;/cite&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="self-closing-tags">Self Closing Tags</h2>
+
+<p><a name="self-closing"></a><a name="4.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#self-closing">4.1</a> You may choose to omit the <code class="highlighter-rouge">/</code> at the end of self-closing tags, but be consistent with all tags in your file, including those in the <code class="highlighter-rouge">&lt;head&gt;</code> as well as <code class="highlighter-rouge">&lt;br&gt;</code> and <code class="highlighter-rouge">&lt;hr&gt;</code> tags.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"foo.jpg"</span> <span class="na">alt=</span><span class="s">"foo description"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="c">&lt;!-- note that there is a space before the "/" --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"foo.jpg"</span> <span class="na">alt=</span><span class="s">"foo description"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- also good --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"foo.jpg"</span> <span class="na">alt=</span><span class="s">"foo description"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="comments">Comments</h2>
+
+<p><a name="comments-inline"></a><a name="5.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-inline">5.1</a> For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs). You should also add comments for any citations, such as images found on the web.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="c">&lt;!-- main section --&gt;</span>
+<span class="nt">&lt;main&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"zoomer.jpg"</span> <span class="na">alt=</span><span class="s">"dog zooming through poles"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="c">&lt;!-- Game board to be populated by JavaScript --&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/main&gt;</span>
+
+<span class="c">&lt;!-- footer --&gt;</span>
+<span class="nt">&lt;footer&gt;</span>
+  ...
+<span class="nt">&lt;/footer&gt;</span>
+</code></pre></div>    </div>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;main&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="c">&lt;!--
+      image from dog.ceo, the open source dog image API
+      https://images.dog.ceo/breeds/labrador/n02099712_3868.jpg
+    --&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"zoomer.jpg"</span> <span class="na">alt=</span><span class="s">"dog zooming through poles"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="c">&lt;!-- Game board to be populated by JavaScript --&gt;</span>
+  <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/main&gt;</span>
+
+<span class="nt">&lt;footer&gt;</span>
+  ...
+<span class="nt">&lt;/footer&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="whitespace--indentation">Whitespace &amp; Indentation</h2>
+
+<p><a name="whitespace-blocks"></a><a name="6.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-blocks">6.1</a> Go to a new line before each block element. Never place more than one block element on a single line.</p>
+
+    <p><strong>NOTE</strong>: Images are technically “inline-block” elements, but we will apply the same indentation rules to them. Place images on their own lines without block elements.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;main&gt;&lt;p&gt;</span>Go Dawgs!<span class="nt">&lt;/p&gt;&lt;/main&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;main&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Go Dawgs!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/main&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-indent"></a><a name="6.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-indent">6.2</a> Always indent one time for each nested block element.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;main&gt;</span>
+  <span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"foo"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>baz bar<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>bar baz<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;p&gt;</span>bar<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/main&gt;</span>
+<span class="nt">&lt;footer&gt;</span>
+  <span class="nt">&lt;p&gt;</span>baz<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/footer&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;main&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"foo"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;</span>baz bar<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>bar baz<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+      <span class="nt">&lt;p&gt;</span>bar<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+  <span class="nt">&lt;/main&gt;</span>
+  <span class="nt">&lt;footer&gt;</span>
+    <span class="nt">&lt;p&gt;</span>baz<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/footer&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-equal"></a><a name="6.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-equal">6.3</a> Never leave space around the equal sign for attributes.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;article</span> <span class="na">class = </span><span class="s">"foo"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"foo"</span><span class="nt">&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="extra-space"></a><a name="6.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#extra-space">6.4</a> Do not add extra spacing inside of elements.</p>
+
+    <blockquote>
+      <p>Why? HTML generally ignores extra whitespace, so this won’t cause too many bugs. However, there are some cases where extra spaces can cause unwanted alignment errors.</p>
+    </blockquote>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;h1&gt;</span> My Webpage <span class="nt">&lt;/h1&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>My Webpage<span class="nt">&lt;/h1&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="good-html-design">Good HTML Design</h2>
+
+<p><a name="alt-attribute"></a><a name="7.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#alt-attribute">7.1</a> Always use <code class="highlighter-rouge">alt</code> attributes for images.</p>
+
+    <blockquote>
+      <p>Why? Similar to semantic tags, alt attributes make our code more accessible to screen readers. Rather than just telling a user that there is an image, it can mention what is in the actual image. This is also useful when the image fails to load to give a better experience to users by displaying the text.</p>
+    </blockquote>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"tree.jpg"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"tree.jpg"</span> <span class="na">alt=</span><span class="s">"large oak tree"</span><span class="nt">&gt;</span>
+</code></pre></div>    </div>
+
+    <p><a name="alt-attribute"></a><a name="7.2"></a></p>
+  </li>
+  <li>
+    <p><a href="#alt-attribute">7.2</a> Do not mention “image of” or anything similar in alt attribute text.</p>
+
+    <blockquote>
+      <p>Why? This is mostly a redundancy thing. By using an <code class="highlighter-rouge">&lt;img&gt;</code>, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as “image of image of fluffy dog”!</p>
+    </blockquote>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"dog.jpg"</span> <span class="na">alt=</span><span class="s">"image of fluffy dog"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"dog.jpg"</span> <span class="na">alt=</span><span class="s">"fluffy dog"</span><span class="nt">&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="redundant-tags"></a><a name="7.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#redundant-tags">7.3</a> Never have two tags grouping the same content unless there is a specific semantic reason for it or it is necessary for styling.</p>
+
+    <p><strong>NOTE</strong>: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as <code class="highlighter-rouge">&lt;div&gt;</code> and <code class="highlighter-rouge">&lt;article&gt;</code>) should wrap the same content.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;main&gt;</span>
+  <span class="nt">&lt;article&gt;</span>
+    ...
+  <span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;/main&gt;</span>
+
+<span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;main&gt;</span>
+  ...
+<span class="nt">&lt;/main&gt;</span>
+
+ <span class="c">&lt;!-- also good --&gt;</span>
+<span class="nt">&lt;article&gt;</span>
+  ...
+<span class="nt">&lt;/article&gt;</span>   
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="js-in-html"></a><a name="7.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#js-in-html">7.4</a> Do not use the <code class="highlighter-rouge">&lt;script&gt;</code> tag except to link to an external <code class="highlighter-rouge">.js</code> file. Do not use the <code class="highlighter-rouge">&lt;style&gt;</code> tag, and do not include any style related attributes in your HTML. Do all styling in CSS.</p>
+
+    <blockquote>
+      <p>Why? It is important to keep content, style and behavior seperate. This keeps our code modular and easy to interpret. Since HTML represents content, there should be no style or behavior information in it.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a name="script-in-head"></a><a name="7.5"></a></p>
+<ul>
+  <li>
+    <p><a href="#script-in-head">7.5</a> Always put <code class="highlighter-rouge">&lt;script&gt;</code> tags in the head, not the body.</p>
+
+    <blockquote>
+      <p>Why? The body represents the actual content of the page, so it is semantically incorrect to put script tags there. That said, it can be common in industry to put scripts at the bottom of the body. The browser reads HTML from the top to the bottom, so if the script tag is last, then the browser will not parse the JavaScript file until the page has loaded. While this technique eliminates the need for <code class="highlighter-rouge">window.addEventListener('load', init)</code>, the relatively-small scope of the code you are working on in CSE 154 more clearly motivates the <code class="highlighter-rouge">&lt;script&gt;</code> in the <code class="highlighter-rouge">&lt;head&gt;</code>, and any other methods of linking to JS are subject to being considered poor code quality.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a name="br-br"></a><a name="7.6"></a></p>
+<ul>
+  <li>
+    <p><a href="#br-br">7.6</a> Never use consecutive <code class="highlighter-rouge">&lt;br&gt;</code> tags. Additionally, do not use them to create extra margin between paragraphs.</p>
+
+    <blockquote>
+      <p>Why? Just like most other tags, <code class="highlighter-rouge">&lt;br&gt;</code> has semantic meaning - it represents a line break. It does not make semantic sense to have consecutive line breaks, because that is just a larger line break. In the case of needing more space between elements, CSS should be changed rather than HTML.</p>
+    </blockquote>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">&lt;!-- bad --&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    ...
+  <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;br&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    ...
+  <span class="nt">&lt;/p&gt;</span>
+
+  <span class="c">&lt;!-- bad --&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    Dogs are<span class="nt">&lt;br&gt;&lt;br&gt;</span>AMAZING!
+  <span class="nt">&lt;/p&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="always-nest"></a><a name="7.7"></a></p>
+<ul>
+  <li>
+    <p><a href="#always-nest">7.7</a> Always nest inline elements inside of block elements other than the body. Text should always be contained in a block element meant to contain text such as <code class="highlighter-rouge">&lt;p&gt;</code> or <code class="highlighter-rouge">&lt;h1&gt;</code>.</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">&lt;!-- bad --&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    This is text
+
+    <span class="nt">&lt;strong&gt;</span>This is also bad<span class="nt">&lt;/strong&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+
+  <span class="c">&lt;!-- good --&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is text<span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;p&gt;</span>This is <span class="nt">&lt;strong&gt;</span>good<span class="nt">&lt;/strong&gt;</span> now!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="font-import"></a><a name="7.8"></a></p>
+<ul>
+  <li>
+    <p><a href="#font-import">7.8</a> Never import fonts directly in HTML. Prefer <code class="highlighter-rouge">@import</code> statements in CSS.</p>
+
+    <p><strong>NOTE</strong>: Only fonts that are used/referenced later in the CSS should be imported.</p>
+
+    <blockquote>
+      <p>Why? Since fonts are stylistic information about the page, we should always prefer to keep anything related to them in our CSS files.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h1>};</h1>
+
+
+    </main>
+    <!-- Footer Information -->
+<footer class="text-focus-in">
+	<hr>
+	<div id="footer-items-container">
+		<img src="/assets/cse-wordmark.png" alt="CSE Watermark">
+		<a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+	</div>
+</footer>
+
+  </body>
+</html>

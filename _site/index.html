@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+
+	<title>General Guidelines Code Quality Guide</title>
+
+	<link rel="canonical" href="/">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/style/normalize.css">
+	<link rel="stylesheet" href="/style/theme.css">
+	<link rel="stylesheet" href="/style/coursewebsite.css">
+
+	<script type="text/javascript" src="/scripts/navbar.js"></script>
+</head>
+
+
+  <body>
+    <!-- Navigation Bar -->
+<header class="navbar">
+	<h1>Code Quality Guide</h1>
+	 
+	
+		<a class="active" href="/">General Guidelines</a>
+	
+	  
+	
+		<a href="/html/">HTML</a>
+	
+	  
+	
+		<a href="/css/">CSS</a>
+	
+	  
+	
+		<a href="/javascript/">JavaScript</a>
+	
+	  
+	
+		<a href="/php/">PHP</a>
+	
+	  
+	
+		<a href="/sql/">SQL</a>
+	
+	 
+	<svg id="mobile-dropdown-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#menu-1"></use>
+	</svg>
+	<svg id="mobile-x-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#close-1"></use>
+	</svg>
+</header>
+
+
+    <main>
+          <h1 id="cse-154-code-quality-guide-">CSE 154 Code Quality Guide() {</h1>
+
+<p><em>A relatively rational approach to web development for <a href="https://cs.washington.edu/154">CSE 154</a> at the University of Washington. Portions of this guide were adapted from <a href="https://github.com/airbnb/javascript">Airbnb’s JavaScript Style Guide</a>.</em></p>
+
+<blockquote>
+  <p>Questions about the guide? We are always looking to improve our resources, feel free to reach out to <a href="mailto:ardmanc@uw.edu">Conner</a> with any questions or concerns!</p>
+</blockquote>
+
+<h2 id="general-guidelines">General Guidelines</h2>
+
+<ol>
+  <li><a href="#comments">Comments</a></li>
+  <li><a href="#whitespace--indentation">Whitespace &amp; Indentation</a></li>
+  <li><a href="#long-lines">Long Lines</a></li>
+</ol>
+
+<h2 id="comments">Comments</h2>
+
+<p><a name="comments-header"></a><a name="1.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-header">1.1</a> Always include a file header comment at the top of each file with your name, the date, your section and a brief description of what the file does. See HTML example below:</p>
+
+    <p><strong>NOTE</strong>: In HTML, this comment must go after the <code class="highlighter-rouge">&lt;DOCTYPE html&gt;</code>. In PHP it must go after the <code class="highlighter-rouge"><span class="cp">&lt;?php</span></code>.</p>
+
+    <p><strong>NOTE</strong>: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the <a href="05PHP.md/#comments-header">PHP guide</a></p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="c">&lt;!--
+  Name: Mowgli Hovik
+  Date: 01.01.2019
+  Section: CSE 154 AX
+
+  This is the index.html page for my portfolio of web development work. It includes links to
+  side projects I have done during CSE 154, including an AboutMe page, a blog template, and
+  a crytogram generator.
+--&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-sources"></a><a name="1.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-sources">1.2</a> Always cite sources in your comments if you use anything found online.</p>
+
+    <p><strong>NOTE</strong>: It is preferred to cite sources in the text content of the HTML so that your users actually see it!</p>
+
+    <p><strong>BIG NOTE</strong>: You should not be citing any sources on homework assignments as everything should be
+your own work. Feel free to use outside artwork, quotes, etc. in your creative projects with proper citations.
+If you want to use code found online, ask your TA or instructor first then cite it with permission. Additionally, if you copy
+any lecture code for your creative projects, please cite that as well.</p>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="whitespace--indentation">Whitespace &amp; Indentation</h2>
+
+<p><a name="whitespace-spaces"></a><a name="2.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-spaces">2.1</a> Use soft tabs (space character) set to 2, 3 or 4 spaces. You should use the same tab length across all of your files.</p>
+
+    <p><strong>NOTE</strong>: Please ask a TA for assistance if you are unsure of how to correct this. The settings are a bit hard to find in Atom, and this can mess up your indentation when turning in files on GitGrade.</p>
+  </li>
+</ul>
+
+<p><a name="whitespace-newline-at-end"></a><a name="2.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-newline-at-end">2.2</a> Never have consecutive newline characters in your code, even at the end of a file.</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
+<span class="kd">function</span> <span class="nx">myFunc</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="s1">'baz'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+
+<span class="kd">function</span> <span class="nx">myOtherFunc</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ..</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// good</span>
+<span class="kd">function</span> <span class="nx">myFunc</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="s1">'baz'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">myOtherFunc</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ..</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- bad --&gt;</span>
+<span class="nt">&lt;p&gt;</span>super cool paragraph<span class="nt">&lt;/p&gt;</span>
+
+
+<span class="nt">&lt;p&gt;</span>other cool paragraph<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>    </div>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- good --&gt;</span>
+<span class="nt">&lt;p&gt;</span>super cool paragraph<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>other cool paragraph<span class="nt">&lt;/p&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="long-lines">Long Lines</h2>
+
+<p><a name="short-lines"></a><a name="3.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#short-lines">3.1</a> Always keep lines under 100 characters. It makes your code much easier to read. The one exception here is links. Any string containing a link can go over 100 characters.</p>
+
+    <p><strong>TIP</strong>: Most IDE’s let you set a line on the screen at a certain character limit. Set it to 80 characters and avoid going over that to be extra careful.</p>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="contributors">Contributors</h2>
+<ul>
+  <li><a href="mailto:ardmanc@uw.edu">Conner Ardman</a></li>
+  <li><a href="https://courses.cs.washington.edu/courses/cse154/19sp/">CSE 154 Spring 2019 Staff</a></li>
+  <li><a href="https://github.com/airbnb/javascript/graphs/contributors">Original Airbnb Contributors</a></li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h1>};</h1>
+
+
+    </main>
+    <!-- Footer Information -->
+<footer class="text-focus-in">
+	<hr>
+	<div id="footer-items-container">
+		<img src="/assets/cse-wordmark.png" alt="CSE Watermark">
+		<a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+	</div>
+</footer>
+
+  </body>
+</html>

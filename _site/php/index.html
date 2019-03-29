@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+
+	<title>PHP Code Quality Guide</title>
+
+	<link rel="canonical" href="/php/">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/style/normalize.css">
+	<link rel="stylesheet" href="/style/theme.css">
+	<link rel="stylesheet" href="/style/coursewebsite.css">
+
+	<script type="text/javascript" src="/scripts/navbar.js"></script>
+</head>
+
+
+  <body>
+    <!-- Navigation Bar -->
+<header class="navbar">
+	<h1>Code Quality Guide</h1>
+	 
+	
+		<a href="/">General Guidelines</a>
+	
+	  
+	
+		<a href="/html/">HTML</a>
+	
+	  
+	
+		<a href="/css/">CSS</a>
+	
+	  
+	
+		<a href="/javascript/">JavaScript</a>
+	
+	  
+	
+		<a class="active" href="/php/">PHP</a>
+	
+	  
+	
+		<a href="/sql/">SQL</a>
+	
+	 
+	<svg id="mobile-dropdown-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#menu-1"></use>
+	</svg>
+	<svg id="mobile-x-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#close-1"></use>
+	</svg>
+</header>
+
+
+    <main>
+          <h1 id="cse-154-code-quality-guidephp-">CSE 154 Code Quality Guide(PHP) {</h1>
+
+<p><em>A largely logical PHP code quality guide for <a href="https:#cs.washington.edu/154">CSE 154</a> at the University of Washington.</em></p>
+
+<p><strong>NOTE</strong>: Many of these rules are the same or similar to those in the <a href="04javascript.md">JavaScript guide</a>. The two languages share a similar “C-like” syntax, and thus we have similar code quality guidelines.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#variables">Variables</a></li>
+  <li><a href="#strings">Strings</a></li>
+  <li><a href="#naming-conventions">Naming Conventions</a></li>
+  <li><a href="#comparison-operators--equality">Comparison Operators &amp; Equality</a></li>
+  <li><a href="#loops">Loops</a></li>
+  <li><a href="#ifelse-statements">If/Else Statements</a></li>
+  <li><a href="#boolean-zen">Boolean Zen</a></li>
+  <li><a href="#curly-braces">Curly Braces</a></li>
+  <li><a href="#comments">Comments</a></li>
+  <li><a href="#whitespace--indentation">Whitespace &amp; Indentation</a></li>
+  <li><a href="#good-php-design">Good PHP Design</a></li>
+</ol>
+
+<h2 id="variables">Variables</h2>
+
+<p><a name="no-global"></a><a name="1.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#no-global">1.1</a> Never use the <code class="highlighter-rouge">global</code> keyword. Instead, pass variables as parameters.</p>
+
+    <blockquote>
+      <p>Why? It is important to keep our functions modular, meaning they are not dependant on other code. By passing parameters, our functions work regardless of the names of variables. Think of the global scope as being equivalent to a “main” function in another language, where we would call functions with parameters created in main.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$count</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">print_count</span><span class="p">();</span>
+
+<span class="k">function</span> <span class="nf">print_count</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">global</span> <span class="nv">$count</span><span class="p">;</span>
+  <span class="k">echo</span> <span class="nv">$count</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># good</span>
+<span class="nv">$count</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">print_count</span><span class="p">(</span><span class="nv">$count</span><span class="p">);</span>
+
+<span class="k">function</span> <span class="nf">print_count</span><span class="p">(</span><span class="nv">$count</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nv">$count</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="variables-define-where-used"></a><a name="1.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#variables-define-where-used">1.2</a> Save expensive function calls into variables, but only once they are needed.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">strlen</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="s2">"foo.txt"</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$text</span> <span class="o">=</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="s2">"foo.txt"</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nv">$text</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="s2">"foo.txt"</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">$text</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$text</span> <span class="o">=</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nv">$text</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad - unnecessary function call</span>
+<span class="k">function</span> <span class="nf">check_name</span><span class="p">(</span><span class="nv">$has_name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$name</span> <span class="o">=</span> <span class="nx">get_name</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$has_name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1"># Never used the $name variable here!</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$name</span> <span class="o">===</span> <span class="s2">"test"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">set_name</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">check_name</span><span class="p">(</span><span class="nv">$has_name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$has_name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nv">$name</span> <span class="o">=</span> <span class="nx">get_name</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$name</span> <span class="o">===</span> <span class="s2">"test"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">set_name</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="strings">Strings</h2>
+
+<p><a name="strings-quotes"></a><a name="2.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#strings-quotes">2.1</a> Using double quotes is necessary in PHP for strings containing variables. For consistency, we prefer that you use double quotes for all strings, however you may use single quotes for strings not containing variables.</p>
+
+    <blockquote>
+      <p>Why? There is actually a really good argument here for single quotes. In double quoted strings, PHP has to search the string for variables, which slows down the runtime. Single quoted strings don’t require the same level of processing. That said, PHP is fast and this probably falls under the realm of useless micro-optimizations.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="s2">"human"</span><span class="p">;</span>
+<span class="nv">$friend</span> <span class="o">=</span> <span class="s1">'dog'</span><span class="p">;</span>
+
+<span class="c1"># good</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="s2">"human"</span><span class="p">;</span>
+<span class="nv">$friend</span> <span class="o">=</span> <span class="s2">"dog"</span><span class="p">;</span>
+
+<span class="c1"># good</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="s1">'human'</span><span class="p">;</span>
+<span class="nv">$friend</span> <span class="o">=</span> <span class="s1">'dog'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+
+<p><a name="naming-descriptive"></a><a name="3.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#naming-descriptive">3.1</a> Avoid single letter names unless it is for an index in a loop. Be descriptive with your naming. Optimally, a reader should understand what your functions and variables do without even reading your comments or the details of your code!</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">p</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">get_power_level</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="naming-underscore"></a><a name="3.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#naming-underscore">3.2</a> Use <code class="highlighter-rouge">$underscore_naming</code> when naming variables, objects and functions. Constants may use <code class="highlighter-rouge">$UPPERCASE_NAMING</code>.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$myString</span> <span class="o">=</span> <span class="s2">"Go Dawgs!"</span><span class="p">;</span>
+<span class="k">function</span> <span class="nf">MyFunction</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nv">$my_string</span> <span class="o">=</span> <span class="s2">"Go Dawgs!"</span><span class="p">;</span>
+<span class="k">function</span> <span class="nf">my_function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="lowercase-functions"></a><a name="3.3"></a></p>
+<ul>
+  <li><a href="#lowercase-functions">3.3</a> While PHP is mostly case-insensative, always use lowercase to reference built in functions.</li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="comparison-operators--equality">Comparison Operators &amp; Equality</h2>
+
+<p><a name="comparison-eqeqeq"></a><a name="4.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-eqeqeq">4.1</a> Use <code class="highlighter-rouge">===</code> and <code class="highlighter-rouge">!==</code> over <code class="highlighter-rouge">==</code> and <code class="highlighter-rouge">!=</code>.</p>
+
+    <blockquote>
+      <p>What’s the difference? Similar to JavaScript, <code class="highlighter-rouge">===</code> performs a “strict” equality check, meaning that it checks value and type. <code class="highlighter-rouge">==</code> only checks for value. For example, the string <code class="highlighter-rouge">"0" == 0</code> is <code class="highlighter-rouge">true</code>, but <code class="highlighter-rouge">"0" === 0</code> is <code class="highlighter-rouge">false</code>. Only using <code class="highlighter-rouge">===</code> is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">==</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">===</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comparison-shortcuts"></a><a name="4.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-shortcuts">4.2</a> Use shortcuts for booleans and null checks, but explicit comparisons for strings and numbers.</p>
+
+    <p><strong>NOTE</strong>: You will often hear instructors refer to this as boolean zen along with <a href="#boolean-zen">this section</a></p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$is_valid</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$is_valid</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$is_valid</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comparison-ternaries"></a><a name="4.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-ternaries">4.3</a> Ternaries can be used, but they should not be nested and should be single line expressions. Additionally, you should not use them in cases where they are completely unnecessary.</p>
+
+    <blockquote>
+      <p>What’s this? The ternary operator is a common shorthand notation in programming languages in the form of “$variable = expression ? value1 : value2”. If expression is true, the $variable gets set to value1 after the “?”. Otherwise, it is set to value2 after the “:”.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$maybe1</span> <span class="o">&gt;</span> <span class="nv">$maybe2</span>
+  <span class="o">?</span> <span class="s2">"bar"</span>
+  <span class="o">:</span> <span class="nv">$value1</span> <span class="o">&gt;</span> <span class="nv">$value2</span> <span class="o">?</span> <span class="s2">"baz"</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1"># good - split into 2 separated ternary expressions</span>
+<span class="nv">$maybe_null</span> <span class="o">=</span> <span class="nv">$value1</span> <span class="o">&gt;</span> <span class="nv">$value2</span> <span class="o">?</span> <span class="s2">"baz"</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$maybe1</span> <span class="o">&gt;</span> <span class="nv">$maybe2</span> <span class="o">?</span> <span class="s2">"bar"</span> <span class="o">:</span> <span class="nv">$maybe_null</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$a</span> <span class="o">?</span> <span class="nv">$a</span> <span class="o">:</span> <span class="nv">$b</span><span class="p">;</span>
+<span class="nv">$baz</span> <span class="o">=</span> <span class="nv">$c</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="c1"># good</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$a</span> <span class="o">||</span> <span class="nv">$b</span><span class="p">;</span>
+<span class="nv">$baz</span> <span class="o">=</span> <span class="o">!</span><span class="nv">$c</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comparison-no-mixed-operators"></a><a name="4.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#comparison-no-mixed-operators">4.4</a> When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators (<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">*</code>, &amp; <code class="highlighter-rouge">/</code>) since their precedence is broadly understood.</p>
+
+    <blockquote>
+      <p>Why? This improves readability and clarifies the developer’s intention.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$a</span> <span class="o">&amp;&amp;</span> <span class="nv">$b</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nv">$c</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nv">$d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1"># bad</span>
+<span class="c1"># note "**" is the exponentiation operator</span>
+<span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$a</span> <span class="o">**</span> <span class="nv">$b</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">%</span> <span class="nv">$d</span><span class="p">;</span>
+
+<span class="c1"># bad</span>
+<span class="c1"># one may be confused into thinking ($a || $b) &amp;&amp; $c</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">||</span> <span class="nv">$b</span> <span class="o">&amp;&amp;</span> <span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">&amp;&amp;</span> <span class="nv">$b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$c</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="nv">$d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1"># good</span>
+<span class="nv">$bar</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">**</span> <span class="nv">$b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">5</span> <span class="o">%</span> <span class="nv">$d</span><span class="p">);</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">||</span> <span class="p">(</span><span class="nv">$b</span> <span class="o">&amp;&amp;</span> <span class="nv">$c</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$a</span> <span class="o">+</span> <span class="nv">$b</span> <span class="o">/</span> <span class="nv">$c</span> <span class="o">*</span> <span class="nv">$d</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="loops">Loops</h2>
+
+<p><a name="for-while"></a><a name="5.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#for-while">5.1</a> Use a <code class="highlighter-rouge">for</code> loop when the number of repetitions is known (definite). Use a <code class="highlighter-rouge">while</code> loop when the number of repetitions is unknown (indefinite).</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nx">arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+  <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nx">arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad - notice the middle condition does not use $i at all, and it is not used in the loop!</span>
+<span class="nv">$sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$sum</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$sum</span> <span class="o">+=</span> <span class="nb">rand</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nv">$sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$sum</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$sum</span> <span class="o">+=</span> <span class="nb">rand</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="break-continue"></a><a name="5.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#break-continue">5.2</a> Never use break, continue or empty return statements in this class.</p>
+
+    <blockquote>
+      <p>Why? For the length and complexity of the programs we ask you to write, these statements deviate from clear logical flow and you should instead consider ways to refactor your conditional statements and loops to handle different cases without forced “shortcuts”.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad - contrived example, but the idea is you can usually replace the break with conditions.</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">echo</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+  <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+  <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$num</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">echo</span> <span class="nv">$num</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$num</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$num</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="ifelse-statements">If/Else Statements</h2>
+
+<p><a name="if-branching"></a><a name="6.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#if-branching">6.1</a> When using <code class="highlighter-rouge">if/else</code> statements, properly choose between various <code class="highlighter-rouge">if</code> and <code class="highlighter-rouge">else</code> patterns depending on whether the conditions relate to one another. Avoid redundant or unnecessary <code class="highlighter-rouge">if</code> tests.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$grade</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"You got an A!"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$grade</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="nv">$grade</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"You got a B!"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$grade</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="o">&amp;&amp;</span> <span class="nv">$grade</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"You got a C!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$grade</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"You got an A!"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$grade</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"You got a B!"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$grade</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"You got a C!"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="if-factoring"></a><a name="6.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#if-factoring">6.2</a> Move common code out of <code class="highlighter-rouge">if/else</code> statements to avoid redundancy.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;</span> <span class="nv">$y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="p">();</span>
+  <span class="nv">$x</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">echo</span> <span class="s2">"hi"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="p">();</span>
+  <span class="nv">$y</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">echo</span> <span class="s2">"hi"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nx">foo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">&lt;</span> <span class="nv">$y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$x</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nv">$y</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">echo</span> <span class="s2">"hi"</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">foo</span><span class="p">()</span> <span class="o">||</span> <span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">foo</span><span class="p">()</span> <span class="o">||</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nx">let</span> <span class="nv">$c</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$c</span> <span class="o">||</span> <span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$c</span> <span class="o">||</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="if-cuddled-elses"></a><a name="6.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#if-cuddled-elses">6.3</a> Put <code class="highlighter-rouge">else</code> on the same line as your <code class="highlighter-rouge">if</code> block’s closing brace.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">thing1</span><span class="p">();</span>
+  <span class="nx">thing2</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="nx">thing3</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">thing1</span><span class="p">();</span>
+  <span class="nx">thing2</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">thing3</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="control-statements"></a><a name="6.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#control-statements">6.4</a> In case your <code class="highlighter-rouge">if</code> gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line. The same is true for <code class="highlighter-rouge">else if</code> and <code class="highlighter-rouge">while</code>.</p>
+
+    <blockquote>
+      <p>Why? Requiring operators at the beginning of the line keeps the operators aligned, improving readability by making it easier to visually follow complex logic.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">((</span><span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">||</span> <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">doesItLookGoodWhenItBecomesThatLong</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">isThisReallyHappening</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span>
+  <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span>
+  <span class="o">&amp;&amp;</span> <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span>
+  <span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span>
+  <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span>
+  <span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span>
+  <span class="o">&amp;&amp;</span> <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">((</span><span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">||</span> <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span><span class="p">)</span>
+  <span class="o">&amp;&amp;</span> <span class="nx">doesItLookGoodWhenItBecomesThatLong</span><span class="p">()</span>
+  <span class="o">&amp;&amp;</span> <span class="nx">isThisReallyHappening</span><span class="p">()</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span> <span class="nv">$bar</span> <span class="o">===</span> <span class="s2">"abc"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="boolean-zen">Boolean Zen</h2>
+
+<p><a name="boolean-zen"></a><a name="7.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#boolean-zen">7.1</a> Never test if a <code class="highlighter-rouge">boolean</code> value is <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code> explicitly.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$my_bool</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">my_bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">my_bool</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">my_bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="boolean-zen-return"></a><a name="7.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#boolean-zen-return">7.2</a> If you have an <code class="highlighter-rouge">if/else</code> statement that returns a boolean value based on a test, just directly return the test’s result instead.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$score1</span> <span class="o">===</span> <span class="nv">$score2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">return</span> <span class="nv">$score1</span> <span class="o">===</span> <span class="nv">$score2</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="curly-braces">Curly Braces</h2>
+
+<p><a name="blocks-braces"></a><a name="8.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#blocks-braces">8.1</a> Use braces for the start of any block, regardless of the number of lines. Always go to a new line after the curly braces.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="comments">Comments</h2>
+
+<p><a name="comments-function-header"></a><a name="9.1"></a></p>
+<ul>
+  <li><a href="#comments-function-header">9.1</a> We prefer that you follow the same conventions of function header comments as in <a href="04javascript.md/#comments-function-header">JavaScript</a> for consistency across our code.</li>
+</ul>
+
+<p><a name="comments-multiline"></a><a name="9.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-multiline">9.2</a> Use <code class="highlighter-rouge">/* ... */</code> for multi-line comments.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="c1"># this comment is getting really really really long</span>
+<span class="c1"># so I am going to break it into multiple lines, but now</span>
+<span class="c1"># there are lots of those ugly start of comment # characters</span>
+
+<span class="c1"># good</span>
+<span class="cm">/*
+  This multiline comment is also getting really really long
+  but I chose to use the correct operator and it is a bit
+  nicer to look at
+ */</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-singleline"></a><a name="9.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-singleline">9.3</a> Use <code class="highlighter-rouge">#</code> or <code class="highlighter-rouge">//</code> for single line comments, but be consistent throughout your code. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">echo</span> <span class="s2">"hello!"</span><span class="p">;</span>
+<span class="c1"># set the default type to 'no type'</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$has_type</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$type</span> <span class="o">=</span> <span class="s2">"none"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">echo</span> <span class="s2">"hello!"</span><span class="p">;</span>
+
+<span class="c1"># set the default type to 'no type'</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$has_type</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$type</span> <span class="o">=</span> <span class="s2">"none"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">get_type</span><span class="p">(</span><span class="nv">$has_type</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1"># set the default type to 'no type'</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$has_type</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"none"</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">calculate_type</span><span class="p">();</span>
+<span class="p">}</span>    
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">get_type</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># set the default type to 'no type'</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$has_type</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"none"</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">calculate_type</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-spaces"></a><a name="9.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-spaces">9.4</a> Start all comments with a space to make it easier to read.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="c1">#is current tab</span>
+<span class="nv">$active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="c1"># good</span>
+<span class="c1"># is current tab</span>
+<span class="nv">$active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="comments-header"></a><a name="9.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#comments-header">9.4</a> In addition to the normal file header comment, PHP web services should also include each GET/POST parameter, their types as well as any output that can occur based on the parameters.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+  Name: Roger Forgetful
+  Section : CSE 154 ZZ
+  Date: 17th March, 20
+
+  This file provides back-end support for the puppy API.
+  Based on the input parameters supplied using GET requests,
+  the API outputs different details about puppies in different formats.
+
+  Web Service details:
+  =====================================================================
+  Required GET parameters:
+  - type
+    - if type is "pos", parameter "character" and "name" are also required.
+  Output formats:
+  - Plain text and JSON
+  Output Details:
+  - If the type parameter is passed and set to "pos", the API
+    will take in the name of a puppy and a character and output the position
+    of the character in the string as plain text.
+  - If the type parameter is passed and set to "all", an array of
+    "good bois" is returned as JSON.
+  - Else outputs 400 error message as plain text.
+ */</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="whitespace--indentation">Whitespace &amp; Indentation</h2>
+
+<p><a name="whitespace-before-blocks"></a><a name="10.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-before-blocks">10.1</a> Place 1 space before the leading brace.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">test</span><span class="p">(){</span>
+  <span class="k">echo</span> <span class="s2">"test"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"test"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">my_boolean</span><span class="p">){</span>
+  <span class="k">echo</span> <span class="s2">"wahoo!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">my_boolean</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"wahoo!"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-around-keywords"></a><a name="10.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-around-keywords">10.2</a> Place 1 space before the opening parenthesis in control statements (<code class="highlighter-rouge">if</code>, <code class="highlighter-rouge">while</code> etc.). Place no space between the argument list and the function name in function calls and declarations.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">is_jedi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fight</span> <span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">is_jedi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fight</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">fight</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"Swooosh!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">fight</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"Swooosh!"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-infix-ops"></a><a name="10.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-infix-ops">10.3</a> Set off operators with spaces.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$x</span><span class="o">=</span><span class="nv">$y</span><span class="o">+</span><span class="mi">5</span><span class="p">;</span>
+
+<span class="c1"># bad</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="nv">$y</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+
+<span class="c1"># good</span>
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-padded-blocks"></a><a name="10.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-padded-blocks">10.4</a> Do not pad your blocks with blank lines. Too much spacing can be just as bad as not enough.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">function</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="k">echo</span> <span class="s2">"foo"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$baz</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">echo</span> <span class="s2">"bar"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"foo"</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"foo"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$baz</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"bar"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"foo"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-comma-spacing"></a><a name="10.5"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-comma-spacing">10.5</a> Avoid spaces before commas and require a space after commas.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+
+<span class="c1"># bad</span>
+<span class="nv">$arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="c1"># good</span>
+<span class="nv">$arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="whitespace-indenting"></a><a name="10.6"></a></p>
+<ul>
+  <li>
+    <p><a href="#whitespace-indenting">10.6</a> Always indent one time for each nested block.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$my_bool</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$my_bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$my_bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">(</span><span class="nv">$arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+    <span class="nx">do_something_else</span><span class="p">();</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$my_bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">(</span><span class="nv">$arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="nx">do_something_else</span><span class="p">();</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h2 id="good-php-design">Good PHP Design</h2>
+
+<p><a name="minimize-redundancy"></a><a name="11.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#minimize-redundancy">11.1</a> Minimize redundant code as much as possible.</p>
+
+    <p><strong>TIP</strong>: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!</p>
+
+    <p><strong>NOTE</strong>: It will be common practice to create a <code class="highlighter-rouge">common.php</code> file containing code needed in multiple files.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nx">foo</span><span class="p">();</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nv">$y</span><span class="o">++</span><span class="p">;</span>
+
+<span class="c1"># somewhere later in the code...</span>
+<span class="nx">foo</span><span class="p">();</span>
+<span class="nv">$x</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="nv">$y</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># good</span>
+<span class="k">function</span> <span class="nf">helper</span><span class="p">(</span><span class="nv">$new_x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="p">();</span>
+  <span class="nv">$x</span> <span class="o">=</span> <span class="nv">$new_x</span><span class="p">;</span>
+  <span class="nv">$y</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">helper</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="c1"># somewhere later in the code...</span>
+<span class="nx">helper</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="no-log"></a><a name="10.2"></a></p>
+<ul>
+  <li><a href="#no-log">10.2</a> Never turn in code with any debugging code left in.</li>
+</ul>
+
+<p><a name="override-header"></a><a name="10.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#override-header">10.2</a> Never override a <code class="highlighter-rouge">content-type</code> header.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: text/plain"</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$has_json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/json"</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$json</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">echo</span> <span class="s2">"There was no JSON"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$has_json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: application/json"</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$json</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nb">header</span><span class="p">(</span><span class="s2">"Content-type: text/plain"</span><span class="p">);</span>
+  <span class="k">echo</span> <span class="s2">"There was no JSON"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="use-die"></a><a name="10.3"></a></p>
+<ul>
+  <li>
+    <p><a href="#use-die">10.3</a> Use <code class="highlighter-rouge">die()</code> instead of <code class="highlighter-rouge">print</code> or <code class="highlighter-rouge">echo</code> when outputting errors.</p>
+
+    <blockquote>
+      <p>Why? <code class="highlighter-rouge">die()</code> kills the program, which is important after an error has occured. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a name="check-isset"></a><a name="10.4"></a></p>
+<ul>
+  <li>
+    <p><a href="#check-isset">10.4</a> Always check if GET and POST parameters were set before accessing them.</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$mode</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">];</span>
+
+<span class="c1"># good</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]))</span> <span class="p">{</span>
+  <span class="nv">$mode</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="use-try-catch"></a><a name="10.5"></a></p>
+<ul>
+  <li>
+    <p><a href="#use-try-catch">10.5</a> Always use <code class="highlighter-rouge">try</code> and <code class="highlighter-rouge">catch</code> when interacting with a database.</p>
+
+    <blockquote>
+      <p>Why? Accessing a database is a common time for programs to fail, because they become reliant on other systems. Using <code class="highlighter-rouge">try/catch</code> allows us to handle these errors gracefully and output appropriate information to a user.</p>
+    </blockquote>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bad</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="nv">$ds</span><span class="p">,</span> <span class="nv">$user</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">);</span>
+
+<span class="c1"># good</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="nv">$ds</span><span class="p">,</span> <span class="nv">$user</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+    <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">error_message</span><span class="p">(</span><span class="s2">"Can not connect to the database.</span><span class="se">\n</span><span class="s2"> Error details: </span><span class="nv">$ex</span><span class="s2"> </span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="min-db-calls"></a><a name="10.6"></a></p>
+<ul>
+  <li>
+    <p><a href="#min-db-calls">10.6</a> Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in will result in needing to make a database call.</p>
+
+    <blockquote>
+      <p>Why? Calling the database can be slow and error prone, so we should avoid doing so until necessary.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a name="functions-top"></a><a name="10.7"></a></p>
+<ul>
+  <li>
+    <p><a href="#functions-top">10.7</a> Place all of your functions at the very top or bottom of your PHP file, never in the middle of the page.</p>
+
+    <blockquote>
+      <p>Why? Any code outside of functions can be thought of as similar to the “main” function in another programming language. We should keep this code together without it being broken up to keep our code clean and easy to read.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h1>};</h1>
+
+
+    </main>
+    <!-- Footer Information -->
+<footer class="text-focus-in">
+	<hr>
+	<div id="footer-items-container">
+		<img src="/assets/cse-wordmark.png" alt="CSE Watermark">
+		<a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+	</div>
+</footer>
+
+  </body>
+</html>

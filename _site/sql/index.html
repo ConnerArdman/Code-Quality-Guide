@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+
+	<title>SQL Code Quality Guide</title>
+
+	<link rel="canonical" href="/sql/">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/style/normalize.css">
+	<link rel="stylesheet" href="/style/theme.css">
+	<link rel="stylesheet" href="/style/coursewebsite.css">
+
+	<script type="text/javascript" src="/scripts/navbar.js"></script>
+</head>
+
+
+  <body>
+    <!-- Navigation Bar -->
+<header class="navbar">
+	<h1>Code Quality Guide</h1>
+	 
+	
+		<a href="/">General Guidelines</a>
+	
+	  
+	
+		<a href="/html/">HTML</a>
+	
+	  
+	
+		<a href="/css/">CSS</a>
+	
+	  
+	
+		<a href="/javascript/">JavaScript</a>
+	
+	  
+	
+		<a href="/php/">PHP</a>
+	
+	  
+	
+		<a class="active" href="/sql/">SQL</a>
+	
+	 
+	<svg id="mobile-dropdown-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#menu-1"></use>
+	</svg>
+	<svg id="mobile-x-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#close-1"></use>
+	</svg>
+</header>
+
+
+    <main>
+          <h1 id="cse-154-code-quality-guidesql-">CSE 154 Code Quality Guide(SQL) {</h1>
+
+<p><em>SELECT code quality FROM guide WHERE class = <a href="https://cs.washington.edu/154">CSE 154</a> AND university = <code class="highlighter-rouge">University of Washington</code></em></p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#naming-conventions">Letter Casing</a></li>
+  <li><a href="#comments">Comments</a></li>
+  <li><a href="#whitespace--indentation">Whitespace &amp; Indentation</a></li>
+</ol>
+
+<h2 id="letter-casing">Letter Casing</h2>
+
+<p><a name="uppercase-naming"></a><a name="1.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#uppercase-naming">1.1</a> SQL kewords such as <code class="highlighter-rouge">SELECT</code>, <code class="highlighter-rouge">FROM</code> and <code class="highlighter-rouge">AUTO INCREMENT</code> should be capitalized.</p>
+
+    <blockquote>
+      <p>Why? Aside from being a standard, using all capital letters makes it easier to quickly read your code.</p>
+    </blockquote>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- bad</span>
+<span class="k">select</span> <span class="n">dog</span> <span class="k">from</span> <span class="n">animal</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">dog</span> <span class="k">from</span> <span class="n">animal</span><span class="p">;</span>
+<span class="k">Select</span> <span class="n">dog</span> <span class="k">From</span> <span class="n">animal</span><span class="p">;</span>
+
+<span class="c1">-- good</span>
+<span class="k">SELECT</span> <span class="n">dog</span> <span class="k">FROM</span> <span class="n">animal</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="lowercase-db"></a><a name="1.2"></a></p>
+<ul>
+  <li><a href="#lowercase-db">1.2</a> Database names should be all lowercase without any numbers or special characters (such as “-“ or “_”).</li>
+</ul>
+
+<p><a name="lowercase-table"></a><a name="1.3"></a></p>
+<ul>
+  <li><a href="#lowercase-table">1.3</a> Table names can either use the same conventions as databases (all lowercase) or you may use PascalCasing (camelCase with the first letter capitalized). Choose one convention and be consistent.</li>
+</ul>
+
+<p><a name="lowercase-column"></a><a name="1.4"></a></p>
+<ul>
+  <li><a href="#lowercase-column">1.4</a> Column names should use lowercase_naming conventions.</li>
+</ul>
+
+<h2 id="comments">Comments</h2>
+
+<p><a name="no-comment"></a><a name="2.1"></a></p>
+<ul>
+  <li><a href="#no-comment">2.1</a> SQL files should contain a header comment just like any other. Other than that, there is no need to comment, but you may comment any complex logic (although we don’t expect it to be necessary in this class).</li>
+</ul>
+
+<h2 id="whitespace--indentation">Whitespace &amp; Indentation</h2>
+
+<p><a name="new-line"></a><a name="3.1"></a></p>
+<ul>
+  <li>
+    <p><a href="#new-line">3.1</a> To avoid long lines (over 100 characters), it is common to go to new lines in <code class="highlighter-rouge">SELECT</code> queries. Start each line with a SQL command such as <code class="highlighter-rouge">SELECT</code>, <code class="highlighter-rouge">FROM</code>, <code class="highlighter-rouge">WHERE</code>, or <code class="highlighter-rouge">AND</code>.</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- bad</span>
+<span class="k">SELECT</span>
+<span class="n">name</span><span class="p">,</span> <span class="n">description</span> <span class="k">FROM</span>
+<span class="n">courses</span> <span class="k">WHERE</span>
+<span class="n">dept</span> <span class="o">=</span> <span class="s1">'CSE'</span><span class="p">;</span>
+
+<span class="c1">-- good</span>
+<span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span> <span class="n">descripion</span>
+<span class="k">FROM</span> <span class="n">courses</span>
+<span class="k">WHERE</span> <span class="n">dept</span> <span class="o">=</span> <span class="s1">'CSE'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a name="consistent-indentation"></a><a name="3.2"></a></p>
+<ul>
+  <li>
+    <p><a href="#consistent-indentation">3.2</a> Keep indendation consistent. There are no clear cut rules on indenation, but keep it consistent and readable.</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- bad</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="k">c</span><span class="p">.</span><span class="n">name</span>
+  <span class="k">FROM</span> <span class="n">courses</span> <span class="k">c</span><span class="p">,</span> <span class="n">students</span> <span class="n">s1</span><span class="p">,</span> <span class="n">students</span> <span class="n">s2</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g1</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g2</span>
+    <span class="k">WHERE</span> <span class="n">g1</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+    <span class="k">AND</span> <span class="n">g1</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">id</span>
+      <span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+      <span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">id</span>
+    <span class="k">AND</span> <span class="n">s1</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Bart'</span>
+    <span class="k">AND</span> <span class="n">s2</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Lisa'</span><span class="p">;</span>
+
+<span class="c1">-- good</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="k">c</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">courses</span> <span class="k">c</span><span class="p">,</span> <span class="n">students</span> <span class="n">s1</span><span class="p">,</span> <span class="n">students</span> <span class="n">s2</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g1</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g2</span>
+<span class="k">WHERE</span> <span class="n">g1</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> <span class="n">g1</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">AND</span> <span class="n">s1</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Bart'</span> <span class="k">AND</span> <span class="n">s2</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Lisa'</span><span class="p">;</span>
+
+<span class="c1">-- good</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="k">c</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">courses</span> <span class="k">c</span><span class="p">,</span> <span class="n">students</span> <span class="n">s1</span><span class="p">,</span> <span class="n">students</span> <span class="n">s2</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g1</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g2</span>
+<span class="k">WHERE</span> <span class="n">g1</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+<span class="k">AND</span> <span class="n">g1</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">id</span>
+<span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+<span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">id</span>
+<span class="k">AND</span> <span class="n">s1</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Bart'</span>
+<span class="k">AND</span> <span class="n">s2</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Lisa'</span><span class="p">;</span>
+
+<span class="c1">-- good</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="k">c</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">courses</span> <span class="k">c</span><span class="p">,</span> <span class="n">students</span> <span class="n">s1</span><span class="p">,</span> <span class="n">students</span> <span class="n">s2</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g1</span><span class="p">,</span> <span class="n">grades</span> <span class="n">g2</span>
+<span class="k">WHERE</span> <span class="n">g1</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">AND</span> <span class="n">g1</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">AND</span> <span class="n">g2</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">AND</span> <span class="n">s1</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Bart'</span>
+  <span class="k">AND</span> <span class="n">s2</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Lisa'</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- bad</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">dogbreeds</span><span class="p">(</span><span class="n">breed_id</span> <span class="n">INT</span><span class="p">,</span> <span class="n">breed_name</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">breed_id</span><span class="p">));</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">doggies</span>
+<span class="p">(</span>
+<span class="n">dog_id</span> <span class="n">INT</span> <span class="n">AUTO</span> <span class="k">INCREMENT</span><span class="p">,</span>
+<span class="n">dog_name</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="n">dog_age</span> <span class="n">INT</span><span class="p">,</span>
+<span class="n">breed_id</span> <span class="n">INT</span><span class="p">,</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">breed_id</span><span class="p">)</span>
+<span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">breed_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">dogbreeds</span><span class="p">(</span><span class="n">breed_id</span><span class="p">));</span>
+
+<span class="c1">-- good</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">dogbreeds</span> <span class="p">(</span>
+  <span class="n">breed_id</span> <span class="n">INT</span> <span class="n">AUTO</span> <span class="k">INCREMENT</span><span class="p">,</span>
+  <span class="n">breed_name</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">breed_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">doggies</span> <span class="p">(</span>
+  <span class="n">dog_id</span> <span class="n">INT</span> <span class="n">AUTO</span> <span class="k">INCREMENT</span><span class="p">,</span>
+  <span class="n">dog_name</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="n">dog_age</span> <span class="n">INT</span><span class="p">,</span>
+  <span class="n">breed_id</span> <span class="n">INT</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">dog_id</span><span class="p">)</span>
+  <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">breed_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">dogbreeds</span><span class="p">(</span><span class="n">breed_id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+<h1>};</h1>
+
+
+    </main>
+    <!-- Footer Information -->
+<footer class="text-focus-in">
+	<hr>
+	<div id="footer-items-container">
+		<img src="/assets/cse-wordmark.png" alt="CSE Watermark">
+		<a href="https://www.washington.edu/online/terms/">UW Site Use Agreement</a>
+	</div>
+</footer>
+
+  </body>
+</html>
