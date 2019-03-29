@@ -1,21 +1,20 @@
+---
+layout: page
+title: General Guidelines
+permalink: /
+---
+
 # CSE 154 Code Quality Guide() {
 
 *A relatively rational approach to web development for [CSE 154](https://cs.washington.edu/154) at the University of Washington. Portions of this guide were adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).*
 
 > Questions about the guide? We are always looking to improve our resources, feel free to reach out to [Conner](mailto:ardmanc@uw.edu) with any questions or concerns!
 
-## General Guidelines
+## Table of Contents
 
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Long Lines](#long-lines)
-
-## Language Specific Guides
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [JavaScript](javascript.md)
-  1. [PHP](PHP.md)
-  1. [SQL](SQL.md)
 
 ## Comments
 
@@ -24,17 +23,16 @@
 
     **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
 
-    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](PHP.md/#comments-header)
+    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output!
 
     ```html
-    <!DOCTYPE html>
     <!--
       Name: Mowgli Hovik
       Date: 01.01.2019
       Section: CSE 154 AX
 
       This is the index.html page for my portfolio of web development work. It includes links to
-      side projects I have done during CSE 154, including an AboutMe page, a blog template, and 
+      side projects I have done during CSE 154, including an AboutMe page, a blog template, and
       a crytogram generator.
     -->
     ```
@@ -42,12 +40,12 @@
   <a name="comments-sources"></a><a name="1.2"></a>
   - [1.2](#comments-sources) Always cite sources in your comments if you use anything found online.
 
-    **NOTE**: It is preferred to cite sources in the text content of the HTML so that your users actually see it!
+    **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
 
     **BIG NOTE**: You should not be citing any sources on homework assignments as everything should be
-    your own work. Feel free to use outside artwork, quotes, etc. in your creative projects with proper citations.
-    If you want to use code found online, ask your TA or instructor first then cite it with permission. Additionally, if you copy
-    any lecture code for your creative projects, please cite that as well.
+    your own work or based on in class code (no need to cite our examples unless told otherwise). Feel free
+    to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
+    code found online, ask your TA or instructor first then cite it with permission.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -63,8 +61,8 @@
 
     ```javascript
     // bad
-    function myFunc(foo) {
-      if (foo === 'baz') {
+    funciton myFunc() {
+      if (myBool) {
         return true;
       }
 
@@ -80,8 +78,8 @@
 
     ```javascript
     // good
-    function myFunc(foo) {
-      if (foo === 'baz') {
+    funciton myFunc() {
+      if (myBool) {
         return true;
       }
 
@@ -121,7 +119,6 @@
 
 ## Contributors
   - [Conner Ardman](mailto:ardmanc@uw.edu)
-  - [CSE 154 Spring 2019 Staff](https://courses.cs.washington.edu/courses/cse154/19sp/)
   - [Original Airbnb Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**

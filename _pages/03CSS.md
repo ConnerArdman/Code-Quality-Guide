@@ -1,3 +1,9 @@
+---
+layout: page
+title: CSS
+permalink: /css/
+---
+
 # CSE 154 Code Quality Guide(CSS) {
 
 *A possibly pragmatic CSS code quality guide for [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
@@ -12,13 +18,6 @@
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Good CSS Design](#good-css-design)
-
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [HTML](HTML.md)
-  1. [JavaScript](javascript.md)
-  1. [PHP](PHP.md)
-  1. [SQL](SQL.md)
 
 ## Ordering
 
@@ -160,7 +159,7 @@
 
   <a name="whitespace-before-curly"></a><a name="5.1"></a>
   - [5.1](#whitespace-before-curly) Place 1 space before the leading brace to begin a rule set.
-    
+
     ```css
     /* bad */
     div{
@@ -175,7 +174,7 @@
 
   <a name="newline"></a><a name="5.2"></a>
   - [5.2](#newline) Place each rule on its own line. Do not place any rules on the same line as a curly brace.
-    
+
     ```css
     /* bad */
     div { border: 5px solid black;
@@ -189,10 +188,10 @@
       margin: auto;
     }
     ```  
-  
+
   <a name="colon-space"></a><a name="5.3"></a>
   - [5.3](#colon-space) Place one space after each colon and none before them.
-    
+
     ```css
     /* bad */
     h1 {
@@ -211,7 +210,7 @@
 
   <a name="blank-lines"></a><a name="5.4"></a>
   - [5.4](#blank-lines) Place exactly one blank line between rule sets. Place no blank lines between rules.
-    
+
     ```css
     /* bad */
     h1 {
@@ -236,13 +235,13 @@
     h2 {
       color: Chartreuse;
     }
-    ``` 
+    ```
 
   <a name="indent"></a><a name="5.5"></a>
   - [5.5](#indent) Indent exactly one time for rules. Do not indent anywhere else in CSS.
-    
+
     ```css
-    /* bad */ 
+    /* bad */
     div {
      font-size: 18pt;
       color: #222222;
@@ -259,7 +258,7 @@
     ```
 
     ```css
-    /* good */ 
+    /* good */
     div {
       font-size: 18pt;
       color: #222222;

@@ -1,3 +1,9 @@
+---
+layout: page
+title: JavaScript
+permalink: /javascript/
+---
+
 # CSE 154 Code Quality Guide(JavaScript) {
 
 *A mostly reasonable approach to JavaScript adapted from [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript) for [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
@@ -23,13 +29,6 @@
   1. [Module Pattern & Strict Mode](#module-pattern--strict-mode)
   1. [Good JavaScript Design](#good-javascript-design)
 
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [PHP](PHP.md)
-  1. [SQL](SQL.md)
-
 ## Variables
 
   <a name="variables-prefer-let"></a><a name="1.1"></a>
@@ -49,7 +48,7 @@
 
    <a name="variables-const"></a><a name="1.2"></a>
   - [1.2](#variables-const) Use `const` for all of your constants with [`UPPERCASE_NAMING`](#naming-camelCase). Use this for any "magic" values appearing in your code and declare them at the top of the module pattern. In general, you should avoid having "random" numbers and strings appear in your code, especially when there is a clear name you could give them.
-    
+
     > Why? Not only does `const` prevent a variable from being reassigned, but constants can also make your code much easier to read. As a note here, it is very common in industry to always prefer const over let when possible. There are benefits to this approach, but we are going to stick to only using const at the module-global level in this class.
 
     ```javascript
@@ -196,7 +195,7 @@
 **[⬆ back to top](#table-of-contents)**
 
 ## Functions
-  
+
   <a name="long-functions"></a><a name="3.1"></a>
   - [3.1](#long-functions-last) If you have a single function that is very long, break it apart into smaller sub-functions. The definition of "very long" is vague, but often a function longer than 20-30 lines is pushing it.
 
@@ -241,7 +240,7 @@
     ```
 
     **NOTE**: This does not mean that there is no place for anonymous functions and arrow functions. For example, when passing simple callback functions as parameters, it can often be clear and concise to use these. Generally arrow functions are preferred, but either is fine in this course.
- 
+
     ```javascript
     // good
     let arr = [1, 2, 3, 4, 5];
@@ -514,7 +513,7 @@
     function foo(num) {
       if (num === 1) {
         return;
-      } 
+      }
       console.log(num + 5);
     }
 
@@ -795,7 +794,7 @@
 
     **NOTE**: The description of your function should describe what the function does, not how it does it. The most important thing is that your comments should describe how the state of the page (and potentially module-global variables) will change by calling the function. Think about how to explain the purpose of the function without implementation details. A good rule of thumb is to never mention processes such as "looping over" things.
 
-    **NOTE**: If there are no parameters or no return value, there should still be a descriptive comment, but you can omit `@param` and `@return` annotations.
+    **NOTE**: If there are no parameters or no return value, there is no need for JSDoc annotations.
 
       ```javascript
       // Single-line JSDoc comment:
@@ -918,7 +917,7 @@
     ```
 
   <a name="whitespace-around-keywords"></a><a name="12.2"></a>
-  - [12.2](#whitespace-around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations. 
+  - [12.2](#whitespace-around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations.
 
     ```javascript
     // bad
@@ -1051,7 +1050,7 @@
 
   <a name="module-pattern"></a><a name="14.1"></a>
   - [14.1](#module-pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
-    
+
     > Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file's function would override the first one's (since HTML is loaded from top to bottom).
 
     See example in [14.2](#use-strict)
@@ -1073,7 +1072,7 @@
 
   <a name="unobtrusive-js"></a><a name="15.1"></a>
   - [15.1](#unobtrusive-js) Never use element.innerHTML for anything other than clearing containers. Prefer createElement().
-    
+
     ```javascript
     // bad
     div.innerHTML = '<img src="dog.jpg" alt="boundless pupper" />';
@@ -1089,7 +1088,7 @@
     ```  
 
   <a name="minimize-redundancy"></a><a name="15.2"></a>
-  - [15.2](#minimize-redundancy) Minimize redundant code as much as possible. 
+  - [15.2](#minimize-redundancy) Minimize redundant code as much as possible.
 
     **TIP**: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
 

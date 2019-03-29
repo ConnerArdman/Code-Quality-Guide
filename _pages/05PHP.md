@@ -1,3 +1,9 @@
+---
+layout: page
+title: PHP
+permalink: /php/
+---
+
 # CSE 154 Code Quality Guide(PHP) {
 
 *A largely logical PHP code quality guide for [CSE 154](https:#cs.washington.edu/154) at the University of Washington.*
@@ -17,13 +23,6 @@
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Good PHP Design](#good-php-design)
-
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [JavaScript](javascript.md)
-  1. [SQL](SQL.md)
 
 ## Variables
 
@@ -248,7 +247,6 @@
     $foo = $a && $b < 0 || $c > 0 || $d + 1 === 0;
 
     # bad
-    # note "**" is the exponentiation operator
     $bar = $a ** $b - 5 % $d;
 
     # bad
@@ -334,7 +332,7 @@
     function foo($num) {
       if ($num === 1) {
         return;
-      } 
+      }
       echo $num + 5;
     }
 
@@ -655,11 +653,11 @@
       Name: Roger Forgetful
       Section : CSE 154 ZZ
       Date: 17th March, 20
-     
+
       This file provides back-end support for the puppy API.
       Based on the input parameters supplied using GET requests,
       the API outputs different details about puppies in different formats.
-    
+
       Web Service details:
       =====================================================================
       Required GET parameters:
@@ -707,7 +705,7 @@
     ```
 
   <a name="whitespace-around-keywords"></a><a name="10.2"></a>
-  - [10.2](#whitespace-around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations. 
+  - [10.2](#whitespace-around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations.
 
     ```php
     # bad
@@ -838,7 +836,7 @@
 ## Good PHP Design
 
   <a name="minimize-redundancy"></a><a name="11.1"></a>
-  - [11.1](#minimize-redundancy) Minimize redundant code as much as possible. 
+  - [11.1](#minimize-redundancy) Minimize redundant code as much as possible.
 
     **TIP**: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
 
@@ -901,12 +899,12 @@
 
   <a name="use-die"></a><a name="10.3"></a>
   - [10.3](#use-die) Use `die()` instead of `print` or `echo` when outputting errors.
-    
+
     > Why? `die()` kills the program, which is important after an error has occured. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.
 
   <a name="check-isset"></a><a name="10.4"></a>
   - [10.4](#check-isset) Always check if GET and POST parameters were set before accessing them.
-    
+
     ```php
     # bad
     $mode = $_GET["mode"];
@@ -938,8 +936,8 @@
     ```
 
   <a name="min-db-calls"></a><a name="10.6"></a>
-  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in will result in needing to make a database call.
-    
+  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in win result in needing to make a database call.
+
     > Why? Calling the database can be slow and error prone, so we should avoid doing so until necessary.
 
   <a name="functions-top"></a><a name="10.7"></a>

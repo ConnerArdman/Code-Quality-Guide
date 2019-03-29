@@ -1,3 +1,9 @@
+---
+layout: page
+title: HTML
+permalink: /html/
+---
+
 # CSE 154 Code Quality Guide(HTML) {
 
 *A somewhat sensible set of HTML code quality guidelines for [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
@@ -14,19 +20,12 @@
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Good HTML Design](#good-html-design)
 
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [CSS](CSS.md)
-  1. [JavaScript](javascript.md)
-  1. [PHP](PHP.md)
-  1. [SQL](SQL.md)
-
 ## Classes & IDs
 
   <a name="unused-classes"></a><a name="1.1"></a>
   - [1.1](#unused-classes) Only add classes and IDs to your HTML when they are needed by CSS and/or JavaScript for selecting elements.
 
-    > Why? IDs and classes don't provide any semantic meaning to the HTML, so they just clutter the HTML if they are not being used by CSS or JavaScript.
+    > Why? IDs and classes don't provide any semantic meaning to the HTML, so they are pointless if they are not being used by CSS or JavaScript.
 
   <a name="prefer-context"></a><a name="1.2"></a>
   - [1.2](#prefer-context) Prefer context selectors over adding classes when styling elements all in the same context. For example, to change fonts of all the paragraphs in `<main>`, use a context selector rather than applying the same class to all of the paragraphs.
@@ -35,10 +34,6 @@
 
     ```html
     <!-- bad -->
-    <!-- 
-      in CSS, the "course" class could easily be selected 
-      with the context selector "ul li".
-    -->
     <ul>
       <li class="course">CSE 154</li>
       <li class="course">CSE 160</li>
@@ -88,10 +83,10 @@
 
     ```html
     <!-- bad -->
-    <p class="pd">...</p>
+    <div class="c">...</div>
 
     <!-- good -->
-    <p class="project-description">...</p>
+    <div class="image-container">...</div>
     ```
 
   <a name="lowercase-naming"></a><a name="2.2"></a>
@@ -137,8 +132,8 @@
 ## Semantic Tags
 
   <a name="prefer-semantic"></a><a name="3.1"></a>
-  - [3.1](#prefer-semantic) Always prefer semantic tags (such as `<section>`) over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
-    
+  - [3.1](#prefer-semantic) Always prefer semantic tags over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
+
     > Why? Semantic tags make our code more accessible, particularly to screen readers. `<div>` and `<span>` are ignored for anything other than grouping, but tags such as `<main>`, `<article>` and `<section>` carry semantic meaning and help the screen reader interpret the page for a user.
 
     **TIP**: Semantic tags can be confusing to decide between. It can be helpful to wireframe your site and try to verbally describe each portion of your page. Here is a [great resource on the usage of these tags](https://www.semrush.com/blog/semantic-html5-guide/) as well as a [list of semantic tags](https://www.w3schools.com/html/html5_semantic_elements.asp).
@@ -190,10 +185,10 @@
     ```
 
   <a name="tables-layout"></a><a name="3.4"></a>
-  - [3.4](#tables-layout) Do not use `<table>` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
+  - [3.4](#tables-layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
 
   <a name="blockquote"></a><a name="3.5"></a>
-  - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content.
+  - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content to surround the `<p>`.
 
     ```html
     <!-- bad -->
@@ -212,7 +207,7 @@
 ## Self Closing Tags
 
   <a name="self-closing"></a><a name="4.1"></a>
-  - [4.1](#self-closing) You may choose to omit the `/` at the end of self-closing tags, but be consistent with all tags in your file, including those in the `<head>` as well as `<br>` and `<hr>` tags.
+  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self closing tags, but be consistent with all tags in your file, including those in the `head` as well as `br` and `hr` tags.
 
     ```html
     <!-- bad -->
@@ -220,7 +215,6 @@
     <br>
 
     <!-- good -->
-    <!-- note that there is a space before the "/" -->
     <img src="foo.jpg" alt="foo description" />
     <br />
 
@@ -234,17 +228,15 @@
 ## Comments
 
   <a name="comments-inline"></a><a name="5.1"></a>
-  - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs). You should also add comments for any citations, such as images found on the web.
-    
+  - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
+
     ```html
     <!-- bad -->
     <!-- main section -->
     <main>
-      <div>
-        <img src="zoomer.jpg" alt="dog zooming through poles">
-      </div>
+      ...
 
-      <!-- Game board to be populated by JavaScript -->
+      <!- Game board to be populated by JavaScript -->
       <div></div>
     </main>
 
@@ -257,15 +249,9 @@
     ```html
     <!-- good -->
     <main>
-      <div>
-        <!-- 
-          image from dog.ceo, the open source dog image API
-          https://images.dog.ceo/breeds/labrador/n02099712_3868.jpg
-        -->
-        <img src="zoomer.jpg" alt="dog zooming through poles">
-      </div>
+      ...
 
-      <!-- Game board to be populated by JavaScript -->
+      <!- Game board to be populated by JavaScript -->
       <div></div>
     </main>
 
@@ -280,7 +266,7 @@
 
   <a name="whitespace-blocks"></a><a name="6.1"></a>
   - [6.1](#whitespace-blocks) Go to a new line before each block element. Never place more than one block element on a single line.
-    
+
     **NOTE**: Images are technically "inline-block" elements, but we will apply the same indentation rules to them. Place images on their own lines without block elements.
 
     ```html
@@ -300,13 +286,9 @@
     <!-- bad -->
     <body>
     <main>
-      <section class="foo">
-        <ul>
-          <li>baz bar</li>
-          <li>bar baz</li>
-        </ul>
+      <div class="foo">
       <p>bar</p>
-      </section>
+      <div>
     </main>
     <footer>
       <p>baz</p>
@@ -316,13 +298,9 @@
     <!-- good -->
     <body>
       <main>
-        <section class="foo">
-          <ul>
-            <li>baz bar</li>
-            <li>bar baz</li>
-          </ul>
+        <div class="foo">
           <p>bar</p>
-        </section>
+        <div>
       </main>
       <footer>
         <p>baz</p>
@@ -335,10 +313,10 @@
 
     ```html
     <!-- bad -->
-    <article class = "foo">
+    <div class = "foo">
 
     <!-- good -->
-    <article class="foo">
+    <div class="foo">
     ```
 
   <a name="extra-space"></a><a name="6.4"></a>
@@ -362,7 +340,7 @@
   - [7.1](#alt-attribute) Always use `alt` attributes for images.
 
     > Why? Similar to semantic tags, alt attributes make our code more accessible to screen readers. Rather than just telling a user that there is an image, it can mention what is in the actual image. This is also useful when the image fails to load to give a better experience to users by displaying the text.
-    
+
     ```html
     <!-- bad -->
     <img src="tree.jpg">
@@ -374,8 +352,8 @@
     <a name="alt-attribute"></a><a name="7.2"></a>
   - [7.2](#alt-attribute) Do not mention "image of" or anything similar in alt attribute text.
 
-    > Why? This is mostly a redundancy thing. By using an `<img>`, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as "image of image of fluffy dog"!
-    
+    > Why? This is mostly a redundancy thing. By using an image tag, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as "image of image of fluffy dog"!
+
     ```html
     <!-- bad -->
     <img src="dog.jpg" alt="image of fluffy dog">
@@ -385,10 +363,10 @@
     ```
 
   <a name="redundant-tags"></a><a name="7.3"></a>
-  - [7.3](#redundant-tags) Never have two tags grouping the same content unless there is a specific semantic reason for it or it is necessary for styling. 
+  - [7.3](#redundant-tags) Never have two tags grouping the same content unless there is a specific semantic reason for it or it is necessary for styling.
 
-    **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `<div>` and `<article>`) should wrap the same content.
-    
+    **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `div` and `article`) should wrap the same content.
+
     ```html
     <!-- bad -->
     <main>
@@ -400,12 +378,7 @@
     <!-- good -->
     <main>
       ...
-    </main>
-
-     <!-- also good -->
-    <article>
-      ...
-    </article>   
+    </main>    
     ```
 
   <a name="js-in-html"></a><a name="7.4"></a>
@@ -416,7 +389,7 @@
   <a name="script-in-head"></a><a name="7.5"></a>
   - [7.5](#script-in-head) Always put `<script>` tags in the head, not the body.
 
-      > Why? The body represents the actual content of the page, so it is semantically incorrect to put script tags there. That said, it can be common in industry to put scripts at the bottom of the body. The browser reads HTML from the top to the bottom, so if the script tag is last, then the browser will not parse the JavaScript file until the page has loaded. While this technique eliminates the need for `window.addEventListener('load', init)`, the relatively-small scope of the code you are working on in CSE 154 more clearly motivates the `<script>` in the `<head>`, and any other methods of linking to JS are subject to being considered poor code quality.
+      > Why? The body represents the actual content of the page, so it is semantically incorrect to put script tags there. That said, it can be common in industry to put scripts at the bottom of the body. The browser reads HTML from the top to the bottom, so if the script tag is last, then the browser will not parse the JavaScript file until the page has loaded. While this technique eliminates the need for 'window.addEventListener('load', init)`, we will consider it poor code quality in this course.
 
   <a name="br-br"></a><a name="7.6"></a>
   - [7.6](#br-br) Never use consecutive `<br>` tags. Additionally, do not use them to create extra margin between paragraphs.
@@ -460,8 +433,6 @@
 
   <a name="font-import"></a><a name="7.8"></a>
   - [7.8](#font-import) Never import fonts directly in HTML. Prefer `@import` statements in CSS.
-
-      **NOTE**: Only fonts that are used/referenced later in the CSS should be imported.
 
       > Why? Since fonts are stylistic information about the page, we should always prefer to keep anything related to them in our CSS files.
 

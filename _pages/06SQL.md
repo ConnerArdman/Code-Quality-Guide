@@ -1,6 +1,12 @@
+---
+layout: page
+title: SQL
+permalink: /sql/
+---
+
 # CSE 154 Code Quality Guide(SQL) {
 
-*SELECT code quality FROM guide WHERE class = [CSE 154](https://cs.washington.edu/154) AND university = `University of Washington`*
+*SELECT code quality FROM guide WHERE class = [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
 
 ## Table of Contents
 
@@ -8,19 +14,12 @@
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
 
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [JavaScript](javascript.md)
-  1. [PHP](PHP.md)
-
 ## Letter Casing
 
   <a name="uppercase-naming"></a><a name="1.1"></a>
   - [1.1](#uppercase-naming) SQL kewords such as `SELECT`, `FROM` and `AUTO INCREMENT` should be capitalized.
 
-    > Why? Aside from being a standard, using all capital letters makes it easier to quickly read your code. 
+    > Why? Aside from being a standard, using all capital letters makes it easier to quickly read your code.
 
     ```sql
     -- bad
@@ -60,48 +59,48 @@
 
     -- good
     SELECT name, descripion
-    FROM courses
+    FORM courses
     WHERE dept = 'CSE';
     ```
 
   <a name="consistent-indentation"></a><a name="3.2"></a>
   - [3.2](#consistent-indentation) Keep indendation consistent. There are no clear cut rules on indenation, but keep it consistent and readable.
-  
+
     ```sql
     -- bad
     SELECT DISTINCT c.name
-      FROM courses c, students s1, students s2, grades g1, grades g2 
-        WHERE g1.course_id = c.id 
-        AND g1.student_id = s1.id 
-          AND g2.course_id = c.id 
-          AND g2.student_id = s2.id 
-        AND s1.name = 'Bart' 
+      FROM courses c, students s1, students s2, grades g1, grades g2
+        WHERE g1.course_id = c.id
+        AND g1.student_id = s1.id
+          AND g2.course_id = c.id
+          AND g2.student_id = s2.id
+        AND s1.name = 'Bart'
         AND s2.name = 'Lisa';
 
     -- good
     SELECT DISTINCT c.name
-    FROM courses c, students s1, students s2, grades g1, grades g2 
-    WHERE g1.course_id = c.id AND g1.student_id = s1.id 
-      AND g2.course_id = c.id AND g2.student_id = s2.id 
+    FROM courses c, students s1, students s2, grades g1, grades g2
+    WHERE g1.course_id = c.id AND g1.student_id = s1.id
+      AND g2.course_id = c.id AND g2.student_id = s2.id
       AND s1.name = 'Bart' AND s2.name = 'Lisa';
 
     -- good
     SELECT DISTINCT c.name
-    FROM courses c, students s1, students s2, grades g1, grades g2 
+    FROM courses c, students s1, students s2, grades g1, grades g2
     WHERE g1.course_id = c.id
-    AND g1.student_id = s1.id 
+    AND g1.student_id = s1.id
     AND g2.course_id = c.id
-    AND g2.student_id = s2.id 
+    AND g2.student_id = s2.id
     AND s1.name = 'Bart'
     AND s2.name = 'Lisa';
 
     -- good
     SELECT DISTINCT c.name
-    FROM courses c, students s1, students s2, grades g1, grades g2 
+    FROM courses c, students s1, students s2, grades g1, grades g2
     WHERE g1.course_id = c.id
-      AND g1.student_id = s1.id 
+      AND g1.student_id = s1.id
       AND g2.course_id = c.id
-      AND g2.student_id = s2.id 
+      AND g2.student_id = s2.id
       AND s1.name = 'Bart'
       AND s2.name = 'Lisa';
     ```
@@ -120,11 +119,11 @@
 
     -- good
     CREATE TABLE dogbreeds (
-      breed_id INT AUTO INCREMENT, 
-      breed_name VARCHAR(20), 
+      breed_id INT AUTO INCREMENT,
+      breed_name VARCHAR(20),
       PRIMARY KEY (breed_id)
     );
-     
+
     CREATE TABLE doggies (
       dog_id INT AUTO INCREMENT,
       dog_name VARCHAR(20),
