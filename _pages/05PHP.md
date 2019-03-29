@@ -163,7 +163,7 @@ permalink: /php/
     ```
 
   <a name="lowercase-functions"></a><a name="3.3"></a>
-  - [3.3](#lowercase-functions) While PHP is mostly case-insensative, always use lowercase to reference built in functions.
+  - [3.3](#lowercase-functions) While PHP is mostly case-insensitive, always use lowercase to reference built in functions.
 
 
 **[⬆ back to top](#table-of-contents)**
@@ -839,7 +839,7 @@ permalink: /php/
   <a name="minimize-redundancy"></a><a name="11.1"></a>
   - [11.1](#minimize-redundancy) Minimize redundant code as much as possible.
 
-    **TIP**: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
+    **TIP**: If the same or extremely similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
 
     **NOTE**: It will be common practice to create a `common.php` file containing code needed in multiple files.
 
@@ -901,7 +901,7 @@ permalink: /php/
   <a name="use-die"></a><a name="10.3"></a>
   - [10.3](#use-die) Use `die()` instead of `print` or `echo` when outputting errors.
 
-    > Why? `die()` kills the program, which is important after an error has occured. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.
+    > Why? `die()` kills the program, which is important after an error has occurred. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.
 
   <a name="check-isset"></a><a name="10.4"></a>
   - [10.4](#check-isset) Always check if GET and POST parameters were set before accessing them.

@@ -308,7 +308,7 @@ permalink: /javascript/
   <a name="comparison-eqeqeq"></a><a name="5.1"></a>
   - [5.1](#comparison-eqeqeq) Use `===` and `!==` over `==` and `!=`.
 
-    > What's the difference? `===` performs a "strict" equality check, meaning that it checks value and type. `==` only checks for value. For example, the string `"0" == 0` is `true`, but `"0" === 0` is `false`. Only using `===` is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, [here](https://dorey.github.io/JavaScript-Equality-Table/) is a great table explaning the difference.
+    > What's the difference? `===` performs a "strict" equality check, meaning that it checks value and type. `==` only checks for value. For example, the string `"0" == 0` is `true`, but `"0" === 0` is `false`. Only using `===` is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, [here](https://dorey.github.io/JavaScript-Equality-Table/) is a great table explaining the difference.
 
     ```javascript
     // bad
@@ -1090,7 +1090,7 @@ permalink: /javascript/
   <a name="minimize-redundancy"></a><a name="15.2"></a>
   - [15.2](#minimize-redundancy) Minimize redundant code as much as possible.
 
-    **TIP**: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
+    **TIP**: If the same or extremely similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
 
     ```javascript
     // bad
@@ -1119,7 +1119,7 @@ permalink: /javascript/
     ```
 
     <a name="no-css"></a><a name="15.3"></a>
-  - [15.3](#no-css) Do not include any CSS styles in JavaScript unless absoolutely necessary. Prefer adding and removing classes.
+  - [15.3](#no-css) Do not include any CSS styles in JavaScript unless absolutely necessary. Prefer adding and removing classes.
 
     **TIP**: A good rule of thumb is that if you can make a CSS class to easily achieve your desired output, you should do that instead. Styling in JavaScript should only occur when adding dynamic styles (such as a random color) that cannot be predetermined with CSS classes.
 

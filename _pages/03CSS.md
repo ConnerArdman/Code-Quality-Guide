@@ -84,7 +84,7 @@ permalink: /css/
   <a name="redundant-rules"></a><a name="2.1"></a>
   - [2.1](#redundant-rules) Avoid writing redundant rules if they appear for the same reason. For example, if you want to make all headings red, use a single rule. However, if two unrelated elements are set to have `5px` margin, there is no need to factor that out. The general rule here is only group them together if changing one would always mean wanting to change both.
 
-    > Why? The goal here is to create readable and scalable CSS. In the example given, if we had a seperate rule for each heading it would be confusing to read. This way, it is very clear that all headings have this same color. Additionally, if we ever decide to change the color in the future, we only need to change it in one place. However, in the case of unrelated styles, it could actually make our code harder to update in the future!
+    > Why? The goal here is to create readable and scalable CSS. In the example given, if we had a separate rule for each heading it would be confusing to read. This way, it is very clear that all headings have this same color. Additionally, if we ever decide to change the color in the future, we only need to change it in one place. However, in the case of unrelated styles, it could actually make our code harder to update in the future!
 
     ```css
     /* bad */
@@ -281,7 +281,7 @@ permalink: /css/
   <a name="never-star"></a><a name="6.1"></a>
   - [6.1](#never-star) Never apply styles to all elements using the `*` or `html` selectors. Prefer styling `body`.
 
-    **NOTE**: Not all elements inherit from their parent, so you might need to use a comma seperated selector rather than just `body`. For example, `button` elements do not inherit font information by default.
+    **NOTE**: Not all elements inherit from their parent, so you might need to use a comma separated selector rather than just `body`. For example, `button` elements do not inherit font information by default.
 
     > Why? Using the `*` selector applies styles to every single element, even the ones that don't need the style such as those in the `head`. Similarly, `html` contains the `head`, where we don't want to apply styles as they have no meaning. As a note, there are actually some very specific cases where styling the `html` element is the only solution, but you should not run into them in this class.
 
