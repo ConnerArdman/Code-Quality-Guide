@@ -1,6 +1,6 @@
 # CSE 154 Code Quality Guide(SQL) {
 
-*SELECT code quality FROM guide WHERE class = [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
+*SELECT code quality FROM guide WHERE class = [CSE 154](https://cs.washington.edu/154) AND university = `University of Washington`*
 
 ## Table of Contents
 
