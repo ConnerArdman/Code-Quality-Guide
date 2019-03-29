@@ -94,7 +94,7 @@ permalink: /html/
     ```
 
   <a name="lowercase-naming"></a><a name="2.2"></a>
-  - [2.2](#lowercase-naming) Use all lowercase names for classes and IDs. You can choose to seperate words either by dashes or with no seperation mark. Either is fine, but make sure to be consistent.
+  - [2.2](#lowercase-naming) Use all lowercase names for classes and IDs. You can choose to separate words either by dashes or with no separation mark. Either is fine, but make sure to be consistent.
 
     ```html
     <!-- bad -->
@@ -410,7 +410,7 @@ permalink: /html/
   <a name="js-in-html"></a><a name="7.4"></a>
   - [7.4](#js-in-html) Do not use the `<script>` tag except to link to an external `.js` file. Do not use the `<style>` tag, and do not include any style related attributes in your HTML. Do all styling in CSS.
 
-      > Why? It is important to keep content, style and behavior seperate. This keeps our code modular and easy to interpret. Since HTML represents content, there should be no style or behavior information in it.
+      > Why? It is important to keep content, style and behavior separate. This keeps our code modular and easy to interpret. Since HTML represents content, there should be no style or behavior information in it.
 
   <a name="script-in-head"></a><a name="7.5"></a>
   - [7.5](#script-in-head) Always put `<script>` tags in the head, not the body.

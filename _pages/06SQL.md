@@ -17,7 +17,7 @@ permalink: /sql/
 ## Letter Casing
 
   <a name="uppercase-naming"></a><a name="1.1"></a>
-  - [1.1](#uppercase-naming) SQL kewords such as `SELECT`, `FROM` and `AUTO INCREMENT` should be capitalized.
+  - [1.1](#uppercase-naming) SQL keywords such as `SELECT`, `FROM` and `AUTO INCREMENT` should be capitalized.
 
     > Why? Aside from being a standard, using all capital letters makes it easier to quickly read your code.
 
@@ -58,13 +58,13 @@ permalink: /sql/
     dept = 'CSE';
 
     -- good
-    SELECT name, descripion
+    SELECT name, description
     FROM courses
     WHERE dept = 'CSE';
     ```
 
   <a name="consistent-indentation"></a><a name="3.2"></a>
-  - [3.2](#consistent-indentation) Keep indendation consistent. There are no clear cut rules on indenation, but keep it consistent and readable.
+  - [3.2](#consistent-indentation) Keep indentation consistent. There are no clear cut rules on indentation, but keep it consistent and readable.
 
     ```sql
     -- bad
