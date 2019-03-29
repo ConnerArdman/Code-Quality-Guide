@@ -1,0 +1,17 @@
+<!-- Navigation Bar -->
+<header class="navbar">
+	<h1>Code Quality Guide</h1>
+	{% for currpage in site.pages %} {% if currpage.title %}
+	{% if page.title == currpage.title %}
+		<a class="active" href="{{ currpage.url | prepend: site.baseurl }}">{{ currpage.title }}</a>
+	{% else %}
+		<a href="{{ currpage.url | prepend: site.baseurl }}">{{ currpage.title }}</a>
+	{% endif %}
+	{% endif %} {% endfor %}
+	<svg id="mobile-dropdown-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#menu-1"></use>
+	</svg>
+	<svg id="mobile-x-icon" width="40" height="40">
+		<use xlink:href="../assets/website-icons.svg#close-1"></use>
+	</svg>
+</header>
