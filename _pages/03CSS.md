@@ -19,6 +19,13 @@ permalink: /css/
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Good CSS Design](#good-css-design)
 
+## Other Guides
+  1. [General Guidelines](README.md)
+  1. [HTML](HTML.md)
+  1. [JavaScript](javascript.md)
+  1. [PHP](PHP.md)
+  1. [SQL](SQL.md)
+
 ## Ordering
 
   <a name="selector-ordering"></a><a name="1.1"></a>

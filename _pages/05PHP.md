@@ -24,6 +24,13 @@ permalink: /php/
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Good PHP Design](#good-php-design)
 
+## Other Guides
+  1. [General Guidelines](README.md)
+  1. [HTML](HTML.md)
+  1. [CSS](CSS.md)
+  1. [JavaScript](javascript.md)
+  1. [SQL](SQL.md)
+
 ## Variables
 
   <a name="no-global"></a><a name="1.1"></a>
@@ -247,6 +254,7 @@ permalink: /php/
     $foo = $a && $b < 0 || $c > 0 || $d + 1 === 0;
 
     # bad
+    # note "**" is the exponentiation operator
     $bar = $a ** $b - 5 % $d;
 
     # bad
@@ -936,7 +944,7 @@ permalink: /php/
     ```
 
   <a name="min-db-calls"></a><a name="10.6"></a>
-  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in win result in needing to make a database call.
+  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in will result in needing to make a database call.
 
     > Why? Calling the database can be slow and error prone, so we should avoid doing so until necessary.
 

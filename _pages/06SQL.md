@@ -6,13 +6,20 @@ permalink: /sql/
 
 # CSE 154 Code Quality Guide(SQL) {
 
-*SELECT code quality FROM guide WHERE class = [CSE 154](https://cs.washington.edu/154) at the University of Washington.*
+*SELECT code quality FROM guide WHERE class = [CSE 154](https://cs.washington.edu/154) AND university = `University of Washington`*
 
 ## Table of Contents
 
   1. [Letter Casing](#naming-conventions)
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
+
+## Other Guides
+  1. [General Guidelines](README.md)
+  1. [HTML](HTML.md)
+  1. [CSS](CSS.md)
+  1. [JavaScript](javascript.md)
+  1. [PHP](PHP.md)
 
 ## Letter Casing
 
@@ -59,7 +66,7 @@ permalink: /sql/
 
     -- good
     SELECT name, descripion
-    FORM courses
+    FROM courses
     WHERE dept = 'CSE';
     ```
 
@@ -115,7 +122,7 @@ permalink: /sql/
     dog_age INT,
     breed_id INT,
     PRIMARY KEY (breed_id)
-    FOREIGN KEY (breed_id) REFERENCES dobreeds(breed_id));
+    FOREIGN KEY (breed_id) REFERENCES dogbreeds(breed_id));
 
     -- good
     CREATE TABLE dogbreeds (
