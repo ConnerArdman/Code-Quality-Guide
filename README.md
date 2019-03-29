@@ -3,6 +3,8 @@
 ## Customizing and Deploying This Guide
 
   1. Clone the Repo.
+  1. Install Ruby and Jekyll if you haven't already.
+    1. `gem install bundler jekyll` after installing Ruby.
   1. Run `jekyll build`. This will create a new directory `_site` with a deployable site. Never directly edit this directory.
     - An example of this is available on the `gh-pages` branch and live [here](https://connerardman.github.io/Code-Quality-Guide/).
     - It might be best to add this directory to a gitignore or to use a "deployment" branch such as `gh-pages`.
