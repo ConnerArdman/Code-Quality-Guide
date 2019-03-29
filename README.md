@@ -121,6 +121,7 @@
 
 ## Contributors
   - [Conner Ardman](mailto:ardmanc@uw.edu)
+  - [CSE 154 Spring 2019 Staff](https://courses.cs.washington.edu/courses/cse154/19sp/)
   - [Original Airbnb Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
