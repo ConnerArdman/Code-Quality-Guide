@@ -8,7 +8,7 @@ permalink: /php/
 
 *A largely logical PHP code quality guide for [CSE 154](https:#cs.washington.edu/154) at the University of Washington.*
 
-**NOTE**: Many of these rules are the same or similar to those in the [JavaScript guide](javascript). The two languages share a similar "C-like" syntax, and thus we have similar code quality guidelines.
+**NOTE**: Many of these rules are the same or similar to those in the [JavaScript guide](../javascript). The two languages share a similar "C-like" syntax, and thus we have similar code quality guidelines.
 
 ## Table of Contents
 
@@ -573,7 +573,7 @@ permalink: /php/
 ## Comments
 
   <a name="comments-function-header"></a><a name="9.1"></a>
-  - [9.1](#comments-function-header) We prefer that you follow the same conventions of function header comments as in [JavaScript](javascript/#comments-function-header) for consistency across our code.
+  - [9.1](#comments-function-header) We prefer that you follow the same conventions of function header comments as in [JavaScript](../javascript/#comments-function-header) for consistency across our code.
 
   <a name="comments-multiline"></a><a name="9.2"></a>
   - [9.2](#comments-multiline) Use `/* ... */` for multi-line comments.
