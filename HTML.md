@@ -26,7 +26,7 @@
   <a name="unused-classes"></a><a name="1.1"></a>
   - [1.1](#unused-classes) Only add classes and IDs to your HTML when they are needed by CSS and/or JavaScript for selecting elements.
 
-    > Why? IDs and classes don't provide any semantic meaning to the HTML, so they are pointless if they are not being used by CSS or JavaScript.
+    > Why? IDs and classes don't provide any semantic meaning to the HTML, so they just clutter the HTML if they are not being used by CSS or JavaScript.
 
   <a name="prefer-context"></a><a name="1.2"></a>
   - [1.2](#prefer-context) Prefer context selectors over adding classes when styling elements all in the same context. For example, to change fonts of all the paragraphs in `<main>`, use a context selector rather than applying the same class to all of the paragraphs.
@@ -84,10 +84,10 @@
 
     ```html
     <!-- bad -->
-    <div class="c">...</div>
+    <p class="pd">...</p>
 
     <!-- good -->
-    <div class="image-container">...</div>
+    <p class="project-description">...</p>
     ```
 
   <a name="lowercase-naming"></a><a name="2.2"></a>
@@ -133,7 +133,7 @@
 ## Semantic Tags
 
   <a name="prefer-semantic"></a><a name="3.1"></a>
-  - [3.1](#prefer-semantic) Always prefer semantic tags over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
+  - [3.1](#prefer-semantic) Always prefer semantic tags (such as `<section>`) over generic ones (such as `<div>` and `<span>`). Never use classes that share a name with a tag, use that tag instead.
     
     > Why? Semantic tags make our code more accessible, particularly to screen readers. `<div>` and `<span>` are ignored for anything other than grouping, but tags such as `<main>`, `<article>` and `<section>` carry semantic meaning and help the screen reader interpret the page for a user.
 
@@ -189,7 +189,7 @@
   - [3.4](#tables-layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
 
   <a name="blockquote"></a><a name="3.5"></a>
-  - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content to surround the `<p>`.
+  - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content.
     ```html
     <!-- bad -->
     <p>bark! bark! bark!</p>
@@ -207,7 +207,7 @@
 ## Self Closing Tags
 
   <a name="self-closing"></a><a name="4.1"></a>
-  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self closing tags, but be consistent with all tags in your file, including those in the `head` as well as `br` and `hr` tags.
+  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self-closing tags, but be consistent with all tags in your file, including those in the `head` as well as `br` and `hr` tags.
 
     ```html
     <!-- bad -->
@@ -228,15 +228,17 @@
 ## Comments
 
   <a name="comments-inline"></a><a name="5.1"></a>
-  - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs).
+  - [5.1](#comments-inline) For the most part, there is no need to comment inline in HTML. Most inline comments just result in restating what the HTML tags say. However, you might want to comment sections of code that are there for JavaScript to interactive with (such as empty divs). You should also add comments for any citations, such as images found on the web.
     
     ```html
     <!-- bad -->
     <!-- main section -->
     <main>
-      ...
+      <div>
+        <img src="zoomer.jpg" alt="dog zooming through poles">
+      </div>
 
-      <!- Game board to be populated by JavaScript -->
+      <!-- Game board to be populated by JavaScript -->
       <div></div>
     </main>
 
@@ -249,9 +251,15 @@
     ```html
     <!-- good -->
     <main>
-      ...
+      <div>
+        <!-- 
+          image from dog.ceo, the open source dog image API
+          https://images.dog.ceo/breeds/labrador/n02099712_3868.jpg
+        -->
+        <img src="zoomer.jpg" alt="dog zooming through poles">
+      </div>
 
-      <!- Game board to be populated by JavaScript -->
+      <!-- Game board to be populated by JavaScript -->
       <div></div>
     </main>
 
