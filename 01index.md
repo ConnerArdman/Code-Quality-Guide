@@ -48,7 +48,7 @@ permalink: /
     If you want to use code found online, ask your TA or instructor first then cite it with permission. Additionally, if you copy
     any lecture code for your creative projects, please cite that as well.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#general-guidelines)**
 
 ## Whitespace & Indentation
 
@@ -107,7 +107,7 @@ permalink: /
     <p>other cool paragraph</p>
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#general-guidelines)**
 
 ## Long Lines
 
@@ -116,13 +116,13 @@ permalink: /
 
     **TIP**: Most IDE's let you set a line on the screen at a certain character limit. Set it to 80 characters and avoid going over that to be extra careful.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#general-guidelines)**
 
 ## Contributors
   - [Conner Ardman](mailto:ardmanc@uw.edu)
   - [CSE 154 Spring 2019 Staff](https://courses.cs.washington.edu/courses/cse154/19sp/)
   - [Original Airbnb Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#general-guidelines)**
 
 # };
