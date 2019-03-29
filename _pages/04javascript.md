@@ -29,13 +29,6 @@ permalink: /javascript/
   1. [Module Pattern & Strict Mode](#module-pattern--strict-mode)
   1. [Good JavaScript Design](#good-javascript-design)
 
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [PHP](PHP.md)
-  1. [SQL](SQL.md)
-
 ## Variables
 
   <a name="variables-prefer-let"></a><a name="1.1"></a>

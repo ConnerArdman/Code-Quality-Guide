@@ -16,13 +16,6 @@ permalink: /
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Long Lines](#long-lines)
 
-## Language Specific Guides
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [JavaScript](javascript.md)
-  1. [PHP](PHP.md)
-  1. [SQL](SQL.md)
-
 ## Comments
 
   <a name="comments-header"></a><a name="1.1"></a>
@@ -30,7 +23,7 @@ permalink: /
 
     **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
 
-    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](PHP.md/#comments-header)
+    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](05PHP.md/#comments-header)
 
     ```html
     <!DOCTYPE html>

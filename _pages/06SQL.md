@@ -14,13 +14,6 @@ permalink: /sql/
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
 
-## Other Guides
-  1. [General Guidelines](README.md)
-  1. [HTML](HTML.md)
-  1. [CSS](CSS.md)
-  1. [JavaScript](javascript.md)
-  1. [PHP](PHP.md)
-
 ## Letter Casing
 
   <a name="uppercase-naming"></a><a name="1.1"></a>
