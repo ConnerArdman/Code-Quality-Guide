@@ -645,6 +645,36 @@
     $active = true;
     ```
 
+  <a name="comments-header"></a><a name="9.4"></a>
+  - [9.4](#comments-header) In addition to the normal file header comment, PHP web services should also include each GET/POST parameter, their types as well as any output that can occur based on the parameters.
+
+    ```php
+    /*
+      Name: Roger Forgetful
+      Section : CSE 154 ZZ
+      Date: 17th March, 20
+     
+      This file provides back-end support for the puppy API.
+      Based on the input parameters supplied using GET requests,
+      the API outputs different details about puppies in different formats.
+    
+      Web Service details:
+      =====================================================================
+      Required GET parameters:
+      - type
+        - if type is "pos", parameter "character" and "name" are also required.
+      Output formats:
+      - Plain text and JSON
+      Output Details:
+      - If the type parameter is passed and set to "pos", the API
+        will take in the name of a puppy and a character and output the position
+        of the character in the string as plain text.
+      - If the type parameter is passed and set to "all", an array of
+        "good bois" is returned as JSON.
+      - Else outputs 400 error message as plain text.
+     */
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Whitespace & Indentation
@@ -872,6 +902,48 @@
     
     > Why? `die()` kills the program, which is important after an error has occured. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.
 
+  <a name="check-isset"></a><a name="10.4"></a>
+  - [10.4](#check-isset) Always check if GET and POST parameters were set before accessing them.
+    
+    ```php
+    # bad
+    $mode = $_GET["mode"];
+
+    # good
+    if (isset($_GET["mode"])) {
+      $mode = $_GET["mode"];
+    }
+    ```
+
+  <a name="use-try-catch"></a><a name="10.5"></a>
+  - [10.5](#use-try-catch) Always use `try` and `catch` when interacting with a database.
+
+    > Why? Accessing a database is a common time for programs to fail, because they become reliant on other systems. Using `try/catch` allows us to handle these errors gracefully and output appropriate information to a user.
+
+    ```php
+    # bad
+    $db = new PDO($ds, $user, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    # good
+    try {
+        $db = new PDO($ds, $user, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch (PDOException $ex) {
+      error_message("Can not connect to the database.\n Error details: $ex \n");
+    }
+    ```
+
+  <a name="min-db-calls"></a><a name="10.6"></a>
+  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in win result in needing to make a database call.
+    
+    > Why? Calling the database can be slow and error prone, so we should avoid doing so until necessary.
+
+  <a name="functions-top"></a><a name="10.7"></a>
+  - [10.7](#functions-top) Place all of your functions at the very top or bottom of your PHP file, never in the middle of the page.
+
+    > Why? Any code outside of functions can be thought of as similar to the "main" function in another programming language. We should keep this code together without it being broken up to keep our code clean and easy to read.
 
 **[⬆ back to top](#table-of-contents)**
 
