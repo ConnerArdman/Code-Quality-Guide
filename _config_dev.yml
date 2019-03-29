@@ -1,6 +1,6 @@
 # Site Settings
 title: Code Quality Guide
-baseurl: ""
+baseurl: "https://connerardman.github.io/Code-Quality-Guide"
 # Build Settings
 include: ['_pages']
 kramdown:
