@@ -400,7 +400,7 @@
     <p><a href="#comparison-eqeqeq">5.1</a> Use <code class="highlighter-rouge">===</code> and <code class="highlighter-rouge">!==</code> over <code class="highlighter-rouge">==</code> and <code class="highlighter-rouge">!=</code>.</p>
 
     <blockquote>
-      <p>What’s the difference? <code class="highlighter-rouge">===</code> performs a “strict” equality check, meaning that it checks value and type. <code class="highlighter-rouge">==</code> only checks for value. For example, the string <code class="highlighter-rouge">"0" == 0</code> is <code class="highlighter-rouge">true</code>, but <code class="highlighter-rouge">"0" === 0</code> is <code class="highlighter-rouge">false</code>. Only using <code class="highlighter-rouge">===</code> is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, <a href="https://dorey.github.io/JavaScript-Equality-Table/">here</a> is a great table explaning the difference.</p>
+      <p>What’s the difference? <code class="highlighter-rouge">===</code> performs a “strict” equality check, meaning that it checks value and type. <code class="highlighter-rouge">==</code> only checks for value. For example, the string <code class="highlighter-rouge">"0" == 0</code> is <code class="highlighter-rouge">true</code>, but <code class="highlighter-rouge">"0" === 0</code> is <code class="highlighter-rouge">false</code>. Only using <code class="highlighter-rouge">===</code> is generally good, because it can prevent unwanted bugs, such as any false values being evaluated as equal to null. For reference, <a href="https://dorey.github.io/JavaScript-Equality-Table/">here</a> is a great table explaining the difference.</p>
     </blockquote>
 
     <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
@@ -1267,7 +1267,7 @@
   <li>
     <p><a href="#minimize-redundancy">15.2</a> Minimize redundant code as much as possible.</p>
 
-    <p><strong>TIP</strong>: If the same or extremly similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!</p>
+    <p><strong>TIP</strong>: If the same or extremely similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!</p>
 
     <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// bad</span>
 <span class="nx">foo</span><span class="p">();</span>
@@ -1296,7 +1296,7 @@
     <p><a name="no-css"></a><a name="15.3"></a></p>
   </li>
   <li>
-    <p><a href="#no-css">15.3</a> Do not include any CSS styles in JavaScript unless absoolutely necessary. Prefer adding and removing classes.</p>
+    <p><a href="#no-css">15.3</a> Do not include any CSS styles in JavaScript unless absolutely necessary. Prefer adding and removing classes.</p>
 
     <p><strong>TIP</strong>: A good rule of thumb is that if you can make a CSS class to easily achieve your desired output, you should do that instead. Styling in JavaScript should only occur when adding dynamic styles (such as a random color) that cannot be predetermined with CSS classes.</p>
 
