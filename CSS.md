@@ -100,7 +100,11 @@
       color: red;
     }
 
-    #dog-image, nav {
+    #dog-image {
+      margin-bottom: 5px;
+    }
+
+    nav {
       margin-bottom: 5px;
     }
     ```
