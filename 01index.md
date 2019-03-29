@@ -23,7 +23,7 @@ permalink: /
 
     **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
 
-    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](05PHP.md/#comments-header)
+    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](php/#comments-header)
 
     ```html
     <!DOCTYPE html>
