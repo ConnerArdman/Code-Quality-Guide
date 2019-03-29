@@ -10,11 +10,18 @@ permalink: /
 
 > Questions about the guide? We are always looking to improve our resources, feel free to reach out to [Conner](mailto:ardmanc@uw.edu) with any questions or concerns!
 
-## Table of Contents
+## General Guidelines
 
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Long Lines](#long-lines)
+
+## Language Specific Guides
+  1. [HTML](HTML.md)
+  1. [CSS](CSS.md)
+  1. [JavaScript](javascript.md)
+  1. [PHP](PHP.md)
+  1. [SQL](SQL.md)
 
 ## Comments
 
@@ -23,9 +30,10 @@ permalink: /
 
     **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
 
-    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output!
+    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](PHP.md/#comments-header)
 
     ```html
+    <!DOCTYPE html>
     <!--
       Name: Mowgli Hovik
       Date: 01.01.2019
@@ -40,12 +48,12 @@ permalink: /
   <a name="comments-sources"></a><a name="1.2"></a>
   - [1.2](#comments-sources) Always cite sources in your comments if you use anything found online.
 
-    **NOTE**: It is preferred to cite sources in the HTML so that your users actually see it!
+    **NOTE**: It is preferred to cite sources in the text content of the HTML so that your users actually see it!
 
     **BIG NOTE**: You should not be citing any sources on homework assignments as everything should be
-    your own work or based on in class code (no need to cite our examples unless told otherwise). Feel free
-    to use outside artwork, quotes, etc. in your creative projects with proper citations. If you want to use some
-    code found online, ask your TA or instructor first then cite it with permission.
+    your own work. Feel free to use outside artwork, quotes, etc. in your creative projects with proper citations.
+    If you want to use code found online, ask your TA or instructor first then cite it with permission. Additionally, if you copy
+    any lecture code for your creative projects, please cite that as well.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -61,8 +69,8 @@ permalink: /
 
     ```javascript
     // bad
-    funciton myFunc() {
-      if (myBool) {
+    function myFunc(foo) {
+      if (foo === 'baz') {
         return true;
       }
 
@@ -78,8 +86,8 @@ permalink: /
 
     ```javascript
     // good
-    funciton myFunc() {
-      if (myBool) {
+    function myFunc(foo) {
+      if (foo === 'baz') {
         return true;
       }
 
@@ -119,6 +127,7 @@ permalink: /
 
 ## Contributors
   - [Conner Ardman](mailto:ardmanc@uw.edu)
+  - [CSE 154 Spring 2019 Staff](https://courses.cs.washington.edu/courses/cse154/19sp/)
   - [Original Airbnb Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
 **[⬆ back to top](#table-of-contents)**
