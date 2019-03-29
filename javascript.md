@@ -28,6 +28,7 @@
   1. [HTML](HTML.md)
   1. [CSS](CSS.md)
   1. [PHP](PHP.md)
+  1. [SQL](SQL.md)
 
 ## Variables
 

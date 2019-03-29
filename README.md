@@ -15,6 +15,7 @@
   1. [CSS](CSS.md)
   1. [JavaScript](javascript.md)
   1. [PHP](PHP.md)
+  1. [SQL](SQL.md)
 
 ## Comments
 

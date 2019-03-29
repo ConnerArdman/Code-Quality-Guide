@@ -18,6 +18,7 @@
   1. [HTML](HTML.md)
   1. [JavaScript](javascript.md)
   1. [PHP](PHP.md)
+  1. [SQL](SQL.md)
 
 ## Ordering
 
