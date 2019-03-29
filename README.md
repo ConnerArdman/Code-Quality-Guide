@@ -24,7 +24,7 @@
 
     **NOTE**: In HTML, this comment must go after the `<DOCTYPE html>`. In PHP it must go after the `<?php`.
 
-    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output!
+    **NOTE**: In PHP, make sure to mention all of the GET/POST parameters that your webservice takes in as well as its output! See example in the [PHP guide](PHP.md/#comments-header)
 
     ```html
     <!--
