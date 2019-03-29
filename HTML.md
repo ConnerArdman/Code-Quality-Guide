@@ -186,10 +186,11 @@
     ```
 
   <a name="tables-layout"></a><a name="3.4"></a>
-  - [3.4](#tables-layout) Do not use `table` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
+  - [3.4](#tables-layout) Do not use `<table>` for layout purposes. Tables are okay to use if they are semantically appropriate, but CSS should be used to achieve layout.
 
   <a name="blockquote"></a><a name="3.5"></a>
   - [3.5](#blockquote) Use `<blockquote>` and `<cite>` when quoting content.
+
     ```html
     <!-- bad -->
     <p>bark! bark! bark!</p>
@@ -207,7 +208,7 @@
 ## Self Closing Tags
 
   <a name="self-closing"></a><a name="4.1"></a>
-  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self-closing tags, but be consistent with all tags in your file, including those in the `head` as well as `br` and `hr` tags.
+  - [4.1](#self-closing) You may choose to omit the ` /` at the end of self-closing tags, but be consistent with all tags in your file, including those in the `<head>` as well as `<br>` and `<hr>` tags.
 
     ```html
     <!-- bad -->
@@ -294,9 +295,13 @@
     <!-- bad -->
     <body>
     <main>
-      <div class="foo">
+      <section class="foo">
+        <ul>
+          <li>baz bar</li>
+          <li>bar baz</li>
+        </ul>
       <p>bar</p>
-      <div>
+      </section>
     </main>
     <footer>
       <p>baz</p>
@@ -306,9 +311,13 @@
     <!-- good -->
     <body>
       <main>
-        <div class="foo">
+        <section class="foo">
+          <ul>
+            <li>baz bar</li>
+            <li>bar baz</li>
+          </ul>
           <p>bar</p>
-        <div>
+        </section>
       </main>
       <footer>
         <p>baz</p>
@@ -321,10 +330,10 @@
 
     ```html
     <!-- bad -->
-    <div class = "foo">
+    <article class = "foo">
 
     <!-- good -->
-    <div class="foo">
+    <article class="foo">
     ```
 
   <a name="extra-space"></a><a name="6.4"></a>
@@ -360,7 +369,7 @@
     <a name="alt-attribute"></a><a name="7.2"></a>
   - [7.2](#alt-attribute) Do not mention "image of" or anything similar in alt attribute text.
 
-    > Why? This is mostly a redundancy thing. By using an image tag, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as "image of image of fluffy dog"!
+    > Why? This is mostly a redundancy thing. By using an `<img>`, you have already informed screen readers and browsers that there is an image. Some screen readers my even read the below example as "image of image of fluffy dog"!
     
     ```html
     <!-- bad -->
@@ -373,7 +382,7 @@
   <a name="redundant-tags"></a><a name="7.3"></a>
   - [7.3](#redundant-tags) Never have two tags grouping the same content unless there is a specific semantic reason for it or it is necessary for styling. 
 
-    **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `div` and `article`) should wrap the same content.
+    **NOTE**: These cases are rare, and there is usually a solution that does not require redundant tags. There is almost never a time when two grouping tags (such as `<div>` and `<article>`) should wrap the same content.
     
     ```html
     <!-- bad -->
@@ -386,7 +395,12 @@
     <!-- good -->
     <main>
       ...
-    </main>    
+    </main>
+
+     <!-- also good -->
+    <article>
+      ...
+    </article>   
     ```
 
   <a name="js-in-html"></a><a name="7.4"></a>
@@ -397,7 +411,7 @@
   <a name="script-in-head"></a><a name="7.5"></a>
   - [7.5](#script-in-head) Always put `<script>` tags in the head, not the body.
 
-      > Why? The body represents the actual content of the page, so it is semantically incorrect to put script tags there. That said, it can be common in industry to put scripts at the bottom of the body. The browser reads HTML from the top to the bottom, so if the script tag is last, then the browser will not parse the JavaScript file until the page has loaded. While this technique eliminates the need for 'window.addEventListener('load', init)`, we will consider it poor code quality in this course.
+      > Why? The body represents the actual content of the page, so it is semantically incorrect to put script tags there. That said, it can be common in industry to put scripts at the bottom of the body. The browser reads HTML from the top to the bottom, so if the script tag is last, then the browser will not parse the JavaScript file until the page has loaded. While this technique eliminates the need for `window.addEventListener('load', init)`, the relatively-small scope of the code you are working on in CSE 154 more clearly motivates the `<script>` in the `<head>`, and any other methods of linking to JS are subject to being considered poor code quality.
 
   <a name="br-br"></a><a name="7.6"></a>
   - [7.6](#br-br) Never use consecutive `<br>` tags. Additionally, do not use them to create extra margin between paragraphs.
@@ -441,6 +455,8 @@
 
   <a name="font-import"></a><a name="7.8"></a>
   - [7.8](#font-import) Never import fonts directly in HTML. Prefer `@import` statements in CSS.
+
+      **NOTE**: Only fonts that are used/referenced later in the CSS should be imported.
 
       > Why? Since fonts are stylistic information about the page, we should always prefer to keep anything related to them in our CSS files.
 
