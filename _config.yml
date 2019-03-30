@@ -1,6 +1,6 @@
 # Site Settings
 title: Code Quality Guide
-baseurl: ""
+baseurl: "https://courses.cs.washington.edu/courses/cse154/codequalityguide/_site"
 # Build Settings
 include: ['_pages']
 kramdown:
