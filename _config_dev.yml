@@ -1,6 +1,6 @@
 # Site Settings
 title: Code Quality Guide
-baseurl: "localhost:8888/codequalityguide"
+baseurl: ""
 # Build Settings
 include: ['_pages']
 kramdown:
