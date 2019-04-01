@@ -833,17 +833,21 @@ permalink: /javascript/
     ```
 
   <a name="comments-singleline"></a><a name="11.3"></a>
-  - [11.3](#comments-singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+  - [11.3](#comments-singleline) Use `//` for single line comments. When inside of a function, place single line comments on a newline above the subject of the comment, and put an empty line before the comment unless it’s on the first line of a block.
 
-    **NOTE**: While not required, many programmers like to comment each module-global variable with a single line comment.
+    **NOTE**: While not required, many programmers like to comment each module-global variable with a single line comment. These comments can go on the same line as the variable declaration.
 
     ```javascript
-    // bad
-    let active = true;  // is current tab
-
     // good
-    // is current tab
-    let active = true;
+    (function {
+      let active = true;  // is current tab
+    })();
+
+    // also good
+    (function {
+      // is current tab
+      let active = true;
+    })();
     ```
 
     ```javascript

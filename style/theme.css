@@ -160,7 +160,7 @@ main :first-child { margin-top: 0; }
 @media screen and (min-width: 42em) and (max-width: 64em) { main { padding: 2rem 4rem; font-size: 1.1rem; } }
 @media screen and (max-width: 42em) { main { padding: 2rem 1rem; font-size: 1rem; } }
 main img { max-width: 100%; }
-main h1, main h2, main h3, main h4, main h5, main h6 { margin-top: 2rem; margin-bottom: 1rem; font-weight: normal; color: #159957; }
+main h1, main h2, main h3, main h4, main h5, main h6 { margin-top: 2rem; margin-bottom: 1rem; font-weight: normal; color: #7063EC; }
 main p { margin-bottom: 1em; }
 main code { padding: 2px 4px; font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9rem; color: #567482; background-color: #f3f6fa; border-radius: 0.3rem; }
 main pre { padding: 0.8rem; margin-top: 0; margin-bottom: 1rem; font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace; color: #567482; word-wrap: normal; background-color: #f3f6fa; border: solid 1px #dce6f0; border-radius: 0.3rem; }
