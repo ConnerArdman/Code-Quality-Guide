@@ -118,7 +118,7 @@ permalink: /html/
     <H1>Code Quality Guide</H1>
 
     <!-- good -->
-    <h1>Code Quality Guide</H1>
+    <h1>Code Quality Guide</h1>
     ```
 
     ```html
