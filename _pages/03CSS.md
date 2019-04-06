@@ -100,11 +100,11 @@ permalink: /css/
       color: red;
     }
 
-    #dog-image {
+    nav {
       margin-bottom: 5px;
     }
 
-    nav {
+    #dog-image {
       margin-bottom: 5px;
     }
     ```
@@ -115,14 +115,13 @@ permalink: /css/
       color: red;
     }
 
-    #dog-image {
-      margin-bottom: 5px;
-    }
-
     nav {
       margin-bottom: 5px;
     }
 
+    #dog-image {
+      margin-bottom: 5px;
+    }
     ```
 
 **[⬆ back to top](#table-of-contents)**
