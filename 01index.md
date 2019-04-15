@@ -15,6 +15,7 @@ permalink: /
   1. [Comments](#comments)
   1. [Whitespace & Indentation](#whitespace--indentation)
   1. [Long Lines](#long-lines)
+  1. [File Names](#file-names)
 
 ## Comments
 
@@ -115,6 +116,19 @@ permalink: /
   - [3.1](#short-lines) Always keep lines under 100 characters. It makes your code much easier to read. The one exception here is links. Any string containing a link can go over 100 characters.
 
     **TIP**: Most IDE's let you set a line on the screen at a certain character limit. Set it to 80 characters and avoid going over that to be extra careful.
+
+**[⬆ back to top](#general-guidelines)**
+
+## File Names
+
+  <a name="file-names-lower"></a><a name="4.1"></a>
+  - [4.1](#file-names-lower) All files names submitted in CSE 154 should use lowercase
+  naming. You may choose to separate words with a `-` character. For example, both
+  `mycoolfile.js` and `my-cool-file.js` are valid file names. `myCoolFile.js` is not.
+
+  > Why? Different operating systems handle letter casing in different ways. Always
+  using lowercase naming keeps our code consistent and prevents broken links on
+  different systems.
 
 **[⬆ back to top](#general-guidelines)**
 

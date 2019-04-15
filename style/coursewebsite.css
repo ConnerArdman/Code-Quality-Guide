@@ -6,10 +6,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:700|Open+Sans');
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   font-family: 'Open Sans', sans-serif;
   color: #252629;
