@@ -1147,9 +1147,9 @@ permalink: /javascript/
      * From here: https://www.paulirish.com/2009/random-hex-color-code-snippets/
      * @return {String} Random hex code starting with a '#'
      */
-    function genRandomColor() {
-      return '#'+Math.floor(Math.random()*16777215).toString(16);
-    }
+     function genRandomColor() {
+       return '#' + Math.floor(Math.random() * 16777215).toString(16);
+     }
     ```
 
   <a name="no-log"></a><a name="15.4"></a>
