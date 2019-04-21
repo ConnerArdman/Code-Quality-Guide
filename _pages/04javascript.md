@@ -91,7 +91,7 @@ permalink: /javascript/
     function foo() {
       let a = 1;
       const B = 1;
-      if (a == B) {
+      if (a === B) {
         let c = 1;
       }
       console.log(c); // ReferenceError
