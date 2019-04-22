@@ -91,7 +91,7 @@ permalink: /javascript/
     function foo() {
       let a = 1;
       const B = 1;
-      if (a === B) {
+      if (a == B) {
         let c = 1;
       }
       console.log(c); // ReferenceError
@@ -1053,14 +1053,14 @@ permalink: /javascript/
 ## Module Pattern & Strict Mode
 
   <a name="module-pattern"></a><a name="14.1"></a>
-  - [14.1](#module-pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
+  - [13.1](#module-pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
 
     > Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file's function would override the first one's (since HTML is loaded from top to bottom).
 
     See example in [14.2](#use-strict)
 
   <a name="use-strict"></a><a name="13.2"></a>
-  - [14.2](#use-strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
+  - [13.2](#use-strict) Always write a `"use strict";` declaration at the top of your module pattern to tell the browser to enable strict syntax checking of your JavaScript code.
 
     ```javascript
     // good
@@ -1075,7 +1075,7 @@ permalink: /javascript/
 ## Good JavaScript Design
 
   <a name="unobtrusive-js"></a><a name="15.1"></a>
-  - [15.1](#unobtrusive-js) Never use element.innerHTML for anything other than clearing containers. Prefer createElement().
+  - [14.1](#unobtrusive-js) Never use element.innerHTML for anything other than clearing containers. Prefer createElement().
 
     ```javascript
     // bad
@@ -1092,7 +1092,7 @@ permalink: /javascript/
     ```  
 
   <a name="minimize-redundancy"></a><a name="15.2"></a>
-  - [15.2](#minimize-redundancy) Minimize redundant code as much as possible.
+  - [14.2](#minimize-redundancy) Minimize redundant code as much as possible.
 
     **TIP**: If the same or extremely similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
 
@@ -1123,7 +1123,13 @@ permalink: /javascript/
     ```
 
     <a name="no-css"></a><a name="15.3"></a>
-  - [15.3](#no-css) Do not include any CSS styles in JavaScript unless absolutely necessary. Prefer adding and removing classes.
+  - [14.3](#no-css) Do not include any CSS styles in JavaScript unless absolutely necessary. Prefer adding and removing classes.
+
+    **NOTE**: There are two primary ways to add a class with JavaScript, using
+    `element.classList.add("class-name")` and `element.className = "class-name"`.
+    However there is a key difference, setting `className` directly results in deleting
+    all other classes, while `classList.add()` simply adds a new class. For this reason,
+    we usually prefer utilizing the `add()` and `remove()` functions of the classList.
 
     **TIP**: A good rule of thumb is that if you can make a CSS class to easily achieve your desired output, you should do that instead. Styling in JavaScript should only occur when adding dynamic styles (such as a random color) that cannot be predetermined with CSS classes.
 
@@ -1132,7 +1138,7 @@ permalink: /javascript/
     div.style.color = 'red';
 
     // better - this isn't great, because it would remove all other classes from div.
-    div.class = 'red';
+    div.className = 'red';
 
     // good
     div.classList.add('red');
@@ -1147,13 +1153,13 @@ permalink: /javascript/
      * From here: https://www.paulirish.com/2009/random-hex-color-code-snippets/
      * @return {String} Random hex code starting with a '#'
      */
-     function genRandomColor() {
-       return '#' + Math.floor(Math.random() * 16777215).toString(16);
-     }
+    function genRandomColor() {
+      return '#'+Math.floor(Math.random()*16777215).toString(16);
+    }
     ```
 
   <a name="no-log"></a><a name="15.4"></a>
-  - [15.4](#no-log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
+  - [14.4](#no-log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
 
 **[⬆ back to top](#table-of-contents)**
 
