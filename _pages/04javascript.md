@@ -167,6 +167,11 @@ permalink: /javascript/
       return name;
     }
     ```
+  <a name="variables-no-dom-global"></a><a name="1.5"></a>
+  - [1.5](#variables-no-dom-global) In general, do not store DOM elements as module-global variables. Instead prefer accessing the DOM.
+    
+    > Why? As a general good coding practice, we want to minimize the number of module-global variables that we use. Since we always have access to the DOM (and DOM lookups are fairly fast), there is usually no need to store these elements or their contents as persisting variables. That said, there are occasional exceptions to this rule, such as when the element is needed by multiple functions extremely frequently. 
+
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -197,7 +202,7 @@ permalink: /javascript/
 ## Functions
 
   <a name="long-functions"></a><a name="3.1"></a>
-  - [3.1](#long-functions-last) If you have a single function that is very long, break it apart into smaller sub-functions. The definition of "very long" is vague, but often a function longer than 20-30 lines is pushing it.
+  - [3.1](#long-functions) If you have a single function that is very long, break it apart into smaller sub-functions. The definition of "very long" is vague, but often a function longer than 20-30 lines is pushing it.
 
     **TIP**: If you try to describe the function's purpose and find yourself using the word "and" a lot, that probably means the function does too many things and should be split into sub-functions.
 
