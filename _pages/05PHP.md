@@ -869,11 +869,11 @@ permalink: /php/
     helper(15);
     ```
 
-  <a name="no-log"></a><a name="10.2"></a>
-  - [10.2](#no-log) Never turn in code with any debugging code left in.
+  <a name="no-log"></a><a name="11.2"></a>
+  - [11.2](#no-log) Never turn in code with any debugging code left in.
 
-  <a name="override-header"></a><a name="10.2"></a>
-  - [10.2](#override-header) Never override a `content-type` header.
+  <a name="override-header"></a><a name="11.3"></a>
+  - [11.3](#override-header) Never override a `content-type` header.
 
     ```php
     # bad
@@ -898,13 +898,33 @@ permalink: /php/
     }
     ```
 
-  <a name="use-die"></a><a name="10.3"></a>
-  - [10.3](#use-die) Use `die()` instead of `print` or `echo` when outputting errors.
+  <a name="no-print-pre-header"></a><a name="11.4"></a>
+  - [11.4](#no-print-pre-header) Always set a `Content-type` header before printing.
+
+    > Why? The Content-type tells the client of your API (usually a browser) what
+    type of data is being returned. PHP usually defaults to outputting HTML, which
+    we rarely want.
+
+    ```php
+    # bad - missing Content-type
+    echo "Hello World!";
+
+    # also bad - the header doesn't do anything if it is set after printing.
+    echo "Hello World!";
+    header("Content-type: text/plain");
+
+    # good
+    header("Content-type: text/plain");
+    echo "Hello World!";
+    ```
+
+  <a name="use-die"></a><a name="11.5"></a>
+  - [11.5](#use-die) Use `die()` instead of `print` or `echo` when outputting errors.
 
     > Why? `die()` kills the program, which is important after an error has occurred. There is no need to continue running a webservice if something has gone wrong, such as a missing GET parameter.
 
-  <a name="check-isset"></a><a name="10.4"></a>
-  - [10.4](#check-isset) Always check if GET and POST parameters were set before accessing them.
+  <a name="check-isset"></a><a name="11.6"></a>
+  - [11.6](#check-isset) Always check if GET and POST parameters were set before accessing them.
 
     ```php
     # bad
@@ -916,8 +936,8 @@ permalink: /php/
     }
     ```
 
-  <a name="use-try-catch"></a><a name="10.5"></a>
-  - [10.5](#use-try-catch) Always use `try` and `catch` when interacting with a database.
+  <a name="use-try-catch"></a><a name="11.7"></a>
+  - [11.7](#use-try-catch) Always use `try` and `catch` when interacting with a database.
 
     > Why? Accessing a database is a common time for programs to fail, because they become reliant on other systems. Using `try/catch` allows us to handle these errors gracefully and output appropriate information to a user.
 
@@ -936,13 +956,13 @@ permalink: /php/
     }
     ```
 
-  <a name="min-db-calls"></a><a name="10.6"></a>
-  - [10.6](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in will result in needing to make a database call.
+  <a name="min-db-calls"></a><a name="11.8"></a>
+  - [11.8](#min-db-calls) Minimize calls to the database as much as possible. For example, do not create a PDO object until after confirming that the parameters passed in will result in needing to make a database call.
 
     > Why? Calling the database can be slow and error prone, so we should avoid doing so until necessary.
 
-  <a name="functions-top"></a><a name="10.7"></a>
-  - [10.7](#functions-top) Place all of your functions at the very top or bottom of your PHP file, never in the middle of the page.
+  <a name="functions-top"></a><a name="11.9"></a>
+  - [11.9](#functions-top) Place all of your functions at the very top or bottom of your PHP file, never in the middle of the page.
 
     > Why? Any code outside of functions can be thought of as similar to the "main" function in another programming language. We should keep this code together without it being broken up to keep our code clean and easy to read.
 

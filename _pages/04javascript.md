@@ -169,8 +169,8 @@ permalink: /javascript/
     ```
   <a name="variables-no-dom-global"></a><a name="1.5"></a>
   - [1.5](#variables-no-dom-global) In general, do not store DOM elements as module-global variables. Instead prefer accessing the DOM.
-    
-    > Why? As a general good coding practice, we want to minimize the number of module-global variables that we use. Since we always have access to the DOM (and DOM lookups are fairly fast), there is usually no need to store these elements or their contents as persisting variables. That said, there are occasional exceptions to this rule, such as when the element is needed by multiple functions extremely frequently. 
+
+    > Why? As a general good coding practice, we want to minimize the number of module-global variables that we use. Since we always have access to the DOM (and DOM lookups are fairly fast), there is usually no need to store these elements or their contents as persisting variables. That said, there are occasional exceptions to this rule, such as when the element is needed by multiple functions extremely frequently.
 
 
 **[⬆ back to top](#table-of-contents)**
@@ -1057,7 +1057,7 @@ permalink: /javascript/
 
 ## Module Pattern & Strict Mode
 
-  <a name="module-pattern"></a><a name="14.1"></a>
+  <a name="module-pattern"></a><a name="13.1"></a>
   - [13.1](#module-pattern) Always use the module pattern to contain your code. No code should exist outside of this pattern.
 
     > Why? Any code outside of the module pattern becomes global to your entire site. This means that any code you define will be able to interact with other global code and vice versa. The problem here, is that this can create unexpected behavior. For example, if two files both define functions with the same name, the second file's function would override the first one's (since HTML is loaded from top to bottom).
@@ -1079,7 +1079,7 @@ permalink: /javascript/
 
 ## Good JavaScript Design
 
-  <a name="unobtrusive-js"></a><a name="15.1"></a>
+  <a name="unobtrusive-js"></a><a name="14.1"></a>
   - [14.1](#unobtrusive-js) Never use element.innerHTML for anything other than clearing containers. Prefer createElement().
 
     ```javascript
@@ -1096,7 +1096,7 @@ permalink: /javascript/
     div.innerHTML = '';
     ```  
 
-  <a name="minimize-redundancy"></a><a name="15.2"></a>
+  <a name="minimize-redundancy"></a><a name="14.2"></a>
   - [14.2](#minimize-redundancy) Minimize redundant code as much as possible.
 
     **TIP**: If the same or extremely similar chunks of code (2+ lines) are repeated, you should probably factor it out. If code is slightly different, try representing the differences as parameters to functions!
@@ -1127,7 +1127,7 @@ permalink: /javascript/
     helper(15);
     ```
 
-    <a name="no-css"></a><a name="15.3"></a>
+    <a name="no-css"></a><a name="14.3"></a>
   - [14.3](#no-css) Do not include any CSS styles in JavaScript unless absolutely necessary. Prefer adding and removing classes.
 
     **NOTE**: There are two primary ways to add a class with JavaScript, using
@@ -1163,8 +1163,28 @@ permalink: /javascript/
     }
     ```
 
-  <a name="no-log"></a><a name="15.4"></a>
+  <a name="no-log"></a><a name="14.4"></a>
   - [14.4](#no-log) Never turn in code with `console.log()`, `alert()`, `debugger`, commented out code or other debugging code left in. The one exception here is you can use `.catch(console.log)` when we do not specify anything else to do with the error.
+
+  <a name="generate-html"></a><a name="14.5"></a>
+  - [14.5](#generate-html) Always generate valid HTML following the [HTML Code Quality Guide](../html)
+
+    > Why? The browser will interact with any code we generate in the same way as it does
+    with code in an HTML file, so we need to follow the same standards. For example, we still
+    need to add alt attributes to images to help screen readers understand them.
+
+    ```javascript
+    // bad
+    let img = document.createElement("IMG");
+    img.src = "boundelesspupper.png";
+    document.getElementById("pups").appendChild(img);
+
+    // good
+    let img = document.createElement("img");
+    img.src = "boundelesspupper.png";
+    img.alt = "boundless pupper";
+    document.getElementById("pups").appendChild(img);
+    ```
 
 **[⬆ back to top](#table-of-contents)**
 

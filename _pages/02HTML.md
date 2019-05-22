@@ -94,7 +94,7 @@ permalink: /html/
     ```
 
   <a name="lowercase-naming"></a><a name="2.2"></a>
-  - [2.2](#lowercase-naming) Use all lowercase names for classes and IDs. You can choose to separate words either by dashes or with no separation mark. Either is fine, but make sure to be consistent.
+  - [2.2](#lowercase-naming) Use all lowercase names for classes and IDs. You can choose to separate words by either by dashes or with no separation mark, but make sure to be consistent.
 
     ```html
     <!-- bad -->
