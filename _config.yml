@@ -5,3 +5,5 @@ baseurl: "https://courses.cs.washington.edu/courses/cse154/codequalityguide/_sit
 include: ['_pages']
 kramdown:
   input: GFM
+
+theme: jekyll-theme-cayman
